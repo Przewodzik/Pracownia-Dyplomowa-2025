@@ -117,15 +117,53 @@
 
 ## 5. Metody przeszukiwania grafów i wyznaczania najkrótszej ścieżki na przykładzie algorytmu Dijkstry
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### [Przeszukiwanie grafu / przechodzenie grafu](https://en.wikipedia.org/wiki/Graph_traversal) - odwiedzenie wszystkich wierzchołków grafu w usystematyzowany sposób. Dwie podstawowe metody:
+- [BFS - Breadth First Search / Przeszukiwanie wszerz](https://pl.wikipedia.org/wiki/Przeszukiwanie_wszerz) ![BFS Przykład](Static/Q5/BFS_Example.png)
+- [DFS - Depth First Search / Przeszukiwanie w głąb](https://pl.wikipedia.org/wiki/Przeszukiwanie_w_g%C5%82%C4%85b) ![DFS Przykład](Static/Q5/DFS_Example.png)
+
+W grafach ważonych (z kosztami krawędzi) BFS już nie wystarcza. Potrzebujemy algorytmów, które uwzględniają długości krawędzi, np.:
+- algorytm Dijkstry, [Wikipedia ENG](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm), [Wikipedia PL](https://pl.wikipedia.org/wiki/Algorytm_Dijkstry)
+- algorytm Bellmana-Forda (obsługuje też wagi ujemne),
+- algorytm Floyda-Warshalla (dla wszystkich par wierzchołków)
+
+### Algorytm Dijkstry:
+[Poradnik na YouTube](https://www.youtube.com/watch?v=_lHSawdgXpI)
+- Tworzymy tabelę nieodwiedzonych wierzchołków.
+- Tworzymy tabelę kosztu przejścia, gdzie początkowo:
+  startowy = 0,
+  wszystkie inne = ∞.
+- Wybieramy wierzchołek o najmniejszej znanej odległości i wykreślamy go z nieodwiedzonych.
+- Teraz szukamy kolejnego punktu. Koszt dojścia do niego uwzględnia sumę poprzednich kosztów. Zapisujemy koszty w tabeli przejść i wybieramy najmniejszy.
+- Pętelka :)
+
+![Przykład Dijkstra](Static/Q5/Dijkstra_Example.gif)
 
 ## 6. Abstrakcyjne struktury danych: listy, kolejki, stosy, słowniki
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Abstrakcyjne struktury danych to modele logiczne sposobu organizacji i przechowywania danych, niezależne od implementacji. Do podstawowych należą:
+- Lista - uporządkowana sekwencja elementów, do której można uzyskać dostęp za pomocą indeksu. Umożliwia wstawianie, usuwanie i odczyt w dowolnym miejscu. Może być implementowana jako tablica dynamiczna lub lista wiązana. [Wykład Piojas 1](https://piojas.pl/wp-content/uploads/2024/05/PSwyklad13.html#/title-slide), [Wykład Piojas 2](https://piojas.pl/wp-content/uploads/2024/05/PSwyklad14.html#/title-slide), [Wikipedia PL](https://pl.wikipedia.org/wiki/Lista), [Wikipedia ENG](https://en.wikipedia.org/wiki/List_(abstract_data_type))
+- Stos (stack) – struktura LIFO (Last In, First Out). Ostatni wstawiony element jest pierwszy do usunięcia. Podstawowe operacje: push (dołożenie) i pop (zdjęcie ze stosu). Stos znajduje zastosowanie m.in. w rekurencji i analizie wyrażeń. [Wikipedia PL](https://pl.wikipedia.org/wiki/Stos_(informatyka)), [Wikipedia ENG](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+- Kolejka (queue) – struktura FIFO (First In, First Out). Pierwszy element dodany jest pierwszy do usunięcia. Operacje: enqueue (dodanie na koniec) i dequeue (usunięcie z początku). Wariantem jest kolejka priorytetowa. [Wikipedia PL](https://pl.wikipedia.org/wiki/Kolejka_(informatyka)), [Wikipedia ENG](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
+- Słownik (mapa, tablica asocjacyjna) – przechowuje pary klucz–wartość, umożliwiając szybkie wyszukiwanie po kluczu. Najczęściej implementowany za pomocą tablicy mieszającej (hash table) lub drzewa zrównoważonego. [Wikipedia PL](https://pl.wikipedia.org/wiki/Tablica_asocjacyjna), [Wikipedia ENG](https://en.wikipedia.org/wiki/Associative_array)
+
+| Struktura | Organizacja danych            | Zasada działania        | Typowe zastosowania                           |
+|-----------|-------------------------------|-------------------------|-----------------------------------------------|
+| Lista     | Uporządkowana sekwencja       | Dostęp przez indeks     | Przechowywanie i przetwarzanie sekwencji      |
+| Stos      | Elementy jeden na drugim      | LIFO (Last In, First Out)| Rekursja, cofanie operacji, analiza wyrażeń   |
+| Kolejka   | Elementy w kolejności przyjścia | FIFO (First In, First Out)| Symulacje, buforowanie, obsługa zadań        |
+| Słownik   | Pary klucz–wartość            | Dostęp przez klucz      | Wyszukiwanie danych, mapowanie, bazy danych   |
+
 
 ## 7. Strategia dziel i zwyciężaj, idea algorytmu zachłannego
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### Dziel i zwyciężaj
+Polega na rozwiązywaniu problemu przez podział na mniejsze podproblemy tego samego typu, rozwiązanie ich (najczęściej rekurencyjnie), a następnie połączenie uzyskanych wyników w rozwiązanie całości. Klasyczne przykłady to: sortowanie szybkie (quicksort), sortowanie przez scalanie (mergesort), algorytm Karacuby dla mnożenia liczb. Kluczowe etapy: dziel (rozbicie problemu), zwyciężaj (rozwiązanie podproblemów), scal (połączenie wyników). [Wikipedia PL](https://pl.wikipedia.org/wiki/Dziel_i_zwyci%C4%99%C5%BCaj)
+
+### Algorytm zachłanny
+Opiera się na podejmowaniu w każdym kroku decyzji lokalnie optymalnej (wybieramy najlepsze rozwiązanie chwilowe), w nadziei, że doprowadzi to do rozwiązania globalnie optymalnego. Stosuje się go tam, gdzie problem ma własność optymalnej podstruktury i zachłanności. Przykłady: algorytmy znajdowania minimalnego drzewa rozpinającego, algorytm Dijkstry. [Wikipedia PL](https://pl.wikipedia.org/wiki/Algorytm_zach%C5%82anny)
 
 ---
 
@@ -133,7 +171,41 @@
 
 ## 8. Reprezentacja liczb całkowitych i zmiennoprzecinkowych w systemach binarnym i szesnastkowym
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### System Binarny
+- Używa tylko 0 i 1.
+- Każde miejsce ma wartość potęgi dwójki.
+
+1011 (binarnie) = 1* 8 + 0* 4 + 1* 2 + 1* 1 = 11 (dziesiętnie)
+[Wikipedia PL](https://pl.wikipedia.org/wiki/Dw%C3%B3jkowy_system_liczbowy)
+
+### System szesnastkowy (hex)
+- Używa cyfr 0–9 i liter A–F (gdzie A=10, B=11 … F=15).
+- 1 cyfra hex = 4 bity (np. 1111 = F).
+
+1011 (binarnie) = B (hex), 11111111 (binarnie) = FF (hex)
+[Wikipedia PL](https://pl.wikipedia.org/wiki/Szesnastkowy_system_liczbowy)
+### Liczby całkowite
+#### Bez znaku: zwykły zapis binarny.
+
+00001011 = 11
+
+#### Ze znakiem (dodatnie/ujemne): najczęściej kod U2 (uzupełnień do dwóch). [Wikipedia PL](https://pl.wikipedia.org/wiki/Kod_uzupe%C5%82nie%C5%84_do_dw%C3%B3ch)
+00001011 = +11
+
+11110101 = -11
+
+### Liczby zmiennoprzecinkowe
+[Wikipedia PL](https://pl.wikipedia.org/wiki/IEEE_754)
+[Przykłady](https://eduinf.waw.pl/inf/alg/006_bin/0021.php)
+
+Liczby zmiennoprzecinkowe reprezentowane są zgodnie ze standardem IEEE 754. Składają się z trzech pól:
+- znaku +/- (S) - 1 bit,
+- wykładnika (E) - zapisany w kodzie z przesunięciem (bias),
+- mantysy (M) - ułamkowej części liczby w zapisie binarnym.
+
+Wartość liczby określa wzór:
+(-1)^S × 1,M × 2^(E-bias).
 
 ## 9. Specyfika programowania niskopoziomowego
 **Odpowiedź:**
