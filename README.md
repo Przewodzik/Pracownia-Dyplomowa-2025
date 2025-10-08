@@ -101,19 +101,295 @@
 
 ## 1. Pojęcie algorytmu i jego prezentacja
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Algorytm** to skończony, jednoznacznie określony i uporządkowany ciąg czynności (kroków), który po wykonaniu prowadzi do rozwiązania danego problemu lub zadania.
+
+---
+
+## 2. Cechy poprawnego algorytmu
+
+Aby algorytm był poprawny, musi spełniać podstawowe wymagania:
+
+* **Jednoznaczność** – każdy krok algorytmu musi być dokładnie opisany i nie może być dowolnie interpretowany.
+* **Skończoność** – po pewnej liczbie kroków algorytm musi się zakończyć (nie może działać w pętli bez końca).
+* **Określoność** – w algorytmie musi być dokładnie wiadomo, jakie dane są potrzebne na początku i co stanowi wynik.
+* **Skuteczność (wykonalność)** – każdy krok algorytmu musi być możliwy do wykonania w praktyce.
+* **Poprawność** – dla każdego poprawnego zestawu danych wejściowych, algorytm musi podawać poprawny wynik.
+
+
+---
+
+## 3. Sposoby prezentacji (reprezentacji) algorytmu
+
+### 1. Opis słowny
+
+Algorytm opisany za pomocą zdań w języku naturalnym. Używany do ogólnego wyjaśnienia zasady działania.
+
+**Przykład (algorytm obliczania sumy dwóch liczb):**
+
+1.  Pobierz dwie liczby A i B.
+2.  Oblicz ich sumę.
+3.  Wyświetl wynik.
+
+### 2. Lista kroków (pseudokod)
+
+Zapis przypominający kod programu, ale bez składni konkretnego języka programowania. Stosowany, gdy chcemy opisać logikę w sposób bardziej formalny.
+
+**Przykład:**
+
+Wczytaj A, B
+
+SUMA = A + B
+
+Wypisz SUMA
+### 3. Schemat blokowy (diagram przepływu)
+
+Graficzne przedstawienie algorytmu — każdy krok to blok o określonym kształcie, a strzałki pokazują kierunek działania.
+
+**Legenda:**
+
+* Blok początkowy/końcowy – owal (**START/KONIEC**)
+* Blok operacji (obliczenia) – prostokąt
+* Blok decyzji (warunek) – romb
+* Blok wejścia/wyjścia – równoległobok
+
+**Przykład – schemat sumowania dwóch liczb:**
+
+
+
+
+### Schemat blokowy algorytmu
+![Schemat blokowy algorytmu](Static/Q1_4/SchematBlokowy.drawio.png)
+
+
+
+
+
+### 4. Program komputerowy
+
+Zapis algorytmu w konkretnym języku programowania – to już wykonana, gotowa wersja, którą komputer może uruchomić.
+
+**Przykład w języku Python:**
+
+```python
+a = float(input("Podaj pierwszą liczbę: "))
+b = float(input("Podaj drugą liczbę: "))
+suma = a + b
+print("Suma =", suma)
+```
 
 ## 2. Metody szacowania złożoności obliczeniowej algorytmów. Złożoność czasowa, pamięciowa, asymptotyczna i benchmarking
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Szacowanie złożoności służy do określenia, jak czas działania i zużycie zasobów (głównie pamięci) algorytmu rośnie w zależności od rozmiaru danych wejściowych ($n$).
+
+* **Złożoność Czasowa:** Ilość czasu potrzebnego na wykonanie zadania, wyrażona jako funkcja rozmiaru danych wejściowych ($n$), mierzona liczbą operacji elementarnych.
+* **Złożoność Pamięciowa:** Ilość pamięci roboczej (dodatkowej) potrzebnej na wykonanie zadania, wyrażona jako funkcja rozmiaru danych wejściowych ($n$).
+
+---
+
+### 1. Metoda Asymptotyczna (Teoretyczna)
+
+Jest to dominująca metoda w teorii informatyki. Opiera się na analizie kodu i określeniu, jak szybko rośnie liczba operacji, ignorując stałe i czynniki niskiego rzędu.
+
+**Złożoność Asymptotyczna** opisuje granicę wzrostu złożoności, gdy rozmiar danych $n$ dąży do nieskończoności.
+
+#### Notacje Asymptotyczne
+
+| Notacja | Nazwa | Przypadek | Opis |
+| :--- | :--- | :--- | :--- |
+| **$O$ (Duże O)** | Ograniczenie Górne | Najgorszy | Funkcja $f(n)$ rośnie nie szybciej niż $g(n)$. Stosując $O$, podajemy najbardziej znaczący składnik (np. dla $5n^2+20n+100$ piszemy $O(n^2)$). |
+| **$\Omega$ (Omega)** | Ograniczenie Dolne | Najlepszy | Funkcja $f(n)$ rośnie nie wolniej niż $g(n)$. |
+| **$\Theta$ (Theta)** | Ograniczenie Dokładne | Średni/Typowy | Reprezentuje typowe zachowanie, będąc jednocześnie ograniczeniem górnym ($O$) i dolnym ($\Omega$). |
+
+#### Przykłady Funkcji Złożoności (od najlepszej do najgorszej)
+
+* $O(1)$ – **Stała**
+* $O(\log n)$ – **Logarytmiczna**
+* $O(n)$ – **Liniowa**
+* $O(n \log n)$ – **Liniowo-logarytmiczna**
+* $O(n^2)$ – **Kwadratowa**
+* $O(n^k)$ – **Wielomianowa** ($k>2$)
+* $O(2^n)$ – **Wykładnicza**
+* $O(n!)$ – **Rzędu silnia**
+
+---
+
+### 2. Benchmarking (Metoda Praktyczna)
+
+Benchmarking polega na praktycznym pomiarze rzeczywistego czasu wykonania algorytmu na konkretnym sprzęcie.
+
+* **Procedura:** Implementacja → Wykonanie dla różnych $n$ → Zmierzenie rzeczywistego czasu → Wizualizacja wyników (wykres: czas vs. $n$).
+* **Zastosowanie:** Umożliwia sprawdzenie, jak stałe czynniki systemowe (sprzęt, pamięć podręczna, kompilator) wpływają na wydajność.
+* **Ograniczenia:** Wyniki są zależne od środowiska (sprzętu i obciążenia systemu), co utrudnia uniwersalne porównania.
+
 
 ## 3. Przykłady algorytmów sortowania i ich złożoność obliczeniowa
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Sortowanie to proces uporządkowania zbioru danych według określonego kryterium.
+
+---
+
+## 1. Sortowanie bąbelkowe (Bubble Sort)
+
+* **Charakterystyka:** Najprostsza metoda sortowania. Algorytm stabilny i sortujący w miejscu (in-place).
+* **Zasada działania:** Polega na porównywaniu sąsiednich elementów i zamianie ich miejscami, jeśli są w niewłaściwej kolejności. Proces powtarza się, aż w całym przebiegu nie zajdzie żadna zamiana. Największy element „wypływa” na koniec tablicy.
+
+### Wizualizacja Kroków (Bubble Sort)
+
+Ciąg wejściowy: [4, 2, 5, 1, 7]
+
+| Krok | Operacja | Wynik | Porównanie |
+| :---: | :--- | :--- | :--- |
+| **Początek** | | [4, 2, 5, 1, 7] | |
+| **Przebieg 1** | 4>2, 4<5, 5>1, 5<7 | [2, 4, 1, 5, **7**] | Wypłynięcie 7 |
+| **Przebieg 2** | 2<4, 4>1, 4<5 | [2, 1, 4, **5, 7**] | Wypłynięcie 5 |
+| **Przebieg 3** | 2>1, 2<4 | [1, 2, **4, 5, 7**] | Wypłynięcie 4 |
+| **Przebieg 4** | 1<2 | [1, 2, 4, 5, 7] | Koniec |
+
+**Posortowany ciąg:** [1, 2, 4, 5, 7]
+
+## 2. Sortowanie przez wybieranie (Selection Sort)
+
+* **Charakterystyka:** Prosta metoda sortowania, algorytm sortujący w miejscu (in-place).
+* **Zasada działania:** Wyszukiwanie najmniejszego elementu w nieposortowanej części tablicy i zamiana go z pierwszym elementem tej części. Proces powtarza się, przesuwając granicę posortowanego fragmentu.
+
+### Przykład Sortowania Przez Wybieranie
+
+Tablica początkowa: [9, 1, 6, 8, 4, 3, 2, 0]
+
+| Element Tablicy (i) | Tablica (Wyszukiwanie/Zamiana) | Wartość Najmniejsza | Uwagi |
+| :---: | :--- | :---: | :--- |
+| **0** | [**9, 1, 6, 8, 4, 3, 2, 0**] | **0** | Najmniejsza wartość to 0, zamiana z elementem na pozycji 0 (czyli z 9). |
+| **1** | [0, **1, 6, 8, 4, 3, 2, 9**] | **1** | Najmniejsza wartość to 1 (już na właściwej pozycji 1). |
+| **2** | [0, 1, **6, 8, 4, 3, 2, 9**] | **2** | Najmniejsza wartość to 2, zamiana z elementem na pozycji 2 (czyli z 6). |
+| **3** | [0, 1, 2, **8, 4, 3, 6, 9**] | **3** | Najmniejsza wartość to 3, zamiana z elementem na pozycji 3 (czyli z 8). |
+| **4** | [0, 1, 2, 3, **4, 8, 6, 9**] | **4** | Najmniejsza wartość to 4 (już na właściwej pozycji 4). |
+| **5** | [0, 1, 2, 3, 4, **8, 6, 9**] | **6** | Najmniejsza wartość to 6, zamiana z elementem na pozycji 5 (czyli z 8). |
+| **6** | [0, 1, 2, 3, 4, 6, **8, 9**] | **8** | Najmniejsza wartość to 8 (już na właściwej pozycji 6). |
+
+**Posortowana tablica:** [0, 1, 2, 3, 4, 6, 8, 9]
+
+## 3. Sortowanie przez wstawianie (Insertion Sort)
+
+* **Charakterystyka:** Intuicyjny algorytm. Jego zaletą jest wysoka wydajność dla częściowo posortowanych danych (złożoność $\Omega(n)$). Jest stabilny i sortuje w miejscu (in-place).
+* **Zasada działania:** Przypomina układanie kart w ręku. Kolejne elementy są pobierane i wstawiane w odpowiednie miejsce w już uporządkowanej części tablicy.
+
+### Przykład Sortowania Przez Wstawianie
+
+Tablica początkowa:
+3  7  4  9  5  2  6  1
+
+
+| Stan Tablicy | Komentarz (Klucz Wstawiany) |
+| :--- | :--- |
+| 3  7  4  9  5  2  6  1 | Tablica początkowa |
+| 3\* 7  4  9  5  2  6  1 | Porównanie 7 z 3 (3 jest posortowane) |
+| 3  7\* 4  9  5  2  6  1 | 7 jest na pozycji |
+| 3  4\* 7  9  5  2  6  1 | 4 zostaje wstawione przed 7 |
+| 3  4  7  9\* 5  2  6  1 | 9 jest na pozycji |
+| 3  4  5\* 7  9  2  6  1 | 5 zostaje wstawione przed 7 i 9 |
+| 2\* 3  4  5  7  9  6  1 | 2 zostaje wstawione na początek |
+| 2  3  4  5  6\* 7  9  1 | 6 zostaje wstawione przed 7 i 9 |
+| 1\* 2  3  4  5  6  7  9 | 1 zostaje wstawione na początek |
+
+**Posortowana tablica:** 1  2  3  4  5  6  7  9
+
+
+## 4. Sortowanie przez scalanie (Merge Sort)
+
+* **Charakterystyka:** Algorytm wykorzystujący metodę „dziel i zwyciężaj” (*divide and conquer*). Jest algorytmem stabilnym.
+* **Zasada działania:** Działa rekurencyjnie — dzieli tablicę na mniejsze części, sortuje je osobno, a następnie scala w jedną uporządkowaną całość.
+  
+![Merge_Sort](Static/Q1_4/merge_sort.png)
+
+## 5. Sortowanie przez kopcowanie (Heap Sort)
+
+* **Charakterystyka:** Algorytm oparty na strukturze danych zwanej **kopcem** (*heap*). Jest algorytmem sortującym w miejscu (in-place).
+* **Zasada działania:** Najpierw budowany jest kopiec (drzewo binarne spełniające określone własności porządkowe), a następnie największy element (korzeń) jest przenoszony na koniec tablicy.
+* https://pl.wikipedia.org/wiki/Sortowanie_przez_kopcowanie
+
+## 6. Sortowanie szybkie (Quick Sort)
+
+* **Charakterystyka:** Jeden z najszybszych algorytmów sortowania w praktyce, również wykorzystujący metodę „dziel i zwyciężaj”.
+* **Zasada działania:** Wybierany jest tzw. element rozdzielający (pivot), a następnie tablica jest dzielona na dwie części: elementy mniejsze/równe pivotowi oraz elementy większe od pivotu. Obie części są sortowane rekurencyjnie.
+  
+![Quick_sort](Static/Q1_4/quick_sort.png)
+---
+
+## Złożoność Czasowa Algorytmów Sortowania (Notacja O)
+
+| Nazwa algorytmu | Złożoność czasowa (Optymistyczna) | Złożoność czasowa (Typowa) | Złożoność czasowa (Pesymistyczna) | Złożoność pamięciowa (Pesymistyczna) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Bubble Sort** | $\Omega(\text{n})$ | $\Theta(\text{n}^2)$ | $\text{O}(\text{n}^2)$ | $\text{O}(1)$ |
+| **Selection Sort** | $\Omega(\text{n}^2)$ | $\Theta(\text{n}^2)$ | $\text{O}(\text{n}^2)$ | $\text{O}(1)$ |
+| **Insertion Sort** | $\Omega(\text{n})$ | $\Theta(\text{n}^2)$ | $\text{O}(\text{n}^2)$ | $\text{O}(1)$ |
+| **Merge Sort** | $\Omega(\text{n} \log(\text{n}))$ | $\Theta(\text{n} \log(\text{n}))$ | $\text{O}(\text{n} \log(\text{n}))$ | $\text{O}(\text{n})$ |
+| **Quick Sort** | $\Omega(\text{n} \log(\text{n}))$ | $\Theta(\text{n} \log(\text{n}))$ | $\text{O}(\text{n}^2)$ | $\text{O}(\text{n})$ |
+| **Heap Sort** | $\Omega(\text{n} \log(\text{n}))$ | $\Theta(\text{n} \log(\text{n}))$ | $\text{O}(\text{n} \log(\text{n}))$ | $\text{O}(1)$ |
+
+
 
 ## 4. Drzewa poszukiwań binarnych. Podstawowe operacje na drzewach. Sposoby przechodzenia drzewa
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Binarne drzewo poszukiwań (BST – Binary Search Tree)** – drzewo binarne, w którym lewe dziecko węzła jest od niego mniejsze, a prawe – większe lub równe. Każdy węzeł, oprócz wartości klucza, przechowuje wskaźniki na swoje dzieci oraz na swojego rodzica.
+
+---
+
+## Podstawowe Operacje na Drzewie
+
+### Operacje wykonywane na drzewie
+
+#### Wyszukiwanie (Search)
+Znajdowanie węzła o danym kluczu. Porównywanie klucza i schodzenie do lewego lub prawego poddrzewa.
+
+![Wyszukiwanie węzła o kluczu 4](Static/Q1_4/wyszukiwanie.png)
+
+#### Wstawianie (Insert)
+Dodanie nowego węzła. Wyszukuje się pozycję dla nowego klucza (zawsze jako liść) zgodnie z własnością BST.
+
+#### Wyszukiwanie najmniejszego i największego klucza w drzewie
+Znajdowanie najmniejszego elementu (skrajnie lewa ścieżka) lub największego elementu (skrajnie prawa ścieżka).
+
+#### Usuwanie (Delete)
+Usuwanie węzła. Najbardziej skomplikowana operacja z uwagi na trzy przypadki: węzeł jest liściem, ma jedno dziecko lub ma dwoje dzieci (wymaga zastąpienia go przez następnik in-order).
+
+![Usuwanie w drzewie BST – przypadek 4](Static/Q1_4/13.png)
+**Usuwanie węzła, który jest liściem**
+![Usuwanie w drzewie BST – przypadek 4](Static/Q1_4/14.png)
+**Usuwanie węzła z jednym synem**
+
+![Usuwanie w drzewie BST – przypadek 4](Static/Q1_4/8.png)
+**Usuwanie węzła z kluczem 8 z dwoma synami.** Następnikiem węzła jest węzeł z kluczem 10
+
+![Usuwanie w drzewie BST – przypadek 4](Static/Q1_4/3.png)
+**Usuwanie węzła z kluczem 3 z dwoma synami.** Następnikiem węzła jest węzeł z kluczem 4
+
+
+---
+
+## Sposoby Przechodzenia Drzewa (Traversal)
+
+### 1. Przechodzenie Pre-order (Węzeł-Lewo-Prawo)
+Metoda ta polega na odwiedzeniu najpierw bieżącego węzła, a następnie rekurencyjnym przejściu do lewego poddrzewa i wreszcie do prawego poddrzewa.
+
+**Pre-order:** F, B, A, D, C, E, G, I, H.
+
+![Schemat przejścia Pre-order](Static/Q1_4/Sorted_binary_tree_preorder.svg.png)
+
+### 2. Przechodzenie In-order (Lewo-Węzeł-Prawo)
+Metoda ta polega na odwiedzeniu najpierw lewego poddrzewa, następnie bieżącego węzła, a na końcu prawego poddrzewa, co dla BST daje uporządkowany ciąg kluczy.
+
+**In-order:** A, B, C, D, E, F, G, H, I.
+
+![Schemat przejścia In-order](Static/Q1_4/Sorted_binary_tree_inorder.svg.png)
+
+### 3. Przechodzenie Post-order (Lewo-Prawo-Węzeł)
+Metoda ta polega na odwiedzeniu najpierw lewego poddrzewa, następnie prawego poddrzewa, a na końcu bieżącego węzła (korzenia poddrzewa).
+
+**Post-order:** A, C, E, D, B, H, I, G, F.
+
+![Schemat przejścia Post-order](Static/Q1_4/Sorted_binary_tree_postorder.svg.png)
+
 
 ## 5. Metody przeszukiwania grafów i wyznaczania najkrótszej ścieżki na przykładzie algorytmu Dijkstry
 **Odpowiedź:**
