@@ -553,9 +553,9 @@ DHCP (ang. Dynamic Host Configuration Protocol – protokół umożliwiający ho
 
 **Proces DHCP (DORA):**
 - **Discover** – urządzenie (Klient) szuka serwera, który może zaproponować mu dostęp do sieci.
-- **Offer** – DHCP wysyła odpowiedź, zawierającą informację, że ma dla Klienta wolny adres IP.
+- **Offer** – serwer DHCP wysyła odpowiedź, zawierającą informację, że ma dla Klienta wolny adres IP.
 - **Request** – Klient wysyła żądanie, które jest jednocześnie akceptacją otrzymanego adresu.
-- **Acknowledgement** – DHCP potwierdza, że adres został przydzielony konkretnemu Klientowi (urządzeniu).
+- **Acknowledgement** – serwer DHCP potwierdza, że adres został przydzielony konkretnemu Klientowi (urządzeniu).
 
 
 
