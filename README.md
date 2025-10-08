@@ -487,7 +487,17 @@ Wartość liczby określa wzór:
 
 **Odpowiedź:**
 
-Język niskiego poziomu – kod maszynowy, język programowania, w którym jednej operacji elementarnej odpowiada jedna operacja elementarna rzeczywistego procesora. W tych językach używa się prostych wyrażeń symbolicznych, które odpowiadają zestawowi rozkazów maszynowych. Języki niskiego poziomu nie posiadają abstrakcji programistycznych takich jak pętle czy struktury. Kod jest przekazywany do procesora w niezmienionej formie. Jednym z najbardziej znanych języków jest Assembler. Każda operacja kodu napisanego w języku niskiego poziomu odnosi się do konkretnej operacji. Kod jest unikatowy dla konkretnej architektury i jest trudny w modyfikacji. Programowanie w języku niskiego poziomu pozwala tworzyć bardzo wydajne programy, ale język jest ciężki w zrozumieniu dla człowieka.
+Język niskiego poziomu to język programowania, w którym jednej operacji elementarnej odpowiada jedna operacja elementarna rzeczywistego procesora. W tych językach używa się prostych wyrażeń symbolicznych odpowiadających zestawowi rozkazów maszynowych.
+Języki niskiego poziomu nie posiadają gotowych abstrakcji programistycznych takich jak pętle (for, while) czy struktury danych znane z języków wysokiego poziomu. Programista musi samodzielnie implementować takie mechanizmy za pomocą podstawowych instrukcji – pętle tworzy się używając skoków warunkowych i bezwarunkowych (JMP, JZ, JNZ) oraz etykiet.
+
+Jednym z najbardziej znanych języków niskiego poziomu jest **Assembler**. Kod napisany w Assemblerze musi być przetłumaczony przez asembler na kod maszynowy (ciąg instrukcji binarnych), zanim zostanie wykonany przez procesor. Każda instrukcja asemblera odpowiada zazwyczaj jednej instrukcji maszynowej konkretnego procesora.
+Kod jest **unikatowy dla konkretnej architektury procesora** (np. x86, ARM) – program napisany dla jednej architektury nie będzie działał na innej bez przepisania. Jest to związane z tym, że różne procesory mają różne zestawy instrukcji (ISA - Instruction Set Architecture).
+
+**Zalety:** możliwość tworzenia bardzo wydajnych programów, pełna kontrola nad sprzętem, minimalne zużycie pamięci, optymalna szybkość wykonywania.
+
+**Wady:** kod trudny w zrozumieniu, brak przenośności między architekturami, czasochłonny proces tworzenia, trudność w modyfikacji i utrzymaniu.
+
+Programowanie niskopoziomowe znajduje zastosowanie w systemach wbudowanych, sterownikach urządzeń, bootloaderach oraz fragmentach krytycznych dla wydajności.
 
 ---
 
@@ -495,13 +505,13 @@ Język niskiego poziomu – kod maszynowy, język programowania, w którym jedne
 
 **Odpowiedź:**
 
-**Procesor (ang. central processing unit, CPU)** – sekwencyjne urządzenie cyfrowe, które pobiera dane z pamięci operacyjnej, interpretuje je i wykonuje jako rozkazy. Procesory wykonywane są zwykle jako układy scalone zamknięte w hermetycznej obudowie, często posiadającej złocone wyprowadzenia (stosowane ze względu na odporność na utlenianie) i w takiej postaci nazywa się je mikroprocesorami – w mowie potocznej pojęcia procesor i mikroprocesor używane są zamiennie. Sercem procesora jest monokryształ krzemu, na który naniesiono techniką fotolitografii szereg warstw półprzewodnikowych, tworzących, w zależności od zastosowania, sieć od kilku tysięcy do kilku miliardów tranzystorów. Jego obwody wykonywane są z metali o dobrym przewodnictwie elektrycznym, takich jak aluminium czy miedź. Jedną z podstawowych cech procesora jest określona długość (liczba bitów) słowa, na którym wykonuje on podstawowe operacje obliczeniowe. Jeśli przykładowo słowo tworzą 64 bity, to taki procesor określany jest jako 64-bitowy. Innym ważnym parametrem określającym procesor jest szybkość, z jaką wykonuje on rozkazy. Przy danej architekturze procesora, szybkość ta w znacznym stopniu zależy od czasu trwania pojedynczego taktu, a więc głównie od częstotliwości jego taktowania.
+**Procesor (ang. central processing unit, CPU)** – sekwencyjne urządzenie cyfrowe, które pobiera dane z pamięci operacyjnej, interpretuje je i wykonuje jako rozkazy. Procesory wykonywane są jako układy scalone zamknięte w hermetycznej obudowie z złoconymi wyprowadzeniami. Sercem procesora jest monokryształ krzemu z siecią od kilku tysięcy do kilku miliardów tranzystorów naniesioną techniką fotolitografii. Podstawową cechą procesora jest długość słowa (np. 64-bitowy procesor) oraz częstotliwość taktowania określająca szybkość wykonywania rozkazów.
 
-**Procesor graficzny (ang. graphics processing unit, GPU)** – jednostka obliczeniowa znajdująca się w kartach graficznych.
+**Procesor graficzny (ang. graphics processing unit, GPU)** – wyspecjalizowana jednostka obliczeniowa w kartach graficznych, zaprojektowana do równoległego przetwarzania danych. Charakteryzuje się architekturą umożliwiającą jednoczesne wykonywanie tysięcy prostych operacji, co czyni go idealnym do obliczeń graficznych, uczenia maszynowego oraz obliczeń naukowych.
 
-**Tensor Processing Unit (TPU)** to specyficzny dla aplikacji układ scalony (ASIC) akceleratora AI opracowany przez Google do uczenia maszynowego sieci neuronowych przy użyciu własnego oprogramowania TensorFlow firmy Google.
+**Tensor Processing Unit (TPU)** – specyficzny dla aplikacji układ scalony (ASIC) opracowany przez Google, zoptymalizowany pod kątem operacji na tensorach używanych w uczeniu maszynowym i sieciach neuronowych. TPU oferuje znacznie wyższą wydajność energetyczną i obliczeniową w zadaniach związanych z AI w porównaniu do CPU czy GPU.
 
-**Koprocesor arytmetyczny, jednostka zmiennoprzecinkowa (ang. Floating-Point Unit, FPU)** – układ scalony wspomagający procesor w obliczeniach głównie zmiennoprzecinkowych, ale również na liczbach całkowitych. W większości współczesnych konstrukcji koprocesor arytmetyczny, a także jednostki obsługujące bardziej skomplikowane obliczenia (np. instrukcje wektorowe), zintegrowany jest z procesorem w jednym układzie scalonym. Koprocesorami nazywane bywają również układy wspomagające tworzenie i przetwarzanie grafiki (głównie wektorowej), czyli procesory graficzne (GPU). Ponadto nazwa koprocesor czasami używana jest w stosunku do układów przetwarzających sygnały (DSP) i procesorów dźwiękowych pozwalających pozycjonować dźwięki w przestrzeni (karta Sound Blaster X-Fi).
+**Koprocesor arytmetyczny, jednostka zmiennoprzecinkowa (ang. Floating-Point Unit, FPU)** – układ scalony wspomagający procesor w obliczeniach głównie zmiennoprzecinkowych, ale również na liczbach całkowitych. We współczesnych konstrukcjach FPU oraz jednostki obsługujące instrukcje wektorowe (SSE, AVX) są zintegrowane z procesorem w jednym układzie scalonym. Koprocesorami nazywane są również GPU oraz układy DSP (przetwarzające sygnały).
 
 ---
 
@@ -512,22 +522,22 @@ Język niskiego poziomu – kod maszynowy, język programowania, w którym jedne
 **Odpowiedź:**
 
 **Protokoły warstwy łącza danych:**
- 
+
+ - **Ethernet** - najpopularniejszy standard sieci lokalnych (LAN), definiujący sposób przesyłania danych w ramkach. Obsługuje prędkości od 10 Mb/s do 100 Gb/s i więcej.
 - **WiFi** - zestaw standardów stworzonych do budowy bezprzewodowych sieci komputerowych. Szczególnym zastosowaniem wi-fi jest budowanie sieci lokalnych (LAN) opartych na komunikacji radiowej, czyli WLAN.
-- **PPP** - protokół połączenia punkt-punkt, – protokół komunikacyjny warstwy łącza danych używany przy bezpośrednich połączeniach pomiędzy dwoma węzłami sieci.
-- **ATM** - Asynchronous Transfer Mode – szerokopasmowy standard komunikacji, realizujący przesył pakietów poprzez łącza wirtualne. Wybór drogi jest dokonywany tylko raz, przy zestawianiu łącza. Wszystkie pakiety należące do jednego połączenia wirtualnego są wysyłane tą samą trasą. Jest stosowany w sieciach MAN i WAN.
+- **PPP** - protokół połączenia punkt-punkt, – protokół komunikacyjny warstwy łącza danych używany przy bezpośrednich połączeniach pomiędzy dwoma węzłami sieci, często w połączeniach dial-up i tunelach VPN.
 - **Token ring** - metoda tworzenia sieci LAN opracowana przez firmę IBM w latach 70., dziś wypierana przez technologię Ethernetu. Szybkość przesyłania informacji w sieciach Token Ring wynosi 4 lub 16 Mb/s.
 
 **Protokoły sieci:**
 
 - **IPv4** - czwarta wersja protokołu komunikacyjnego IP przeznaczonego dla Internetu. Identyfikacja hostów w IPv4 opiera się na adresach IP. Dane przesyłane są w postaci standardowych datagramów. Wykorzystanie IPv4 jest możliwe niezależnie od technologii łączącej urządzenia sieciowe – sieć telefoniczna, kablowa, radiowa itp.
-- **IPv6** - protokół komunikacyjny, będący następcą protokołu IPv4, do którego opracowania przyczynił się w głównej mierze problem małej, kończącej się liczby adresów IPv4. Podstawowymi zadaniami nowej wersji protokołu jest zwiększenie przestrzeni dostępnych adresów poprzez zwiększenie długości adresu z 32 bitów do 128 bitów, uproszczenie nagłówka protokołu oraz zapewnienie jego elastyczności poprzez wprowadzenie rozszerzeń, a także wprowadzenie wsparcia dla klas usług, uwierzytelniania oraz spójności danych.
+- **IPv6** - protokół komunikacyjny, będący następcą protokołu IPv4 z 128-bitowymi adresami, rozwiązujący problem wyczerpywania się puli adresów IPv4. Oferuje uproszczony nagłówek, wsparcie dla klas usług, uwierzytelniania i spójności danych.
 - **ICMP** - wykorzystywany w diagnostyce sieci oraz trasowaniu. Pełni przede wszystkim funkcję kontroli transmisji w sieci. Jest wykorzystywany w programach ping oraz traceroute.
 
 **Protokoły warstwy transportowej:**
  
 - **TCP** - protokół sterowania transmisją - połączeniowy, niezawodny, strumieniowy protokół komunikacyjny stosowany do przesyłania danych między procesami uruchomionymi na różnych maszynach, będący częścią szeroko wykorzystywanego obecnie stosu TCP/IP.
-- **UDP** - protokół bezpołączeniowy, więc nie ma narzutu na nawiązywanie połączenia i śledzenie sesji (w przeciwieństwie do TCP). Nie ma też mechanizmów kontroli przepływu i retransmisji. Korzyścią płynącą z takiego uproszczenia budowy jest szybsza transmisja danych i brak dodatkowych zadań, którymi musi zajmować się host posługujący się tym protokołem.
+- **UDP** - protokół bezpołączeniowy bez mechanizmów kontroli przepływu i retransmisji. Szybsza transmisja, ale bez gwarancji dostarczenia. Używany w streaming, grach online, DNS, VoIP.
 
 ---
 
@@ -535,11 +545,18 @@ Język niskiego poziomu – kod maszynowy, język programowania, w którym jedne
 
 **Odpowiedź:**
 
-DHCP (ang. Dynamic Host Configuration Protocol – protokół dynamicznego konfigurowania hostów) – protokół komunikacyjny umożliwiający hostom uzyskanie od serwera danych konfiguracyjnych, np. adresu IP hosta, adresu IP bramy sieciowej, adresu serwera DNS, maski podsieci.
+DHCP (ang. Dynamic Host Configuration Protocol – protokół umożliwiający hostom automatyczne uzyskanie od serwera danych konfiguracyjnych: adresu IP, maski podsieci, adresu bramy sieciowej, adresu serwera DNS oraz innych parametrów sieciowych.
 
 - **przydzielanie ręczne** oparte na tablicy adresów MAC oraz odpowiednich dla nich adresów IP. Jest ona tworzona przez administratora serwera DHCP. W takiej sytuacji prawo do pracy w sieci mają tylko komputery zarejestrowane wcześniej przez obsługę systemu.
 - **przydzielanie automatyczne**, gdzie wolne adresy IP z zakresu ustalonego przez administratora są przydzielane kolejnym zgłaszającym się po nie klientom.
 - **przydzielanie dynamiczne**, pozwalające na ponowne użycie adresów IP. Administrator sieci nadaje zakres adresów IP do rozdzielenia. Wszyscy klienci mają tak skonfigurowane interfejsy sieciowe, że po starcie systemu automatycznie pobierają swoje adresy. Każdy adres przydzielany jest na pewien czas. Taka konfiguracja powoduje, że zwykły użytkownik ma ułatwioną pracę z siecią.
+
+**Proces DHCP (DORA):**
+- **Discover** – urządzenie (Klient) szuka serwera, który może zaproponować mu dostęp do sieci.
+- **Offer** – DHCP wysyła odpowiedź, zawierającą informację, że ma dla Klienta wolny adres IP.
+- **Request** – Klient wysyła żądanie, które jest jednocześnie akceptacją otrzymanego adresu.
+- **Acknowledgement** – DHCP potwierdza, że adres został przydzielony konkretnemu Klientowi (urządzeniu).
+
 
 
 ## 13. Wyliczanie adresów: sieci, maski, rozgłoszeniowego w IPv4, IPv6
