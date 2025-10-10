@@ -561,11 +561,49 @@ DHCP (ang. Dynamic Host Configuration Protocol – protokół umożliwiający ho
 
 ## 13. Wyliczanie adresów: sieci, maski, rozgłoszeniowego w IPv4, IPv6
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Adresowanie IP pozwala na jednoznaczną identyfikację urządzeń w sieci komputerowej. Każdy adres należy do określonej podsieci, której granice wyznacza **maska podsieci**. Na podstawie adresu hosta i maski można wyliczyć adres sieci, zakres hostów oraz adres rozgłoszeniowy (w IPv4).
+
+Adres IPv4 ma długość 32 bitów i zapisywany jest w postaci czterech oktetów.
+
+**Wyliczanie adresu sieci:**
+1. Mamy adres 192.168.1.34/24. Na początku rozpisujemy adres hosta do postaci bitowej, czyli 192.168.1.34 zapisujemy jako:
+**11000000.10101000.00000001.00100010**
+![wyliczanie adresu 1](Static/Q13/adres_sieci_1.jpg)
+2. Przechodzimy do maski. Zapis skrócony to liczba jedynek. 
+/24 -> **11111111.11111111.11111111.00000000**
+3. Na końcu mnożymy bitowy zapis adresu i bitowy zapis maski, zapisując adresy jeden pod drugim. Wykonujemy operację AND, czyli jeśli A=1 AND B=1, to A&B=1. W uproszczeniu: jeśli w masce jest 1, to przepisujemy cyfrę z adresu hosta. W pozostałych miejscach wstawiamy 0.
+![wyliczanie adresu 1](Static/Q13/adres_sieci_2.jpg)
+
+Dla adresu i maski 192.168.1.34/24, adresem sieci będzie **192.168.1.0/24**
+
+**Wyliczanie adresu rozgłoszeniowego:**
+
+Aby obliczyć adres rozgłoszeniowy, musimy pomnożyć adres hosta rozpisany binarnie przez maskę, a następnie w miejscach, gdzie w masce występują 0, umieszczamy 1.
+
+Dla adresu i maski 192.168.1.34/24, adresem rozgłoszeniowym będzie **192.168.1.255/24**
+
+**IPv6**
+
+IPv6 (Internet Protocol version 6) to protokół sieciowy nowej generacji, który zastępuje IPv4, przede wszystkim z powodu wyczerpania dostępnych adresów w starszym protokole. Adres IPv6 ma długość **128 bitów**, co pozwala na utworzenie ogromnej liczby unikalnych adresów. Adres zapisywany jest w postaci **ósemek szesnastkowych oddzielonych dwukropkami**, np.: 2001:0db8:85a3:0000:0000:8a2e:0370:7334. Dla uproszczenia długie ciągi zer można skracać, np. 2001:db8:85a3::8a2e:370:7334.
+
+
+
 
 ## 14. System DNS
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+System DNS (Domain Name System) jest **hierarchicznym** i rozproszonym systemem, którego głównym zadaniem jest tłumaczenie nazw domenowych na adresy IP. Czyli my w przeglądarkę wpisujemy www.google.com, a DNS tłumaczy to np. na 142.250.186.100. 
+
+Struktura usługi DNS ma postać odwróconego drzewa, gdzie na szczycie znajdują się serwery główne, tak zwane **Root Servers**, reprezentowane przez znak kropki, której my nie widzimy, chociaż faktycznie ona tam jest, a poniżej serwery dla poszczególnych domen. Domeny **drugiego poziomu** to domeny typu com, pl, org czy też gov. Dalej mamy **domeny trzeciego** poziomu czyli wp.pl, microsoft.com itd. Następne w hierarchii są domeny typu poczta.wp.pl czy netacad.cisco.com. **Serwery autorytatywne** to lokalne serwery przechowujące aktualne informacje na temat urządzeń w danej domenie
+
+Podsumowując, mamy serwery domeny głównej i serwery autorytatywne. Klientem systemu DNS jest usługa systemowa zwana **resolver**, która implementowana jest w każdym systemie operacyjnym. To ona odpowiedzialna jest za komunikację z serwerem DNS.
+
+Ważnym elementem działania systemu DNS jest **buforowanie** odpowiedzi. Raz rozwiązana nazwa domenowa jest przechowywana tymczasowo w pamięci podręcznej, co przyspiesza kolejne zapytania i zmniejsza obciążenie sieci.
+
+Rodzaje zapytań DNS możemy podzielić na:
+- **rekurencyjne** - wymuszają na serwerze odnalezienie informacji na temat danej domeny lub przesłanie komunikatu o błędzie
+- **iteracyjne** - nie wymuszają łączenia się z innymi serwerami DNS, gdy serwer nie zna adresu IP domeny — w takim przypadku prezentują one najlepszą odpowiedź, jaką w danej chwili posiadają.
 
 ---
 
@@ -573,11 +611,33 @@ DHCP (ang. Dynamic Host Configuration Protocol – protokół umożliwiający ho
 
 ## 15. Klucze główne, klucze obce w bazach danych
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Klucz główny** (primary key) to atrybut lub zestaw atrybutów, który **jednoznacznie identyfikuje** każdy rekord w tabeli bazy danych. Wartości klucza głównego muszą być **unikalne** i nie mogą przyjmować wartości pustych (NULL). Dzięki temu możliwe jest szybkie i jednoznaczne odwołanie się do konkretnego rekordu. Każda tabela może posiadać **tylko jeden** klucz główny, ale może on składać się z kilku kolumn. Klucz główny powinien być stabilny, czyli jego wartość nie powinna ulegać zmianie w czasie.
+
+**Klucz obcy** (foreign key) to atrybut w jednej tabeli, który odwołuje się do klucza głównego w innej tabeli. Służy do tworzenia relacji między tabelami i zapewnia spójność danych w bazie. Dzięki kluczom obcym możliwe jest odwzorowanie powiązań logicznych, np. przypisanie zamówienia do konkretnego użytkownika. Klucz obcy wymusza integralność referencyjną – oznacza to, że nie można wprowadzić wartości, która nie istnieje w tabeli nadrzędnej. Na przykład, jeżeli w tabeli „Zamówienia” pole „id_uzytkownika” jest kluczem obcym, to jego wartość musi odpowiadać istniejącemu „id_uzytkownika” w tabeli „Użytkownicy”.
+
+Stosowanie kluczy głównych i obcych pozwala utrzymać porządek i integralność danych, eliminuje duplikaty oraz umożliwia łatwe łączenie informacji z wielu tabel za pomocą zapytań SQL. Dzięki nim baza danych staje się spójnym systemem powiązanych ze sobą elementów.
 
 ## 16. Diagram związków encji
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Diagram związków encji** (ERD – Entity Relationship Diagram) - graficzne narzędzie służące do projektowania baz danych. Dzięki ERD można zobaczyć, jakie informacje będą przechowywane w bazie oraz jak będą ze sobą powiązane. Przedstawia on:
+- **encje** - obiekty, o których gromadzimy dane
+- **atrybuty** - cechy encji
+- **związki** - relacje między encjami
+
+**Encje** oznacza się prostokątami. Są to obiekty takie jak np. Klient, Produkt, Zamówienie. Każda encja ma swoje **atrybuty**, czyli dane opisujące jej właściwości. Przykładowo, encja Klient może mieć atrybuty: id_klienta, imię, nazwisko, e-mail, telefon. Wśród atrybutów wyróżnia się **klucz główny**, czyli pole jednoznacznie identyfikujące każdy rekord w tabeli.
+
+**Związki (relacje)** oznacza się rombami lub samymi liniami. Pokazują one powiązania między encjami. Np. Klient – „składa” → Zamówienie albo Zamówienie – „zawiera” → Produkt. 
+
+Przy relacjach podaje się **krotności (liczebności)**:
+- 1:1 (jeden do jednego) – np. jeden użytkownik ma jeden profil
+- 1:N (jeden do wielu) – np. jeden klient może złożyć wiele zamówień, ale każde zamówienie należy do jednego klienta
+- N:1 (wiele do jednego) - np. wiele pracowników może pracować w jednym dziale, ale każdy pracownik należy do jednego działu.
+- M:N (wiele do wielu) – np. zamówienie może zawierać wiele produktów, a produkt może wystąpić w wielu zamówieniach
+
+W przypadku relacji wiele do wielu (M:N) w praktyce stosuje się dodatkową encję pośredniczącą, np. „Pozycja_zamówienia”, która łączy Zamówienie i Produkt i przechowuje m.in. liczbę sztuk danego produktu w danym zamówieniu.
+
 
 ## 17. Język baz danych SQL. Podjęzyki DDL, DML, DCL
 **Odpowiedź:**
