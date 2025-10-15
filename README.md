@@ -641,11 +641,144 @@ W przypadku relacji wiele do wielu (M:N) w praktyce stosuje się dodatkową encj
 
 ## 17. Język baz danych SQL. Podjęzyki DDL, DML, DCL
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**SQL (Structured Query Language)** to podstawowy język do pracy z relacyjnymi bazami danych. Umożliwia tworzenie, modyfikowanie, odpytywanie oraz kontrolę dostępu do danych. SQL dzieli się na różne podjęzyki, czyli grupy poleceń, które pełnią konkretne funkcje.
+
+Najważniejsze z nich to:​
+
+**1. DDL (Data Definition Language) – Język definicji danych.**
+  <br>Służy do definiowania i modyfikowania struktury bazy danych: <br>czyli do tworzenia, zmieniania i usuwania obiektów takich jak tabele, bazy, indeksy.
+   - **Najczęstsze polecenia:**
+    
+      * `CREATE` – tworzy nowe obiekty (np. tabelę, bazę)
+    
+      * `ALTER` – zmienia istniejącą strukturę (np. dodaje kolumnę)
+    
+      * `DROP` – usuwa obiekty
+  
+   - **Przykład:**
+      ```
+      CREATE TABLE pracownicy (
+      id INT, imie VARCHAR(100), nazwisko VARCHAR(100)
+     );
+     ```
+     To polecenie tworzy nową tabelę "pracownicy" z trzema kolumnami.
+
+**2. DML (Data Manipulation Language) – Język manipulacji danymi.**
+   <br>Pozwala na operacje na danych zapisanych już w tabelach – dodawanie, modyfikowanie, usuwanie.
+  
+  - **Najczęstsze polecenia:**
+      
+     * `INSERT` – dodaje nowe rekordy
+      
+     * `UPDATE` – aktualizuje istniejące rekordy
+      
+      * `DELETE` – usuwa rekordy
+      
+  - **Przykład:**
+    ```
+    INSERT INTO pracownicy (id, imie, nazwisko) VALUES (1, 'Adam', 'Nowak');
+    UPDATE pracownicy SET imie = 'Jan' WHERE id = 1;
+    DELETE FROM pracownicy WHERE id = 1;
+    ```
+
+**3. DCL (Data Control Language) – Język kontroli nad danymi**
+  - **Pozwala kontrolować dostęp do danych i obiektów w bazie** – czyli kto i co może zrobić.
+  - **Najczęstsze polecenia:**
+    
+    - `GRANT` – nadaje uprawnienia
+      
+    - `REVOKE` – odbiera uprawnienia
+  - **Przykład:**
+    ```
+    GRANT SELECT ON pracownicy TO uzytkownik;
+    REVOKE SELECT ON pracownicy FROM uzytkownik;
+    ```
 
 ## 18. Instrukcja SELECT, łączenie danych z wielu tabel
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**1. Instrukcja SELECT — pobieranie danych**
+
+Polecenie SELECT służy do pobierania danych z tabel w bazie danych. <br>To podstawowa komenda w SQL i należy do podjęzyka DQL (Data Query Language), który jest częścią DML.<br>
+**Składnia podstawowa**
+```
+SELECT kolumny
+FROM nazwa_tabeli
+[WHERE warunki]
+[ORDER BY kolumna [ASC | DESC]];
+```
+
+**Przykład**
+```
+SELECT imie, nazwisko, placa
+FROM pracownicy
+WHERE placa > 1000
+ORDER BY nazwisko ASC;
+```
+
+**Opis:** zapytanie wybiera kolumny imie, nazwisko i placa z tabeli pracownicy, dla osób zarabiających więcej niż 1000, i sortuje wyniki rosnąco według nazwiska.
+
+**Działanie klauzul:**
+- `SELECT` – określa, które kolumny ma zwrócić zapytanie.
+
+- `FROM` – wskazuje, z której tabeli dane mają pochodzić.
+
+- `WHERE` – pozwala filtrować rekordy wg warunków logicznych (np. placa > 1000).
+
+- `ORDER BY` – sortuje wynik według wybranych kolumn (rosnąco ASC lub malejąco DESC).
+
+**2.Łączenie danych z wielu tabel — JOIN**
+
+W relacyjnych bazach danych informacje są często podzielone między różne tabele. Aby uzyskać dane z kilku tabel jednocześnie, używamy **łączenia tabel (JOIN).**
+
+**Typy łączeń (JOIN)**
+**a) INNER JOIN** — łączenie wewnętrzne
+Zwraca tylko te wiersze, które mają dopasowanie w obu tabelach.
+```
+SELECT pracownicy.imie, dzialy.nazwa
+FROM pracownicy
+INNER JOIN dzialy ON pracownicy.id_dzialu = dzialy.id_dzialu;
+```
+
+**Opis:** pokazuje imię pracownika i nazwę działu tylko wtedy, gdy istnieje dopasowanie w obu tabelach.
+
+**b) LEFT JOIN — łączenie z lewej tabeli**
+Zwraca wszystkie rekordy z lewej tabeli, nawet jeśli nie ma dopasowania w prawej.
+```SELECT pracownicy.imie, dzialy.nazwa
+FROM pracownicy
+LEFT JOIN dzialy ON pracownicy.id_dzialu = dzialy.id_dzialu;
+```
+
+**Opis:** pokaże wszystkich pracowników, nawet jeśli nie mają przypisanego działu.
+
+**c) RIGHT JOIN — łączenie z prawej tabeli**
+Zwraca wszystkie rekordy z prawej tabeli, nawet bez dopasowania w lewej.
+```
+SELECT pracownicy.imie, dzialy.nazwa
+FROM pracownicy
+RIGHT JOIN dzialy ON pracownicy.id_dzialu = dzialy.id_dzialu;
+```
+
+**Opis:** pokaże wszystkie działy – także te, w których nie ma pracowników.
+
+**d) FULL JOIN — pełne łączenie**
+Zwraca wszystkie rekordy z obu tabel, niezależnie od dopasowania.
+```
+SELECT pracownicy.imie, dzialy.nazwa
+FROM pracownicy
+FULL JOIN dzialy ON pracownicy.id_dzialu = dzialy.id_dzialu;
+```
+
+**3. Aliasowanie i filtrowanie po JOIN**
+Aby uprościć kod, można używać aliasów:
+
+```
+SELECT p.imie, d.nazwa
+FROM pracownicy AS p
+JOIN dzialy AS d ON p.id_dzialu = d.id_dzialu
+WHERE d.nazwa = 'Sprzedaż';
+```
+
+**Opis:** zwraca imiona pracowników, którzy pracują w dziale „Sprzedaż”.
 
 ---
 
@@ -653,11 +786,87 @@ W przypadku relacji wiele do wielu (M:N) w praktyce stosuje się dodatkową encj
 
 ## 19. Diody półprzewodnikowe. Tranzystory
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Diody półprzewodnikowe**
+  - **Budowa i działanie:** Dioda składa się z dwóch warstw półprzewodników: typu P (z nadmiarem dziur – dodatnich nośników ładunku) i typu N (z nadmiarem elektronów – ujemnych nośników ładunku). Obszar styku tych warstw tworzy złącze P-N. Dioda ma dwa     wyprowadzenia: anodę (A, po stronie P) i katodę (K, po stronie N).​
+
+  - Prąd płynie przez diodę tylko w jednym kierunku — gdy anoda jest podłączona do wyższego potencjału niż katoda (kierunek przewodzenia). W przeciwną stronę (kierunek zaporowy) dioda blokuje przepływ prądu.
+
+  - Typy diod:
+  
+    - Prostownicze — do zamiany prądu przemiennego (AC) na stały (DC)
+  
+    - Zenera — stabilizują napięcie
+  
+    - LED (elektroluminescencyjne) — źródła światła
+  
+    - Fotodiody — czujniki światła
+  
+    - Schottky’ego, tunelowe, varikapy, detekcyjne itp
+      
+  - **Zastosowanie:** Prostowniki, układy zabezpieczające, wskaźniki LED, ogniwa fotowoltaiczne, czujniki światła, układy stabilizujące napięcie
+
+**Tranzystory**
+  - **Budowa i rodzaje:** Tranzystor jest elementem półprzewodnikowym składającym się z trzech warstw półprzewodników (NPN lub PNP dla tranzystorów bipolarnych; MOSFET, IGBT dla tranzystorów unipolarnych).​
+  
+  - Zasada działania: Tranzystor działa jak elektroniczny przełącznik lub wzmacniacz. Niewielki prąd (lub napięcie) przyłożony do jednej z elektrod (baza w bipolarnych, bramka w MOSFET) pozwala sterować większym prądem płynącym przez pozostałe elektrody (kolektor-emiter lub dren-źródło).​
+  
+  - **Zastosowanie:** Wzmacniacze sygnałów, układy przełączające, zasilacze, generatory, regulatory napięcia, sterowniki silników, układy cyfrowe (podstawa działania komputerów i mikroprocesorów).
 
 ## 20. Układy scalone, impulsowe, cyfrowe
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Układy scalone**
+- **Definicja: Układ scalony (IC – Integrated Circuit)** to miniaturowy obwód elektroniczny, w którym na jednej płytce półprzewodnika (zwykle z krzemu) zintegrowano tysiące, a nawet miliardy elementów takich jak tranzystory, rezystory, diody i kondensatory.​
+
+- **Budowa:** Wszystkie elementy są na stałe umieszczone i połączone wewnątrz mikrochipu, który następnie zostaje zamknięty w obudowie z metalowymi wyprowadzeniami (pinami), np. typu DIP, SOIC, QFP lub QFN.​
+
+- **Podział ze względu na konstrukcję:**
+
+   - Monolityczne – wszystkie elementy wykonane są w jednym monokrysztale półprzewodnika.
+    
+   - Hybrydowe – wykonane z połączenia kilku warstw i różnych materiałów (np. przewodników i rezystorów).
+
+- **Podział według stopnia integracji:**
+
+   - SSI (Small Scale Integration) – do 100 elementów.
+    
+   - MSI (Medium Scale Integration) – do 1000 elementów.
+    
+   - LSI, VLSI, ULSI – tysiące do miliardów elementów w jednym układzie (np. mikroprocesory).​
+ 
+**Układy impulsowe**
+- **Charakterystyka:** Układy impulsowe działają na zasadzie przetwarzania sygnałów elektrycznych mających postać impulsów, czyli krótkich zmian napięcia w czasie. Sygnały te mogą być wykorzystywane do sterowania, modulacji lub generowania częstotliwości.​
+
+- **Działanie:** Ich zadaniem jest zamiana sygnałów ciągłych (analogowych) na serię impulsów lub odwrotnie. Wykorzystują elementy takie jak tranzystory, diody, kondensatory i specjalne układy scalone przystosowane do pracy impulsowej.​
+
+- **Zastosowanie:**
+
+   - generatory i przetwornice,
+    
+   - układy czasowe (np. 555 Timer),
+    
+   - zasilacze impulsowe (SMPS),
+    
+   - modulatory i demodulatory w systemach telekomunikacyjnych.
+
+**Układy cyfrowe**
+- **Charakterystyka:** Układy cyfrowe przetwarzają sygnały binarne – czyli mają tylko dwa stany: 0 (niski poziom napięcia) i 1 (wysoki poziom). Działają na zasadach logiki Boole’a.​
+
+- **Elementy podstawowe:**
+
+   - bramki logiczne (AND, OR, NOT, NAND, NOR),
+    
+   - przerzutniki (flip-flops),
+    
+   - liczniki, rejestry, multipleksery.
+
+- **Rodzaje technologii:**
+    
+   - TTL (Transistor-Transistor Logic),
+    
+   - CMOS (Complementary Metal-Oxide-Semiconductor) – energooszczędna i powszechnie stosowana w nowoczesnych mikrokontrolerach i procesorach.​
+
+- **Zastosowanie:** w komputerach, mikrokontrolerach, systemach sterowania, pamięciach RAM/ROM, czujnikach cyfrowych i urządzeniach komunikacyjnych.​
+
 
 ## 21. Przetworniki analogowo-cyfrowe i cyfrowo-analogowe
 **Odpowiedź:**
