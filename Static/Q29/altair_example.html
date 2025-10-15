@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-3f3fe6d8bd36224b311d07cb8b550943"}, "mark": {"type": "bar", "color": "skyblue"}, "encoding": {"tooltip": [{"field": "Miasto", "type": "nominal"}, {"field": "Liczba mieszka\u0144c\u00f3w (mln)", "type": "quantitative"}], "x": {"field": "Miasto", "type": "nominal"}, "y": {"field": "Liczba mieszka\u0144c\u00f3w (mln)", "type": "quantitative"}}, "title": "Liczba mieszka\u0144c\u00f3w w polskich miastach", "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-3f3fe6d8bd36224b311d07cb8b550943": [{"Miasto": "Warszawa", "Liczba mieszka\u0144c\u00f3w (mln)": 1.8}, {"Miasto": "Krak\u00f3w", "Liczba mieszka\u0144c\u00f3w (mln)": 0.8}, {"Miasto": "Gda\u0144sk", "Liczba mieszka\u0144c\u00f3w (mln)": 0.5}, {"Miasto": "Wroc\u0142aw", "Liczba mieszka\u0144c\u00f3w (mln)": 0.6}, {"Miasto": "Pozna\u0144", "Liczba mieszka\u0144c\u00f3w (mln)": 0.54}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
