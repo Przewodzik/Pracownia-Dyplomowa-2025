@@ -951,19 +951,285 @@ Istnieją dwie główne metody przechowywania struktury grafu w pamięci kompute
 
 ## 29. Definicja histogramu. Jakiego typu wykresu warto użyć do prezentacji?
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Histogram** to rodzaj wykresu służący do przedstawiania rozkładu danych liczbowych. Pokazuje, **jak często** (czyli z jaką częstotliwością) występują wartości z określonych przedziałów (zwanych klasami). Każdy słupek na histogramie pokazuje, **ile elementów mieści się w danym zakresie wartości** (przedziale). Im wyższy słupek, tym więcej danych w tym zakresie. Oś pozioma (OX) oznacza zakresy wartości badanej cechy, natomiast oś pionowa (OY) – liczebność obserwacji w danym zakresie.
+
+![Konstrukcja Histogramu](Static/Q29/Konstrukcja_histogramu.png)
+
+Histogram różni się od wykresu słupkowego tym, że jego słupki są połączone – nie ma przerw między nimi, ponieważ prezentuje dane ciągłe, a nie kategoryczne. Dzięki temu pozwala ocenić nie tylko ilość obserwacji, ale także kształt rozkładu danych (np. czy jest on symetryczny, skośny czy wielomodalny).
+
+
+### **Przykład:**
+Załóżmy, że zmierzyliśmy wzrost 20 osób (w cm):
+
+160, 162, 163, 164, 165, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 175, 176, 178, 180  
+
+Jeśli podzielimy dane na przedziały co 5 cm (np. 160–164, 165–169, 170–174, 175–179, 180+), to histogram pokaże nam, **ile osób mieści się w każdym przedziale**.
+
+| Przedział (cm) | Liczba osób |
+|----------------|-------------|
+| 160–164 | 4 |
+| 165–169 | 6 |
+| 170–174 | 5 |
+| 175–179 | 4 |
+| 180+ | 1 |
+
+
+### **Wizualizacja (histogram):**
+```python
+import matplotlib.pyplot as plt
+
+dane = [160,162,163,164,165,165,166,167,168,169,170,171,172,173,174,175,175,176,178,180]
+plt.hist(dane, bins=5, color='skyblue', edgecolor='black')
+plt.title("Histogram wzrostu osób")
+plt.xlabel("Wzrost [cm]")
+plt.ylabel("Liczba osób")
+plt.show()
+```
+
+![Wykres Histogramu](Static/Q29/histogram_exapmle.png)
+
+
+### **Jaki typ wykresu wybrać do prezentacji?**
+Do prezentacji danych ilościowych najlepiej użyć właśnie histogramu, gdy chcemy zrozumieć strukturę rozkładu – wykres ten ułatwia analizę statystyczną i podejmowanie decyzji badawczych. Gdy natomiast mamy do czynienia z danymi kategorycznymi (np. płeć, kolor auta, kierunek studiów), lepszym rozwiązaniem będzie wykres słupkowy z przerwami między kolumnami, aby oddzielić od siebie niezależne kategorie.
+
+**Histogram** – do danych liczbowych ciągłych (np. wzrost, waga, czas, temperatura).  
+**Wykres słupkowy (bar chart)** – do danych **kategorycznych** (np. ulubiony kolor, kraj pochodzenia, typ urządzenia).  
+
+**Różnica:**  
+- Histogram pokazuje **rozkład liczbowy (ciągły)**.  
+- Wykres słupkowy pokazuje **ilości kategorii (dane nieciągłe)**.  
+
+---
 
 ## 30. Biblioteki wspierające tworzenie wykresów za pomocą języka Python
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+W języku **Python** istnieje wiele bibliotek, które pomagają w tworzeniu wykresów i wizualizacji danych. Dzięki nim możemy łatwo pokazać wyniki analiz w formie graficznej.
+
+
+### **Najważniejsze biblioteki:**
+
+#### 🟦 **Matplotlib**
+"Stara, dobra klasyka". Matplotlib to najstarsza i najbardziej podstawowa biblioteka do rysowania wykresów w Pythonie. Można go porównać do "rysownika z linijką" - pozwala nam zrobić dosłownie wszystko, ale musimy dokładnie mu powiedzieć co i jak narysować.
+- Najbardziej podstawowa i popularna biblioteka do rysowania wykresów.
+- Pozwala tworzyć linie, słupki, koła, histogramy i wykresy 3D.
+- Umożliwia pełną kontrolę nad kolorami, tytułami i osiami.
+
+**Przykład:**
+```python
+import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4]
+y = [10, 15, 7, 12]
+plt.plot(x, y)
+plt.title("Przykładowy wykres liniowy")
+plt.xlabel("Czas")
+plt.ylabel("Wartość")
+plt.show()
+```
+
+![Wykres Matplotlib](Static/Q29/matplotlib_exapmle.png)
+
+
+#### 🟩 **Seaborn**
+"Młodszy brat Matplotlib, który ma styl". Seaborn to biblioteka zbudowana na biazie Matplotlib, ale robi to samo ładniej i szybciej. Nie musisz pisać tylu linijek kodu – Seaborn sam zadba o kolory, styl i legendę.
+- Buduje na Matplotlib, ale wygląda ładniej i ma gotowe style.
+- Świetna do wykresów statystycznych: histogramy, wykresy rozrzutu, wykresy pudełkowe.
+- Często używana przy analizie danych z Pandas.
+
+**Przykład:**
+```python
+import seaborn as sns
+import pandas as pd
+
+dane = pd.DataFrame({"wiek": [20,22,23,21,25,26,22,23,24]})
+sns.histplot(dane["wiek"], bins=5, color="skyblue")
+```
+
+![Wykres Seaborn](Static/Q29/seaborn_example.png)
+
+
+#### 🟨 **Plotly**
+"interaktywny czarodziej". Plotly to biblioteka, która tworzy interaktywne wykresy – takie, które możesz przesuwać, powiększać, a po najechaniu myszką pokazują dane. Działa świetnie w przeglądarce, Jupyterze i aplikacjach webowych.
+- Tworzy **interaktywne wykresy** (można je obracać, powiększać, najeżdżać kursorem).
+- Stosowana często w aplikacjach webowych (np. z Dash lub Streamlit).
+
+**Przykład:**
+```python
+import plotly.express as px
+
+dane = {"Miasto": ["Olsztyn", "Warszawa", "Kraków"], "Liczba": [120, 300, 250]}
+fig = px.bar(dane, x="Miasto", y="Liczba", title="Liczba mieszkańców")
+fig.show()
+```
+
+[Zobacz wykres Plotly →](Static/Q29/plotly_example.html)
+
+
+#### 🟥 **Pandas**
+„Excel Pythona”. Pandas to jedna z najważniejszych bibliotek w Pythonie — służy do przechowywania, przetwarzania i analizowania danych.
+Można powiedzieć, że to Pythonowa wersja Excela, tylko dużo mądrzejsza, szybsza i dająca większe możliwości.
+- Sama w sobie nie jest biblioteką wizualizacyjną, ale współpracuje z Matplotlib.
+- Można szybko tworzyć wykresy z danych w DataFrame.
+
+**Przykład:**
+```python
+import pandas as pd
+
+dane = pd.Series([3, 7, 1, 9])
+dane.plot(kind='bar')
+```
+
+![Wykres Pandas](Static/Q29/pandas_example.png)
+
+
+#### 🟪 **Altair**
+„Nowoczesny automat do wykresów”. Altair to biblioteka do tworzenia wykresów szybko i zrozumiale.
+Nie musisz pisać dużo kodu ani ustawiać szczegółów — po prostu mówisz „co chcesz zobaczyć”, a Altair sam to narysuje.
+- Deklaratywna biblioteka oparta na zasadzie „powiedz, co chcesz zobaczyć, a nie jak zrobić”.
+- Bardzo czytelna składnia, dobra do szybkich prototypów.
+
+**Przykład:**
+```python
+import altair as alt
+import pandas as pd
+
+dane = pd.DataFrame({
+    'Miasto': ['Warszawa', 'Kraków', 'Gdańsk', 'Wrocław', 'Poznań'],
+    'Liczba mieszkańców (mln)': [1.8, 0.8, 0.5, 0.6, 0.54]
+})
+
+wykres = alt.Chart(dane).mark_bar(color='skyblue').encode(
+    x='Miasto',                      
+    y='Liczba mieszkańców (mln)',    
+    tooltip=['Miasto', 'Liczba mieszkańców (mln)']
+).properties(
+    title='Liczba mieszkańców w polskich miastach'
+)
+
+wykres.show()
+```
+
+[Zobacz wykres Altair →](Static/Q29/altair_example.html)
+
+---
 
 ## 31. Omów koncepcję "czystych danych/tidy data"
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Czyste dane (ang. tidy data)** to sposób przechowywania danych w tabeli, dzięki któremu analiza i wizualizacja są **proste i logiczne**. Koncepcja tidy data została opracowana przez Hadleya Wickhama i stanowi uniwersalny standard organizacji danych, ułatwiający analizę i wizualizację.
+
+
+### **Zasady czystych danych (wg Hadleya Wickhama):**
+1. **Każda kolumna** to **jedna zmienna** (np. imię, wiek, kraj).
+2. **Każdy wiersz** to **jedna obserwacja** (np. jedna osoba, produkt, pomiar).
+3. **Każda komórka** zawiera **jedną wartość**, a nie kilka naraz.
+
+
+### **Przykład:**
+#### Dane NIEczyste:
+| Imię | Wiek-Kraj |
+|------|------------|
+| Ola  | 20-Polska  |
+| Max  | 25-Niemcy  |
+
+Tutaj w jednej kolumnie są **dwie zmienne**: wiek i kraj — to błąd.
+
+
+#### Dane czyste (tidy):
+| Imię | Wiek | Kraj |
+|------|------|------|
+| Ola  | 20   | Polska |
+| Max  | 25   | Niemcy |
+
+Teraz każda kolumna opisuje **jedną cechę**, więc dane są gotowe do analizy.
+
+
+### **Dlaczego to ważne?**
+Przygotowanie danych w takiej formie jest kluczowe, ponieważ zdecydowana większość narzędzi analitycznych (np. w Pythonie) oczekuje danych w strukturze „tidy”. Dane „brudne” (dirty data) natomiast mają często problemy takie jak brakujące wartości, powtórzenia, mieszanie wielu typów informacji w jednej kolumnie, czy wiele kolumn reprezentujących różne okresy czasowe.
+Czyste dane są podstawą poprawnej analizy — biblioteki takie jak **pandas** czy **seaborn** zakładają, że dane są właśnie w takim formacie. Dzięki temu, możemy od razu wykonać poprawny i czytelny wykres.
+
+
+### **Podsumowanie:**
+- Jedna kolumna = jedna zmienna  
+- Jeden wiersz = jedna obserwacja  
+- Jedna komórka = jedna wartość  
+
+Niepoprawne dane → błędne wyniki analiz lub błędy w kodzie.
+
+---
 
 ## 32. Etapy analizy i wizualizacji danych
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Analiza danych to proces, w którym przekształcamy surowe dane w **wiedzę i wnioski**.  
+Można to porównać do gotowania – najpierw trzeba umyć i pokroić składniki, zanim coś ugotujemy.  
+
+
+### **Etapy analizy danych:**
+
+#### 1 **Zbieranie danych**
+Jest to pierwszy krok, w którym zbieramy dane z różnych źródeł: baz danych, arkuszy, plików CSV, API, czy ankiet. 
+**Przykład:** pobranie danych o temperaturze z pliku CSV lub API pogodowego.
+
+```python
+import pandas as pd
+dane = pd.read_csv("temperatura.csv")
+```
+
+
+#### 2 **Czyszczenie danych**
+Ten etap obejmuje usuwanie błędów, duplikatów, pustych wartości, literówek i nieprawidłowych formatów.
+
+**Przykład:**
+```python
+dane.dropna(inplace=True)  # usuwa wiersze z pustymi wartościami
+```
+
+
+#### 3 **Analiza eksploracyjna (EDA – Exploratory Data Analysis)**
+Sprawdzamy, **jak dane wyglądają**. jakie mają zależności, średnie, min/max, rozkłady.
+Wizualizujemy dane, by lepiej je zrozumieć.
+
+**Przykład:**
+```python
+dane.describe()      # statystyki opisowe
+sns.histplot(dane["temperatura"])
+```
+
+
+#### 4 **Modelowanie / obliczenia**
+Na tym etapie wykorzystujemy dane do obliczeń lub tworzenia modeli, np. średnia temperatura, regresja liniowa, wykrywanie anomalii itp.
+
+**Przykład:**
+```python
+dane["średnia"] = dane["temperatura"].mean()
+```
+
+
+#### 5 **Wizualizacja wyników**
+Przedstawiamy dane w zrozumiały sposób — w formie wykresów, tabel i dashboardów.
+Dobre wizualizacje pomagają szybciej dostrzec wzorce i wnioski.
+
+**Przykład:**
+```python
+plt.plot(dane["data"], dane["temperatura"])
+plt.title("Zmiana temperatury w czasie")
+plt.show()
+```
+
+
+#### 6 **Wnioski i prezentacja**
+Ostatni etap to interpretacja — **co dane nam mówią?**  
+Np. "Temperatura w maju rośnie średnio o 2°C tygodniowo" albo "Sprzedaż maleje w weekendy".
+
+
+### **Podsumowanie etapów:**
+| Etap | Co robimy | Przykład |
+|------|------------|-----------|
+| Zbieranie | Pobieramy dane z plików, baz, API | CSV z danymi pogodowymi |
+| Czyszczenie | Usuwamy błędy, braki | `dropna()`, `fillna()` |
+| Analiza | Sprawdzamy zależności | `describe()`, `corr()` |
+| Modelowanie | Liczymy średnie, trenujemy model | Regresja liniowa |
+| Wizualizacja | Rysujemy wykresy | `plt.plot()`, `sns.barplot()` |
+| Wnioski | Interpretujemy dane | np. wzrost temperatury |
 
 ---
 
