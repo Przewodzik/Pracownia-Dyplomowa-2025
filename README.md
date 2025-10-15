@@ -661,7 +661,51 @@ W przypadku relacji wiele do wielu (M:N) w praktyce stosuje się dodatkową encj
 
 ## 21. Przetworniki analogowo-cyfrowe i cyfrowo-analogowe
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Przetworniki analogowo-cyfrowe (ADC) i cyfrowo-analogowe (DAC) to fundamentalne układy elektroniczne, które pełnią rolę interfejsu między światem analogowym a cyfrowym. Umożliwiają one systemom cyfrowym, takim jak komputery i mikrokontrolery, interakcję z rzeczywistymi, ciągłymi sygnałami fizycznymi.
+
+### **Przetwornik analogowo-cyfrowy (ADC)**
+
+**Przetwornik analogowo-cyfrowy (ADC, Analog-to-Digital Converter)** to układ, który zamienia sygnał analogowy (np. napięcie z czujnika) na jego cyfrową, dyskretną reprezentację w postaci liczby binarnej. Dzięki temu możliwe jest przetwarzanie i przechowywanie danych ze świata fizycznego w urządzeniach cyfrowych.
+
+**Zasada działania:** Proces konwersji A/C składa się z trzech głównych etapów:
+
+1.  **Próbkowanie (Sampling):** Polega na mierzeniu wartości sygnału analogowego w regularnych, stałych odstępach czasu. Szybkość tego procesu określa **częstotliwość próbkowania**, wyrażana w hercach (Hz). Zgodnie z twierdzeniem Nyquista-Shannona, aby wiernie odwzorować sygnał, częstotliwość próbkowania musi być co najmniej dwukrotnie większa od najwyższej częstotliwości występującej w sygnale wejściowym.
+2.  **Kwantyzacja (Quantization):** To proces, w którym każdej pobranej próbce sygnału przypisywana jest najbliższa wartość z określonego, skończonego zbioru poziomów. Można to porównać do zaokrąglenia wartości do najbliższej dostępnej "działki" na skali.
+3.  **Kodowanie (Coding):** Na tym etapie skwantowane wartości są zamieniane na odpowiadające im liczby binarne.
+
+**Kluczowe parametry ADC:**
+
+*   **Rozdzielczość:** Określa dokładność, z jaką sygnał jest przetwarzany. Wyrażana jest w bitach. N-bitowy przetwornik może przedstawić sygnał za pomocą 2^n różnych poziomów. Na przykład, 8-bitowy ADC ma 256 poziomów, a 12-bitowy już 4096. Wyższa rozdzielczość oznacza mniejszy błąd kwantyzacji.
+*   **Częstotliwość próbkowania:** Definiuje, jak często pobierane są próbki sygnału. Jest kluczowa w zastosowaniach wymagających monitorowania szybko zmieniających się sygnałów, np. w audio.
+*   **Błąd kwantyzacji:** Nieunikniony błąd wynikający z zaokrąglania ciągłych wartości analogowych do dyskretnych poziomów cyfrowych.
+
+### **Przetwornik cyfrowo-analogowy (DAC)**
+
+**Przetwornik cyfrowo-analogowy (DAC, Digital-to-Analog Converter)** realizuje operację odwrotną do ADC. Przekształca sygnał cyfrowy (ciąg liczb binarnych) na proporcjonalny do niego sygnał analogowy, zazwyczaj w postaci napięcia lub prądu.
+
+**Zasada działania:** DAC odbiera dane cyfrowe i na ich podstawie generuje odpowiedni poziom napięcia lub prądu. W praktyce, sygnał wyjściowy ma często postać "schodkową", dlatego zazwyczaj jest wygładzany za pomocą filtra analogowego, aby uzyskać płynny przebieg. Najpopularniejsze konstrukcje DAC opierają się na tzw. drabince rezystorowej R-2R, która jest prosta i efektywna.
+
+**Kluczowe parametry DAC:**
+
+*   **Rozdzielczość:** Podobnie jak w ADC, określa liczbę bitów słowa cyfrowego na wejściu. Im wyższa rozdzielczość, tym więcej poziomów napięcia może wygenerować przetwornik, co przekłada się na większą wierność sygnału analogowego.
+*   **Czas ustalania (Settling Time):** Czas potrzebny, aby sygnał wyjściowy osiągnął i ustabilizował się na nowej wartości po zmianie danych wejściowych.
+*   **Liniowość:** Parametr określający, jak bardzo rzeczywista charakterystyka przetwornika odbiega od idealnej, liniowej zależności między wartością cyfrową a analogową.
+
+### **Zastosowania przetworników ADC i DAC**
+
+Przetworniki te są wszechobecne we współczesnej elektronice:
+
+*   **Zastosowania ADC:**
+    *   **Urządzenia pomiarowe i sensory:** Przetwarzanie sygnałów z czujników temperatury, ciśnienia, światła itp.
+    *   **Audio:** Digitalizacja dźwięku z mikrofonów.
+    *   **Medycyna:** Urządzenia do EKG, tomografy komputerowe.
+    *   **Komunikacja:** Modemy, odbiorniki radiowe.
+*   **Zastosowania DAC:**
+    *   **Sprzęt audio:** Odtwarzacze CD, karty dźwiękowe, smartfony, gdzie cyfrowe pliki muzyczne (np. MP3) są zamieniane na dźwięk słyszalny w głośnikach lub słuchawkach.
+    *   **Wideo:** Karty graficzne do generowania sygnału dla monitorów.
+    *   **Automatyka i sterowanie:** Sterowanie silnikami, generatorami funkcyjnymi.
+    *   **Telefonia cyfrowa.**
 
 ---
 
@@ -669,15 +713,217 @@ W przypadku relacji wiele do wielu (M:N) w praktyce stosuje się dodatkową encj
 
 ## 22. Schematy wyboru i tożsamości kombinatoryczne
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Kombinatoryka to dział matematyki zajmujący się zliczaniem obiektów o określonych właściwościach. Kluczowe w niej są **schematy wyboru**, które systematyzują sposoby wybierania lub układania elementów ze zbiorów, oraz **tożsamości kombinatoryczne**, czyli równości pozwalające upraszczać skomplikowane wyrażenia związane ze zliczaniem.
+
+### **Schematy wyboru**
+
+Schematy wyboru określają, w jaki sposób możemy tworzyć grupy (podzbiory, ciągi) z elementów danego zbioru. Podstawowe pytania, które pozwalają zidentyfikować odpowiedni schemat, to:
+1.  Czy kolejność wybieranych elementów jest istotna?
+2.  Czy elementy mogą się powtarzać?
+3.  Czy wykorzystujemy wszystkie elementy ze zbioru?
+
+Oto cztery fundamentalne schematy wyboru *k* elementów ze zbioru *n*-elementowego:
+
+#### **1. Wariacje z powtórzeniami**
+*   **Charakterystyka:** Tworzymy *k*-elementowe ciągi, w których **kolejność jest ważna**, a elementy **mogą się powtarzać**.
+*   **Przykład:** Ile czterocyfrowych kodów PIN można utworzyć z cyfr {0, 1, ..., 9}?
+*   **Wzór:**
+    $$ W_n^k = n^k $$
+    *W naszym przykładzie:* $10^4 = 10000$ możliwych kodów.
+
+#### **2. Wariacje bez powtórzeń**
+*   **Charakterystyka:** Tworzymy *k*-elementowe ciągi, w których **kolejność jest ważna**, a elementy **nie mogą się powtarzać**.
+*   **Przykład:** Na ile sposobów można wybrać i obsadzić stanowiska przewodniczącego, zastępcy i skarbnika w 20-osobowej klasie?
+*   **Wzór:**
+    $$ V_n^k = \frac{n!}{(n-k)!} $$
+    *W naszym przykładzie:* $V_{20}^3 = \frac{20!}{17!} = 20 \cdot 19 \cdot 18 = 6840$ sposobów.
+
+#### **3. Permutacje**
+*   **Charakterystyka:** Jest to szczególny przypadek wariacji bez powtórzeń, gdzie *k = n*. Oznacza to, że tworzymy *n*-elementowe ciągi, wykorzystując **wszystkie elementy** zbioru. **Kolejność jest ważna**, a elementy się **nie powtarzają**.
+*   **Przykład:** Na ile sposobów można ustawić 5 osób w kolejce?
+*   **Wzór:**
+    $$ P_n = n! $$
+    *W naszym przykładzie:* $P_5 = 5! = 120$ sposobów.
+
+#### **4. Kombinacje**
+*   **Charakterystyka:** Wybieramy *k*-elementowe podzbiory, w których **kolejność nie ma znaczenia**, a elementy **nie mogą się powtarzać**.
+*   **Przykład:** Na ile sposobów można wybrać 3-osobową delegację z 20-osobowej klasy?
+*   **Wzór (Symbol Newtona):**
+    $$ C_n^k = \binom{n}{k} = \frac{n!}{k!(n-k)!} $$
+    *W naszym przykładzie:* $C_{20}^3 = \binom{20}{3} = \frac{20!}{3! \cdot 17!} = \frac{18 \cdot 19 \cdot 20}{6} = 1140$ sposobów.
+
+*Istnieją również **kombinacje z powtórzeniami**, gdzie kolejność jest nieistotna, a elementy mogą się powtarzać.*
+
+### **Tożsamości kombinatoryczne**
+
+Tożsamości kombinatoryczne to równości algebraiczne, które można udowodnić, interpretując obie strony równania jako dwa różne sposoby zliczania tych samych obiektów.
+
+#### **1. Tożsamość Pascala (reguła trójkąta Pascala)**
+Tożsamość ta stanowi podstawę konstrukcji Trójkąta Pascala, w którym każda liczba (poza skrajnymi jedynkami) jest sumą dwóch liczb znajdujących się bezpośrednio nad nią.
+*   **Wzór:**
+    $$ \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k} $$
+*   **Interpretacja kombinatoryczna:** Liczba sposobów wyboru *k* osób z *n* jest równa sumie liczby sposobów wyboru, w których wyróżniona osoba jest w delegacji (wtedy dobieramy *k-1* osób z *n-1* pozostałych) oraz liczby sposobów, w których jej nie ma (wtedy wybieramy *k* osób z *n-1* pozostałych).
+
+#### **2. Dwumian Newtona**
+Wzór ten pozwala rozpisać potęgę sumy dwóch składników. Współczynniki w rozwinięciu są kolejnymi liczbami z wierszy Trójkąta Pascala.
+*   **Wzór:**
+    $$ (x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k $$
+*   **Przykład dla n=3:**
+    $$ (x+y)^3 = \binom{3}{0}x^3y^0 + \binom{3}{1}x^2y^1 + \binom{3}{2}x^1y^2 + \binom{3}{3}x^0y^3 = x^3 + 3x^2y + 3xy^2 + y^3 $$
+
+#### **3. Suma współczynników dwumianowych**
+*   **Wzór:**
+    $$ \sum_{k=0}^{n} \binom{n}{k} = \binom{n}{0} + \binom{n}{1} + \dots + \binom{n}{n} = 2^n $$
+*   **Interpretacja kombinatoryczna:** Lewa strona to suma liczby wszystkich możliwych podzbiorów (pustego, 1-elementowych, 2-elementowych, itd.) zbioru *n*-elementowego. Prawa strona mówi, że dla każdego z *n* elementów mamy dwie możliwości: albo należy on do podzbioru, albo nie. Daje to $2^n$ wszystkich możliwych podzbiorów.
+
+#### **4. Tożsamość Vandermonde'a**
+Tożsamość ta jest przydatna przy obliczaniu bardziej złożonych sum.
+*   **Wzór:**
+    $$ \binom{m+n}{k} = \sum_{r=0}^{k} \binom{m}{r} \binom{n}{k-r} $$
+*   **Interpretacja kombinatoryczna:** Wyobraźmy sobie wybór *k*-osobowej delegacji z grupy składającej się z *m* kobiet i *n* mężczyzn. Lewa strona to ogólna liczba sposobów. Prawa strona to suma sposobów wyboru delegacji składającej się z *r* kobiet (wybranych na $\binom{m}{r}$ sposobów) i *k-r* mężczyzn (wybranych na $\binom{n}{k-r}$ sposobów), dla wszystkich możliwych wartości *r*.
+
 
 ## 23. Liniowe równania rekurencyjne
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Liniowe równanie rekurencyjne** to równanie, które definiuje ciąg `(a_n)` poprzez wyrażenie n-tego wyrazu ciągu jako liniowej kombinacji jego poprzednich wyrazów. "Rozwiązanie" takiego równania polega na znalezieniu **wzoru jawnego (zamkniętego)**, który pozwala obliczyć `a_n` bezpośrednio na podstawie `n`, bez potrzeby obliczania wszystkich wcześniejszych wyrazów.
+
+Równania te są kluczowe w analizie złożoności obliczeniowej algorytmów rekurencyjnych (np. w strategii "dziel i zwyciężaj"), modelowaniu procesów w biologii, ekonomii i informatyce.
+
+### **Budowa i klasyfikacja**
+
+Ogólna postać liniowego równania rekurencyjnego rzędu *k* o stałych współczynnikach to:
+$$ a_n = c_1 a_{n-1} + c_2 a_{n-2} + \dots + c_k a_{n-k} + f(n) $$
+gdzie `c_1, c_2, ..., c_k` są stałymi.
+
+Równania te dzielimy na dwa główne typy:
+
+1.  **Jednorodne (homogeneous):** gdy `f(n) = 0`. Wyraz `a_n` zależy wyłącznie od swoich poprzedników.
+    *   *Przykład (ciąg Fibonacciego):* `F_n = F_{n-1} + F_{n-2}`
+
+2.  **Niejednorodne (non-homogeneous):** gdy `f(n) ≠ 0`. Występuje dodatkowa funkcja zależna od `n`.
+    *   *Przykład:* `a_n = 3a_{n-1} + 2n`
+
+Do pełnego zdefiniowania ciągu potrzebne są również **warunki początkowe**, czyli wartości kilku pierwszych wyrazów (np. `a_0`, `a_1`, ..., `a_{k-1}`).
+
+### **Metoda rozwiązywania równań jednorodnych**
+
+Proces znajdowania wzoru jawnego dla równania jednorodnego przebiega w czterech krokach:
+
+**Krok 1: Stworzenie równania charakterystycznego**
+Z równania rekurencyjnego `a_n - c_1 a_{n-1} - \dots - c_k a_{n-k} = 0` tworzymy wielomian, zastępując `a_{n-i}` potęgą `r^{k-i}`. Dla równania rzędu 2, `a_n = c_1 a_{n-1} + c_2 a_{n-2}`, równanie charakterystyczne ma postać:
+$$ r^2 - c_1 r - c_2 = 0 $$
+
+**Krok 2: Znalezienie pierwiastków równania charakterystycznego**
+Rozwiązujemy powyższe równanie kwadratowe (lub wielomian wyższego stopnia), aby znaleźć jego pierwiastki `r_1, r_2, ...`.
+
+**Krok 3: Zapisanie rozwiązania ogólnego**
+Postać rozwiązania ogólnego zależy od natury pierwiastków:
+*   **Dwa różne pierwiastki rzeczywiste (`r_1 ≠ r_2`):**
+    Rozwiązanie ogólne ma postać: `a_n = A \cdot r_1^n + B \cdot r_2^n`
+*   **Jeden pierwiastek rzeczywisty podwójny (`r_1 = r_2 = r`):**
+    Rozwiązanie ogólne ma postać: `a_n = (A \cdot n + B) \cdot r^n`
+
+**Krok 4: Wyznaczenie stałych `A` i `B` na podstawie warunków początkowych**
+Podstawiamy warunki początkowe (np. wartości `a_0` i `a_1`) do wzoru ogólnego, tworząc układ równań, z którego obliczamy konkretne wartości stałych `A` i `B`.
+
+---
+**Przykład: Rozwiązanie ciągu Fibonacciego**
+
+*   Równanie: `F_n = F_{n-1} + F_{n-2}`
+*   Warunki początkowe: `F_0 = 0`, `F_1 = 1`
+
+1.  **Równanie charakterystyczne:** `r^2 - r - 1 = 0`
+2.  **Pierwiastki:**
+    $$ r_1 = \frac{1+\sqrt{5}}{2} \quad (\text{złota liczba}, \phi) $$
+    $$ r_2 = \frac{1-\sqrt{5}}{2} \quad (\psi) $$
+3.  **Rozwiązanie ogólne:**
+    $$ F_n = A \cdot \left(\frac{1+\sqrt{5}}{2}\right)^n + B \cdot \left(\frac{1-\sqrt{5}}{2}\right)^n $$
+4.  **Wyznaczenie stałych:**
+    *   Dla `n=0`: `A + B = 0 \implies B = -A`
+    *   Dla `n=1`: `A \cdot \frac{1+\sqrt{5}}{2} + B \cdot \frac{1-\sqrt{5}}{2} = 1`
+    *   Po rozwiązaniu układu równań otrzymujemy: `A = \frac{1}{\sqrt{5}}` i `B = -\frac{1}{\sqrt{5}}`
+
+Ostateczny **wzór jawny (wzór Bineta)** to:
+$$ F_n = \frac{1}{\sqrt{5}} \left( \left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n \right) $$
+---
+
+### **Równania niejednorodne**
+
+Rozwiązanie ogólne równania niejednorodnego `a_n` jest sumą dwóch składników:
+$$ a_n = a_n^{(h)} + a_n^{(p)} $$
+gdzie:
+*   `a_n^{(h)}` to rozwiązanie ogólne **odpowiadającego mu równania jednorodnego** (znajdowane metodą opisaną powyżej).
+*   `a_n^{(p)}` to tzw. **rozwiązanie szczególne**, które "zgadujemy" na podstawie postaci funkcji `f(n)`. Najczęściej stosuje się **metodę współczynników nieoznaczonych**, gdzie przewidywana postać `a_n^{(p)}` jest podobna do `f(n)` (np. jeśli `f(n)` jest wielomianem, przewidujemy wielomian; jeśli funkcją wykładniczą, przewidujemy funkcję wykładniczą).
 
 ## 24. Grafy i ich własności
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Graf** jest fundamentalną strukturą matematyczną i informatyczną służącą do modelowania relacji między obiektami. Formalnie, graf `G` definiuje się jako parę `(V, E)`, gdzie:
+*   `V` (ang. *vertices*) to zbiór **wierzchołków** (obiektów).
+*   `E` (ang. *edges*) to zbiór **krawędzi**, czyli par wierzchołków, które reprezentują relacje między nimi.
+
+### **Podstawowe pojęcia i terminologia**
+
+*   **Wierzchołek (węzeł):** Podstawowy element grafu, reprezentujący obiekt.
+*   **Krawędź:** Połączenie między dwoma wierzchołkami. Może być **skierowana** (uporządkowana para, `(u, v)`) lub **nieskierowana** (nieuporządkowany zbiór, `{u, v}`).
+*   **Sąsiedztwo:** Dwa wierzchołki są **sąsiednie**, jeśli łączy je krawędź.
+*   **Stopień wierzchołka (`deg(v)`):** Liczba krawędzi połączonych z danym wierzchołkiem.
+    *   W grafach skierowanych rozróżniamy **stopień wejściowy** (*in-degree*) i **wyjściowy** (*out-degree*).
+*   **Pętla:** Krawędź łącząca wierzchołek z samym sobą.
+*   **Ścieżka:** Sekwencja wierzchołków, w której każde dwa kolejne są połączone krawędzią. **Długość ścieżki** to liczba jej krawędzi.
+*   **Cykl:** Ścieżka, która zaczyna się i kończy w tym samym wierzchołku, a jej wierzchołki (poza początkowym/końcowym) się nie powtarzają.
+
+### **Rodzaje grafów**
+
+Grafy klasyfikujemy na podstawie właściwości ich krawędzi i struktury:
+
+| Kryterium | Rodzaj | Opis |
+| :--- | :--- | :--- |
+| **Kierunek krawędzi** | **Nieskierowany** | Krawędzie są dwukierunkowe (relacja symetryczna, np. znajomość na Facebooku). |
+| | **Skierowany (Digraf)**| Krawędzie mają określony kierunek (relacja niesymetryczna, np. obserwowanie na Twitterze). |
+| **Wagi krawędzi** | **Nieważony** | Wszystkie krawędzie są równoważne. |
+| | **Ważony** | Każda krawędź ma przypisaną wartość (wagę, koszt, odległość), np. mapa drogowa z odległościami. |
+| **Struktura** | **Prosty** | Nie zawiera pętli ani krawędzi wielokrotnych między tymi samymi wierzchołkami. |
+| | **Spójny** | Istnieje ścieżka między każdą parą wierzchołków (w grafach skierowanych mówimy o **silnej spójności**). |
+| | **Acykliczny** | Nie zawiera żadnych cykli. Skierowany Graf Acykliczny (DAG) jest kluczowy w modelowaniu zależności. |
+| | **Pełny (Klika)** | Każdy wierzchołek jest połączony z każdym innym. Graf pełny o *n* wierzchołkach oznaczamy `K_n`. |
+| | **Dwudzielny** | Zbiór wierzchołków można podzielić na dwa rozłączne podzbiory tak, że krawędzie istnieją tylko *między* tymi podzbiorami. |
+| | **Drzewo** | Spójny graf acykliczny. **Las** to zbiór rozłącznych drzew. |
+
+### **Reprezentacja grafów w informatyce**
+
+Istnieją dwie główne metody przechowywania struktury grafu w pamięci komputera:
+
+1.  **Macierz sąsiedztwa (Adjacency Matrix):**
+    *   Kwadratowa macierz `A` o wymiarach `|V| x |V|`.
+    *   `A[i][j] = 1` (lub waga), jeśli istnieje krawędź od wierzchołka *i* do *j*. W przeciwnym razie `A[i][j] = 0`.
+    *   **Zalety:** Szybkie sprawdzanie istnienia krawędzi (złożoność `O(1)`).
+    *   **Wady:** Duże zużycie pamięci (`O(|V|^2)`), nieefektywne dla grafów rzadkich (mało krawędzi).
+
+2.  **Lista sąsiedztwa (Adjacency List):**
+    *   Tablica, w której dla każdego wierzchołka *i* przechowujemy listę jego sąsiadów.
+    *   **Zalety:** Oszczędność pamięci (`O(|V| + |E|)`), idealna dla grafów rzadkich.
+    *   **Wady:** Wolniejsze sprawdzanie istnienia krawędzi (w pesymistycznym przypadku `O(deg(v))`).
+
+### **Ważne własności i twierdzenia**
+
+1.  **Lemat o uściskach dłoni:** Suma stopni wszystkich wierzchołków w grafie jest równa podwojonej liczbie jego krawędzi:
+    $$ \sum_{v \in V} \text{deg}(v) = 2|E| $$
+    *Wynika z faktu, że każda krawędź "dodaje" po jednym stopniu do dwóch wierzchołków, które łączy.*
+    *   **Wniosek:** Liczba wierzchołków o nieparzystym stopniu musi być parzysta.
+
+2.  **Własności drzew:** Drzewo o *n* wierzchołkach zawsze posiada dokładnie *n-1* krawędzi. Dodanie dowolnej krawędzi do drzewa tworzy cykl.
+
+3.  **Grafy eulerowskie i hamiltonowskie:**
+    *   **Cykl Eulera:** Cykl, który przechodzi przez **każdą krawędź** grafu dokładnie raz.
+        *   **Warunek istnienia:** Graf musi być spójny, a każdy jego wierzchołek musi mieć **parzysty stopień**.
+    *   **Cykl Hamiltona:** Cykl, który przechodzi przez **każdy wierzchołek** grafu dokładnie raz.
+        *   **Brak prostego warunku:** Znalezienie cyklu Hamiltona jest problemem NP-zupełnym, co oznacza, że nie są znane efektywne algorytmy jego rozwiązywania.
+
+4.  **Grafy planarne:** Graf, który można narysować na płaszczyźnie tak, aby jego krawędzie nie przecinały się poza wierzchołkami.
+    *   **Wzór Eulera dla grafów planarnych:** `V - E + F = 2`, gdzie `V` to liczba wierzchołków, `E` - krawędzi, a `F` - ścian (obszarów wydzielonych przez krawędzie, wliczając obszar zewnętrzny).
 
 ---
 
