@@ -1444,19 +1444,422 @@ Np. "Temperatura w maju rośnie średnio o 2°C tygodniowo" albo "Sprzedaż male
 
 ## 33. Składniki klasy i modyfikatory dostępu
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Klasa to podstawowy element programowania obiektowego.
+Stanowi szablon (wzorzec), według którego tworzone są obiekty – konkretne instancje tej klasy. Klasa określa stan oraz zachowanie obiektu.
+
+### **Składniki klasy**
+**Pola (atrybuty)**:
+to zmienne należące do klasy lub obiektu, które przechowują jego stan.  
+**Metody**: To funkcje należące do klasy, które opisują zachowanie obiektu.  
+**Konstruktor**: Specjalna metoda klasy, która służy do inicjalizacji obiektu. Wywoływana automatycznie w momencie tworzenia obiektu (new).
+Każda klasa posiada konstruktor — jeśli nie zdefiniujemy go samodzielnie, kompilator tworzy domyślny pusty konstruktor.  
+**Gettery i Settery**: To zwykłe metody służące do kontrolowanego dostępu do pól prywatnych.  
+
+### **Modyfikatory dostępu**
+Modyfikatory dostępu określają, kto może korzystać z danego pola, metody lub klasy. Pozwalają chronić dane przed niepożądanym dostępem.
+
+| Modyfikator |  Dostępność  |  Opis   |
+|------|------------|-----|
+| public  |  dostępny wszędzie   |   każdy może użyć (w innych klasach i pakietach)  |
+| protected  |  w tej samej klasie i klasach dziedziczących    |   chroni przed dostępem z zewnątrz, ale pozwala dziedziczyć  |
+| private  |  tylko w tej samej klasie    |   ukrywa elementy przed światem zewnętrznym  |
+
+![Modyfikatory dostępu](Static/Q33-36/access_modifiers_2.jpg)
+
+*W językach takich jak C# istnieją dodatkowe modyfikatory, np. internal, które ograniczają dostęp do elementów w obrębie tego samego assembly.*  
+*W niektórych językach istnieje domyślny modyfikator, który stosuje się, gdy nie podamy żadnego słowa kluczowego. Jego widoczność zależy od języka (np. w Javie jest to dostęp pakietowy).*
+  
+
+Przykład klasy w Java
+```
+public class Person {
+
+    // Fields (private for encapsulation)
+    private String name;
+    private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    // Method
+    public void introduce() {
+        System.out.println("Hello, my name is " + name + " and I am " + age + " years old.");
+    }
+}
+```
+
+Przykład klasy w Python
+
+```
+class Person:
+    # Konstruktor
+    def __init__(self, name, age):
+        self._name = name  # prywatne pola (konwencja z "_")
+        self._age = age
+
+    # Gettery
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def age(self):
+        return self._age
+
+    # Settery
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @age.setter
+    def age(self, value):
+        self._age = value
+
+    # Zwykła metoda
+    def introduce(self):
+        print(f"Hello, my name is {self._name} and I am {self._age} years old.")
+```
+
 
 ## 34. Obiekty a klasy, pojęcie hermetyzacji
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+1. Class  
+**Definicja**: Klasa to szablon lub blueprint, który opisuje, jakie pola (dane) i metody (zachowania) będzie miał obiekt.  
+**Nie zajmuje pamięci** dopóki nie utworzymy obiektu.
+
+```
+class Person:
+    def __init__(self, name, age):
+        self.name = name  # publiczne pole
+        self.age = age    # publiczne pole
+
+    def introduce(self):
+        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+```
+
+2. Obiekt (Instance)  
+**Definicja**: Obiekt to konkretna instancja klasy, która istnieje w pamięci i posiada własne wartości pól.  
+**Każda klasa może tworzyć wiele obiektów**, każdy z własnym stanem.
+```
+person1 = Person("Alice", 25)
+person1.age = 52 # tu przypadkiem zmieniony został wiek
+person2 = Person("Bob", 30)
+```
+
+*person1 i person2 są różnymi obiektami, chociaż pochodzą z tej samej klasy Person.*
+
+### **Hermetyzacja (Encapsulation)**
+Hermetyzacja to zasada ukrywania wewnętrznych danych klasy przed bezpośrednim dostępem z zewnątrz, chroni je przed niepożądanymi zmianami i wymusza kontrolowany dostęp.  
+Aby osiągnąć hermetyzację, należy ukryć pola klasy i zapewnić do nich kontrolowany dostęp za pomocą getterów, setterów.
+
+```
+class Person:
+    def __init__(self, name, age):
+        self._name = name
+        self._age = age
+
+    # Getter i setter dla name
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    # Getter i setter dla age
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        if value < 0:
+            print("Age cannot be negative!")
+        else:
+            self._age = value
+```
+Dzięki temu możemy kontrolować zmiany danych, np. dodając walidację w setterze.
+
+```
+person1 = Person("Alice", 25)
+
+# Zmiana wieku przez setter
+person1.age = 26   # poprawna zmiana
+
+person1.age = -5   # Zadziała walidacja i zostanie wyświetlony komunikat
+```
 
 ## 35. Pola i metody statyczne w klasie
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Odpowiedź:**  
+**Pole statyczne** — zmienna należąca do klasy, współdzielona przez wszystkie instancje; istnieje jedna kopia w pamięci.  
+**Metoda statyczna** — metoda należąca do klasy, którą wywołujemy bez tworzenia obiektu; nie ma dostępu do this ani do niestatycznych pól instancji.  
+
+
+
+### **Najważniejsze różnice statyczne vs instancyjne**
+| Cecha |  Statyczne (static)  |  Instancyjne   |
+|------|------------|-----|
+| Należy do  |  klasy   |   obiektu (instancji)  |
+| Liczba kopii  |  1 dla klasy    |   oddzielna dla każdego obiektu  |
+| Dostęp do this  |  brak    |   jest dostępne  |
+| Wywołanie  |  ClassName.member    |   instance.member (lub this)  |
+| Życie w pamięci  |  od załadowania klasy do unload    |   od new do GC obiektu  |
+
+```
+class Counter {
+    // Pole statyczne - współdzielone przez wszystkie instancje
+    static int count = 0;
+
+    // Pole instancyjne - każda instancja ma własną kopię
+    String name;
+
+    // Konstruktor
+    Counter(String name) {
+        this.name = name;
+        count++; // zwiększamy licznik statyczny przy każdym utworzeniu obiektu
+    }
+
+    // Metoda statyczna
+    static void showCount() {
+        System.out.println("Liczba wszystkich Counterów: " + count);
+        // Nie można użyć 'name' tutaj! Bo name jest instancyjne
+    }
+
+    // Metoda instancyjna
+    void showName() {
+        System.out.println("Nazwa: " + name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Counter c1 = new Counter("A");
+        Counter c2 = new Counter("B");
+
+        c1.showName(); // Nazwa: A
+        c2.showName(); // Nazwa: B
+
+        // Wywołanie metody statycznej bez tworzenia obiektu
+        Counter.showCount(); // Liczba wszystkich Counterów: 2
+
+        // Pole statyczne jest współdzielone
+        System.out.println("Dostęp przez c1: " + c1.count); // 2
+        System.out.println("Dostęp przez c2: " + c2.count); // 2
+        System.out.println("Dostęp przez klasę: " + Counter.count); //2
+    }
+}
+```
+
+### **Kiedy używać static — praktyczne zastosowania**
+Elementy statyczne są współdzielone przez wszystkie instancje klasy i nie wymagają tworzenia obiektu, aby z nich korzystać.
+Używa się ich do przechowywania stałych, wspólnych danych, metod pomocniczych, liczników instancji, a także do wzorców projektowych takich jak Singleton czy Fabryka.
+
 
 ## 36. Dziedziczenie, polimorfizm, szablony klas
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Odpowiedź:** 
+
+### Dziedziczenie
+Dziedziczenie to jeden z 4 podstawowych paradygmatów programowania obiektowego. Dziedziczenie jest mechanizmem, w którym jedna klasa nabywa własności innej klasy po której dziedziczy. Dzięki dziedziczeniu możemy ponownie wykorzystać pola i metody istniejącej klasy bez konieczności ich ponownej implementacji.  
+**Cel**:
+- unikanie duplikacji kodu,
+- łatwiejsze utrzymanie,
+- hierarchiczna struktura typów.
+
+![Dziedziczenie](Static/Q33-36/my_example.png)
+
+Przykład w Javie
+```
+class Vehicle {
+    String brand;
+    int speed;
+
+    Vehicle(String brand, int speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+
+    void drive() {
+        System.out.println(brand + " jedzie z prędkością " + speed + " km/h");
+    }
+}
+
+class Car extends Vehicle {
+    int numberOfDoors;
+
+    Car(String brand, int speed, int numberOfDoors) {
+        super(brand, speed); // wywołanie konstruktora klasy bazowej
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    // Nadpisanie (override) metody klasy bazowej
+    @Override
+    void drive() {
+        System.out.println(brand + " (samochód) jedzie z prędkością " 
+                           + speed + " km/h i ma " + numberOfDoors + " drzwi.");
+    }
+}
+
+class Bike extends Vehicle {
+    boolean isElectric;
+
+    Bike(String brand, int speed, boolean isElectric) {
+        super(brand, speed);
+        this.isElectric = isElectric;
+    }
+
+    @Override
+    void drive() {
+        System.out.println(brand + " (rower " 
+                           + (isElectric ? "elektryczny" : "tradycyjny") 
+                           + ") jedzie z prędkością " + speed + " km/h.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle v = new Vehicle("Pojazd", 50);
+        Car c = new Car("Toyota", 120, 4);
+        Bike b = new Bike("Giant", 25, true);
+
+        v.drive(); //Pojazd jedzie z prędkością 50 km/h
+        c.drive(); //Toyota (samochód) jedzie z prędkością 120 km/h i ma 4 drzwi.
+        b.drive(); //Giant (rower elektryczny) jedzie z prędkością 25 km/h.
+    }
+}
+```
+
+**Podsumuwując dzięki dziedziczeniu można ponownie wykorzystywać kod, rozszerzać funkcjonalność i unikać powtarzania tych samych fragmentów programu.** 
+
+### Polimorfizm
+
+Polimorfizm to zdolność obiektów do różnego reagowania na te same wywołania metod.
+Dzięki temu ta sama metoda może działać inaczej w zależności od typu obiektu, który ją wywołuje.
+
+```
+class Shape {
+    double area() {
+        return 0;
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    double width, height;
+
+    Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    double area() {
+        return width * height;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape circle = new Circle(5);
+        Shape rectangle = new Rectangle(4, 6);
+
+        System.out.println("Pole koła: " + circle.area()); 
+        System.out.println("Pole prostokąta: " + rectangle.area());
+    }
+}
+```
+Wszystkie obiekty mają ten sam typ referencyjny (Shape),
+ale wywiłana metoda zostanie właściwą metodę area() — zależnie od rzeczywistego typu obiektu (Circle, Rectangle).
+
+### Szablony klas (generyki)
+
+Szablony klas to mechanizm programowania, który pozwala tworzyć klasy działające dla różnych typów danych, bez potrzeby ich wielokrotnego przepisywania.  
+
+Dzięki temu można napisać jedną uniwersalną wersję klasy lub funkcji, a kompilator sam wygeneruje odpowiedni kod dla konkretnego typu w momencie kompilacji.
+
+Przykład w C++
+```
+#include <iostream>
+#include <string>
+
+template <typename T>
+class Box {
+private:
+    T value;
+public:
+    Box(T v) : value(v) {}
+    T get() const { return value; }
+    void set(T v) { value = v; }
+};
+
+int main() {
+    Box<int> intBox(42);
+    Box<std::string> strBox("Hello");
+
+    std::cout << intBox.get() << std::endl; // 42
+    std::cout << strBox.get() << std::endl; // Hello
+}
+```
+
+Tutaj T jest parametrem typu, który zostanie podstawiony przez konkretny typ danych podczas kompilacji.
+Kompilator tworzy osobne wersje klasy Box dla każdego użytego typu.
+
+Przykład w Javie
+```
+class Box<T> {
+    private T value;
+    Box(T value) { this.value = value; }
+    public T get() { return value; }
+    public void set(T value) { this.value = value; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>(42);
+        Box<String> strBox = new Box<>("Hello");
+
+        System.out.println(intBox.get()); // 42
+        System.out.println(strBox.get()); // "Hello" - jako string
+    }
+}
+```
+
+Szablony klas (w C++) i generyki (w Javie, C#) umożliwiają tworzenie kodu, który działa z różnymi typami danych przy zachowaniu bezpieczeństwa typów.
+Dzięki nim programista może pisać kod ogólny, elastyczny i łatwy do ponownego użycia.
+
 
 ## 37. Klasy abstrakcyjne i interfejsy
 **Odpowiedź:**
