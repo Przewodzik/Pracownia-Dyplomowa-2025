@@ -1137,12 +1137,245 @@ Istnieją dwie główne metody przechowywania struktury grafu w pamięci kompute
 # Programowanie strukturalne
 
 ## 25. Typy zmiennych w językach programowania
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### 1. Typy podstawowe (prymitywne)
+
+**Typy numeryczne:**
+- **Liczby całkowite (int, long, short, byte)** - przechowują liczby bez części dziesiętnej
+  - Przykład: `int wiek = 25;` (Java/C#)
+  - Zakres zależy od rozmiaru typu (np. int: -2,147,483,648 do 2,147,483,647)
+
+- **Liczby zmiennoprzecinkowe (float, double)** - reprezentują liczby rzeczywiste
+  - `float cena = 19.99f;` - pojedyncza precyzja (32 bity)
+  - `double pi = 3.14159265359;` - podwójna precyzja (64 bity)
+
+**Typy znakowe:**
+- **char** - pojedynczy znak Unicode
+  - Przykład: `char litera = 'A';`
+
+**Typy logiczne:**
+- **boolean/bool** - przechowuje wartości prawda/fałsz
+  - Przykład: `boolean czyDorosly = true;`
+
+### 2. Typy złożone (referencyjne)
+
+**Tablice:**
+- Kolekcje elementów tego samego typu
+- `int[] liczby = {1, 2, 3, 4, 5};`
+
+**Łańcuchy znaków (String):**
+- Sekwencje znaków
+- `String imie = "Jan";`
+
+**Obiekty i klasy:**
+- Definiowane przez użytkownika struktury danych
+- `Osoba jan = new Osoba("Jan", "Kowalski");`
+
+### Systemy typowania
+
+#### Typowanie statyczne vs dynamiczne
+
+**Typowanie statyczne** (Java, C++, C#):
+```java
+int liczba = 10;        // typ określony w czasie kompilacji
+// liczba = "tekst";    // błąd kompilacji!
+```
+
+**Typowanie dynamiczne** (Python, JavaScript):
+```python
+liczba = 10           # typ określony w czasie wykonania
+liczba = "tekst"      # możliwe przypisanie innego typu
+```
+
+#### Typowanie silne vs słabe
+
+**Typowanie silne** - brak automatycznych konwersji między niezgodnymi typami:
+```python
+# Python - typowanie silne
+age = 25
+name = "Jan"
+# result = age + name  # TypeError!
+```
+
+**Typowanie słabe** - automatyczne konwersje typów:
+```javascript
+// JavaScript - typowanie słabe
+let age = 25;
+let name = "Jan";
+let result = age + name;  // "25Jan" - automatyczna konwersja
+```
+
+### Konwersje typów
+
+#### Konwersja jawna (rzutowanie)
+```java
+// Java
+double d = 9.78;
+int i = (int) d;           // i = 9 (utrata precyzji)
+```
+
+#### Konwersja niejawna (automatyczna)
+```java
+// Java
+int i = 42;
+double d = i;              // automatyczna konwersja int -> double
+
+```
+
+
 
 ## 26. Rodzaje pętli
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Pętle są fundamentalnymi strukturami kontrolnymi w programowaniu, które pozwalają na wielokrotne wykonywanie bloków kodu. Główne rodzaje pętli to:
+
+### 1. Pętla `for` (licznikowa)
+Używana gdy znamy liczbę iteracji lub chcemy iterować po kolekcji.
+
+**Java/C++/C#:**
+```java
+// Klasyczna pętla for
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+
+// Enhanced for (foreach)
+int[] tablica = {1, 2, 3, 4, 5};
+for (int element : tablica) {
+    System.out.println(element);
+}
+```
+
+**Python:**
+```python
+# Pętla for z range
+for i in range(10):
+    print(i)
+
+# Iteracja po kolekcji
+lista = [1, 2, 3, 4, 5]
+for element in lista:
+    print(element)
+```
+
+### 2. Pętla `while` (z warunkiem na początku)
+Wykonuje się dopóki warunek jest prawdziwy. Sprawdza warunek przed każdą iteracją.
+
+```java
+int i = 0;
+while (i < 10) {
+    System.out.println(i);
+    i++;
+}
+```
+
+```python
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+```
+
+### 3. Pętla `do-while` (z warunkiem na końcu)
+Wykonuje się co najmniej raz, sprawdza warunek po każdej iteracji.
+
+**Java/C++:**
+```java
+int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i < 10);
+```
+
+**Python** (brak natywnej pętli do-while, symulacja):
+```python
+i = 0
+while True:
+    print(i)
+    i += 1
+    if i >= 10:
+        break
+```
+
+### 4. Pętle nieskończone
+```java
+// Java
+while (true) {
+    // kod
+    if (warunek) break;
+}
+
+for (;;) {
+    // kod
+    if (warunek) break;
+}
+```
+
+```python
+# Python
+while True:
+    # kod
+    if warunek:
+        break
+```
+
+### 5. Pętle zagnieżdżone
+```java
+for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+        System.out.println("i=" + i + ", j=" + j);
+    }
+}
+```
+
+### Instrukcje kontrolne w pętlach:
+
+**`break`** - przerywa wykonanie pętli:
+```java
+for (int i = 0; i < 10; i++) {
+    if (i == 5) break;
+    System.out.println(i);  // wypisze 0,1,2,3,4
+}
+```
+
+**`continue`** - przechodzi do następnej iteracji:
+```java
+for (int i = 0; i < 10; i++) {
+    if (i % 2 == 0) continue;
+    System.out.println(i);  // wypisze tylko nieparzyste: 1,3,5,7,9
+}
+```
+
+### Wybór odpowiedniej pętli:
+
+- **`for`** - gdy znamy liczbę iteracji lub iterujemy po kolekcji
+- **`while`** - gdy nie znamy liczby iteracji, ale mamy jasny warunek zakończenia
+- **`do-while`** - gdy chcemy wykonać kod co najmniej raz przed sprawdzeniem warunku
+
+### Przykłady praktyczne:
+
+**Obliczanie sumy elementów tablicy:**
+```java
+int[] liczby = {1, 2, 3, 4, 5};
+int suma = 0;
+for (int liczba : liczby) {
+    suma += liczba;
+}
+```
+
+**Wyszukiwanie elementu:**
+```java
+boolean znaleziono = false;
+int szukana = 3;
+int i = 0;
+while (i < tablica.length && !znaleziono) {
+    if (tablica[i] == szukana) {
+        znaleziono = true;
+    }
+    i++;
+}
+```
+
+Pętle są kluczowym narzędziem w programowaniu, pozwalającym na efektywne przetwarzanie danych i automatyzację powtarzalnych operacji.
 
 ## 27. Zmienne typu adresowego (wskaźniki). Zastosowanie w wybranym języku programowania
 **Odpowiedź:**
