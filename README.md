@@ -1379,11 +1379,196 @@ Pętle są kluczowym narzędziem w programowaniu, pozwalającym na efektywne prz
 
 ## 27. Zmienne typu adresowego (wskaźniki). Zastosowanie w wybranym języku programowania
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### 1. Pojęcie wskaźnika
+
+**Wskaźnik (ang. pointer)** to zmienna, która **przechowuje adres pamięci innej zmiennej**.  
+Dzięki wskaźnikom możemy bezpośrednio manipulować danymi w pamięci komputera.
+
+Wskaźniki są szeroko używane w językach takich jak **C** i **C++**, natomiast w nowoczesnych językach (Java, C#, Python) stosuje się **referencje** lub **obiekty**, które działają w podobny sposób, ale są bezpieczniejsze i automatycznie zarządzane przez środowisko uruchomieniowe.
+
+---
+
+### 2. Wskaźniki w języku C/C++
+
+#### Deklaracja i inicjalizacja wskaźnika
+```cpp
+int liczba = 10;      // zwykła zmienna
+int* wsk = &liczba;   // wskaźnik przechowujący adres zmiennej liczba
+```
+
+#### Dostęp do wartości przez wskaźnik
+```cpp
+cout << *wsk;   // wyświetli wartość zmiennej liczba (czyli 10)
+```
+
+#### Zmiana wartości przez wskaźnik
+```cpp
+*wsk = 20;      // zmienia wartość zmiennej liczba na 20
+```
+
+#### Wskaźnik pusty (nullptr)
+```cpp
+int* p = nullptr;  // wskaźnik nie wskazuje na żaden adres
+```
+
+---
+
+### 3. Operacje na wskaźnikach
+
+- **Operator `&`** – zwraca adres zmiennej  
+  `int* p = &x;`
+
+- **Operator `*`** – dereferencja, czyli dostęp do wartości pod danym adresem  
+  `cout << *p;`
+
+- **Arytmetyka wskaźników** – przesuwanie wskaźnika po elementach tablicy  
+  ```cpp
+  int tab[3] = {1, 2, 3};
+  int* p = tab;
+  cout << *(p + 1); // wypisze 2
+  ```
+
+---
+
+### 4. Zastosowanie wskaźników
+
+- **Dynamiczna alokacja pamięci**
+  ```cpp
+  int* dane = new int[5]; // dynamiczna tablica
+  delete[] dane;          // zwolnienie pamięci
+  ```
+
+- **Przekazywanie danych do funkcji przez adres**
+  (umożliwia modyfikację oryginalnej zmiennej)
+  ```cpp
+  void zwieksz(int* x) {
+      (*x)++;
+  }
+
+  int liczba = 5;
+  zwieksz(&liczba);
+  // liczba = 6
+  ```
+
+- **Struktury danych (listy, drzewa, grafy)** – używają wskaźników do łączenia elementów  
+- **Interakcja z niskopoziomową pamięcią (np. w systemach embedded)**
+
+---
+
+### 5. Referencje i wskaźniki w nowoczesnych językach
+
+**Java / C#**
+- Nie udostępniają bezpośrednich wskaźników (dla bezpieczeństwa).
+- Zmienne obiektowe to **referencje** – działają podobnie jak bezpieczne wskaźniki:
+  ```java
+  String a = "Ala";
+  String b = a;    // b wskazuje na ten sam obiekt co a
+  ```
+
+**Python**
+- Wszystko jest przekazywane przez referencję (adres obiektu w pamięci):
+  ```python
+  lista1 = [1, 2, 3]
+  lista2 = lista1
+  lista2.append(4)
+  print(lista1)   # [1, 2, 3, 4]
+  ```
+
+---
 
 ## 28. Funkcje. Przekazywanie parametrów przez wartość i referencję
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### 1. Funkcja – pojęcie
+
+**Funkcja** to blok kodu wykonujący określone zadanie, który można wywołać wielokrotnie z różnymi argumentami.  
+Pozwala na **modularność**, **czytelność** i **wielokrotne użycie kodu**.
+
+---
+
+### 2. Budowa funkcji (C++ przykład)
+```cpp
+int dodaj(int a, int b) {   // nagłówek funkcji
+    return a + b;           // ciało funkcji
+}
+```
+
+Wywołanie:
+```cpp
+int wynik = dodaj(3, 4);   // wynik = 7
+```
+
+---
+
+### 3. Przekazywanie parametrów
+
+#### a) **Przez wartość**
+- Do funkcji przekazywana jest **kopiowana wartość** argumentu.  
+- Oryginalna zmienna nie ulega zmianie.
+
+```cpp
+void zwieksz(int x) {
+    x++;
+}
+
+int liczba = 5;
+zwieksz(liczba);
+cout << liczba; // wynik: 5 (bez zmian)
+```
+
+#### b) **Przez referencję (lub wskaźnik)**
+- Funkcja otrzymuje **adres zmiennej** – modyfikacje dotyczą oryginału.
+
+**Przez referencję:**
+```cpp
+void zwieksz(int& x) {
+    x++;
+}
+
+int liczba = 5;
+zwieksz(liczba);
+cout << liczba; // wynik: 6
+```
+
+**Przez wskaźnik:**
+```cpp
+void zwieksz(int* x) {
+    (*x)++;
+}
+
+int liczba = 5;
+zwieksz(&liczba);
+cout << liczba; // wynik: 6
+```
+
+---
+
+### 4. Przekazywanie parametrów w innych językach
+
+**Java:**
+- Wszystko przekazywane jest **przez wartość**, ale **dla obiektów** przekazywana jest wartość **referencji**:
+  ```java
+  void zmien(StringBuilder tekst) {
+      tekst.append("!");
+  }
+
+  StringBuilder s = new StringBuilder("Hello");
+  zmien(s);
+  System.out.println(s); // "Hello!"
+  ```
+
+**Python:**
+- Parametry przekazywane są **przez referencję do obiektu**:
+  ```python
+  def dodaj_element(lista):
+      lista.append(4)
+
+  a = [1, 2, 3]
+  dodaj_element(a)
+  print(a)  # [1, 2, 3, 4]
+  ```
+
+---
+
 
 ---
 
