@@ -2491,15 +2491,10 @@ Mnożenie macierzy przez skalar polega na pomnożeniu każdego elementu macierzy
 
 **Mnożenie macierzy**
 
-Mnożenie macierzy jest możliwe tylko wtedy, gdy liczba kolumn pierwszej macierzy równa się liczbie wierszy drugiej.
-
-Macierz wynikowa ma tyle wierszy co pierwsza i tyle kolumn co druga.
-
-Każdy element macierzy wynikowej obliczamy, łącząc cały wiersz z pierwszej macierzy z całą kolumną z drugiej macierzy.
-
-Mnożymy elementy znajdujące się na tych samych pozycjach w wierszu i kolumnie, a następnie dodajemy otrzymane iloczyny.
-
-Suma tych iloczynów tworzy jeden element macierzy wynikowej.
+Mnożenie macierzy jest możliwe tylko wtedy, gdy liczba kolumn pierwszej macierzy jest równa liczbie wierszy drugiej macierzy.
+W wyniku otrzymujemy macierz o tylu wierszach, ile ma pierwsza macierz, i o tylu kolumnach, ile ma druga.
+Każdy element macierzy wynikowej powstaje poprzez pomnożenie elementów odpowiadających sobie w wierszu pierwszej macierzy i kolumnie drugiej, a następnie zsumowanie otrzymanych iloczynów.
+Ta suma stanowi pojedynczy element macierzy wynikowej.
 
 ![Mnożenie macierzy](Static/Q45-48/mnozenie.png)
 
