@@ -2281,27 +2281,237 @@ Dzięki nim programista może pisać kod ogólny, elastyczny i łatwy do ponowne
 
 ## 37. Klasy abstrakcyjne i interfejsy
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### Definicja klasy abstrakcyjnej
 
+Klasa abstrakcyjna to taka, która nie może być bezpośrednio instancjonowana - nie można utworzyć jej obiektu. Służy jako wspólna baza dla klas dziedziczących, które mogą implementować lub rozszerzać jej metody i pola.
+- Może zawierać:
+  - metody abstrakcyjne (bez implementacji)
+  - metody z implementacją
+  - pola, konstruktory i stałe
+- Klasa pochodna musi zaimplementować wszystkie metody abstrakcyjne, jeśli sama nie jest abstrakcyjna.
+
+Przykład w Javie:
 ---
+    abstract class Fugura {
+      abstract double pole(); <--- metoda abstrakcyjna
+
+      cvoid opis() {
+            System.out.println("To jest figura geometryczna");
+          }
+        }
+
+    class Kolo extends Figura {
+      double r;
+
+      Kolo(double r) {
+        this.r = r;
+      }
+
+      double pole() {
+        return Math.PI * r * r;
+      }
+    }
+---
+
+### Definicja interfejsu
+
+Interfejs to zbiór metod i stałych, które określają kontrakt - czyli co klasa ma robić, ale nie jak ma to robić. Każda klasa, która implementuje interfejs, musi zaimplementować wszystkie jego metody.
+- W interfejsach:
+  - metody są domyślnie publiczne i abstrakcyjne
+  - pola są publiczne, statyczne i finalne (stałe)
+  - w nowszych wersjach języków mozna stosować domyślne implementacje i metody statyczne
+
+Przykład w Javie:
+---
+    interface Drukowalny {
+      void drukuj();
+    }
+
+    class Raport  implements Druikowalny {
+      public void drukuj() {
+        System.out.println("Drukowanie raportu");
+      }
+    }
+
+### Klasa abstrakcyjna, a interfejs
+
+| Cecha |  Klasa abstrakcyjna  |  Interfejs   |
+|------|------------|-----|
+| Słowo kluczowe  |  abstract class   |   interface  |
+|  Metody Abstrakcyjne  |  Może je zawierać    |   Wszystkie metody są domyślnie abstrakcyjne  |
+| Metody konkretne  |  Może zawierać metody z pełnym ciałem    |   Może zawierać domyślne i statyczne metody  |
+| Pola  |  Może mieć pola instancji stan obiektu)    |   Ma tylko stałe (public static final)  |
+| Dziedziczenie  |  Klasa dziedziczy tylko po jednej klasie abstrakcyjnej    |   Klasa może implementować wiele interfejsów  |
+| Konstruktor | Może mieć (wywoływany przez super() w podklasach) | Nie może mieć |
+
+### Zastosowanie w praktyce
+
+- Klasy abstrakcyjne – gdy kilka klas ma wspólne zachowanie lub strukturę (np. Figura, Pojazd, Pracownik).
+
+- Interfejsy – gdy różne klasy muszą udostępniać wspólne metody bez wspólnej implementacji (np. Comparable, Serializable, Runnable).
 
 # Systemy operacyjne
 
 ## 38. Procesy, wątki, zarządzanie procesami
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### Procesy
+
+Proces to uruchomiony program, stanowiący podstawową jednostkę alokacji zasobów i niezależnego wykonywania w systemie operacyjnym.
+
+Kluczowe cechy procesu
+- Izolacja pamięci: Każdy proces ma własną, odizolowaną przestrzeń adresową, co zapewnia bezpieczeństwo i stabilność; błąd w jednym procesie nie zakłóca pracy innych.
+- Zasoby: Posiada własny zestaw zasobów (rejestry, stos, licznik rozkazów, uchwyty do plików).
+- Zarządzanie: Jest tworzony, planowany, przełączany i niszczony przez SO.
+
+Stany procesu
+
+Proces przechodzi przez określony cukl życia zarządzany przez SO:
+1. New (Nowy): Utworzony.
+2. Ready (Gotowy): Oczekuje na przydział procesora.
+3. Running (Wykonywany): Aktualnie używa procesora.
+4. Waiting/Blocked (Oczekujący): Czeka na zdarzenie (np. zakończenie operacji I/O).
+5. Terminated (Zakończony): Zakończył działanie.
+---
+### Wątek
+
+Wątek to lekka jednostka wykonawcza działająca wewnątrz procesu. Stanowi ścieżkę wykonywania w ramach wspólnej pamięci procesu.
+
+Kluczowe cechy wątku:
+- Współdzielenie pamięci: Wszystkie wątki w tym samym procesie dzielą wspólną przestrzeń adresową i zasoby (np.dane globalne,pliki).
+- Własne struktury: Każdy wątek ma własny stos i licznik rozkazów.
+- Efektywność: Ich tworzenie i przełączanie kontekstu jest znacznie szybsze (lżejsze) niż procesów, ponieważ nie trzeba przelączać całej przestrzeni adresowej.
+- Współbieżność: Umożliwiają równoległe wykonywanie zadań w ramach jednego programu, co jest kluczowe na procesach wielordzeniowych.
+
+| Cecha | Proces | Wątek |
+|---|---|---|
+| Pamięć | Własna, odizolowana | Współdzielona w obrębie procesu |
+| Przełączanie | Ciężkie (kosztowne) | Lżejsze (szybkie |
+| Komunikacja | Przez IPC (kolejki, potoki) | Bezpośrednio (współdzielone zmienne) |
+---
+### Zarządzanie procesami
+
+Zarządzanie procesami to zbiór działań SO mających na celu alokację i kontrolę zasobów w celu optymalnego wykorzystania sprzętu i wydajności systemu.
+
+A. Planowanie (Scheduling)
+ SO decyduje, który proces (lub wątek) w stanie Ready ma otrzymać procesor, aby przejść w stan Running. Celem jest optymalizacja:
+ - Przepustowości (liczby ukończonych zadań na jednostkę czasu).
+ - Czasu odpowiedzi (szybkość reakcji systemu).
+ - Sprawiedliwość (żaden proces nie czeka zbyt długo).
+
+B. Tworzenie i usuwanie
+- Tworzenie: Obejmuje alokację zasobów (przestrzeń adresowa, struktury danych procesu/wątku) i inicjalizację stanu.
+- Usuwanie: De-alokacja zasobów i usunięcie struktur kontrolnych.
+
+C. Synchronizacja
+Konieczna gdy wiele wątków lub procesów współdzieli zasoby (np. pamięć). Zapobiega błędom współbieżności.
+| Mechanizm | Opis |
+|---|---|
+| Muteksy | Zapewniają wyłączny dostęp do sekcji krytycznej (blokada binarna: 0 lub 1) |
+| Semafory | Kontrolują liczbę jednoczesnych dostępów do zasobu |
+| Monitory | Struktura wyższego poziomu (np. synchronized w Javie), łącząca blokadę i kolejki oczekujących wątków |
+
+D. Komunikacja miedzyprocesowa
+Metody umożliwiające procesom wymianę infromacji i synchronizację ich działań, np.:
+- Potoki (Pipes): Jednokierunkowy lub dwukierunkowy przepływ danych.
+- Pamięć współdzielona (Shared memory): Najszybsza metoda, ale wymaga synchronizacji.
+- Gniazda (Sockets): Komunikacja przez sieć (używana również lokalnie).
 
 ## 39. Synchronizacja procesów współbieżnych. Semafory
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### Synchronizacja procesów współbieżnych
+Synchronizacja to mechanizm zapewniający, że wiele procesów lub wątków, działających spółbieżnie, może bezpiecznie i poprawnie współdzielić zasoby. Jest to kluczowe dla zarządzania sektorami krytycznymi - fragmentami kodu, które uzyskują dostęp do danych współdzielonych.
 
+**Problemy bez synchronizacji:**
+
+Głównym problemem, który rozwiązuje synchronizacja, jest wyścig danych (Race Condition). Występuje on, gdy wynik operacji zależy od kolejności, w jakiej współbieżne procesy lub wątki uzyskują dostęp i modyfikują współdzielone dane.
+
+**Wymagania dla synchronizacji:**
+
+Poprawny mechanizm synchronizacji musi spełniać trzy warunki:
+1. Wzajemne wykluczanie (Mutual exclusion): Jeśli proces $$P_i$$ wykonuje swój sektor krytyczny, żaden inny proces nie może w tym czasie wejść do swojego sektora krytycznego.
+2. Postęp (Progress): jeśli żaden proces nie wykonuje sektora krytycznego i isnieją procesy, które chcą do niego wejść, decyzja o tym, który proces wejdzie, nie może być odkładana w nieskończoność.
+3. Ograniczone oczekiwanie: Musi istnieć limit czasu, przez jaki proces może czekać na wejście do sektora krytycznego. Zapobiega to głodzeniu.
 ---
+### Semafory
+Semafory (Semaphores) są całkowitoliczbowymi zmiennymi używanymi do rozwiązywania problemów synchronizacji i osiągania wzajemnego wykluczania. Zostały zaproponowane przez Edsgera Dijkstrę.
+
+**Budowa semafora**
+
+Semafory są dostępne dla procesów tylko poprzez dwie atomowe (niepodzielne) operacje:
+| Operacja | Nazwa zwykła | Nazwa w systemach | Działanie |
+|---|---|---|---|
+| P | `wait()` | `semWait()` lub `down()` | Zmniejsza wartość semfora. Jeśli jest ona nieujemna, wykonanie jest kontynuowane; jeśli ujemna, proces jest blokowany (zawieszany) i umieszczany w kolejce oczekujących. |
+| V | `signal()` | `semsignal()` lub `up()` | Zwiększa wartość semafora. Jeśli wartość jest <= 0 (oznacza to procesy w kolejce), budzi jeden z zablokowanych procesów.|
+
+**Rodzaje Semforów**
+
+1. Semafory binarne:
+    - Wartość semafora może wynosić tylko 0 lub 1.
+    - Używane głównie do implementacji wzajemnego wykluczania. Wartość 1 oznacza, że zasób jest wolny, 0 - że jest zajęty.
+    - są funkcjonalnie równoważne z muteksami, choź muteksy często mają dodatkowe funkcje (np. wiedzą, który proces je zablokował).
+2. Semafory zliczające:
+   - Mogą przyjmować dowolną nieujemną wartość całkowitą.
+   - Wartość semfora reprezentuje liczbę dostępnych jednostek danego zasobu.
+   - Używanie do kontroli dostępu do puli zasobów (np. limit 10 połączeń do bazy danych). Proces wchodzi do puli, jeśli semafor jest > 0 ('wait()' zmniejsza), i opuszcza, zwalniając jednostkę ('signal()' zwiększa).
+
+**Przykład zastosowania**
+
+Semafory binarne gwarantują, że tylko jeden proces wejdzie do sektora krytycznego:
+
+Przykład w Javie
+```Java
+Semaphore mutex = new Semaphore(1); // Inicjalizacja na 1 (wolny zasób)
+
+// Proces P1:
+// ...
+mutex.wait(); // Opcja P: Zmniejsza semafor do 0.
+// SEKTOR KRYTYCZNY (np. modyfikacja współdzielonej zmiennej)
+mutex.signal(); // Opcja V: Zwiększa semafor do 1, zwalniając blokadę.
+// ...
+
+// Proces P2:
+// ...
+mutex.wait(); // Blokuje się, jeśli semafor jest 0.
+// SEKTOR KRYTYCZNY
+mutex.signal();
+```
 
 # Inżynieria oprogramowania
 
 ## 40. Cykle projektowania i życia oprogramowania
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### Fazy cyklu życia oprogramowania
+Typowy cykl SDLC sklada się z następujących głównych faz:
+1. Planowanie: Określenie zakresu, celów, harmonogramu i wykonalności projektu (technicznej, ekonoicznej, operacyjnej). Ustalenie, czy projekt jest opłacalny i możliwy do zrealizowania.
+2. Analiza wymagań: Zebranie, udokumentowanie i weryfikacja wymagań funkcjonalnych (co system ma robić) i niefunkcjonalnych (jak system ma działać, np. wydajność, bezpieczeństwo). Rezultatem jest specyfikacja wymagań.
+3. Projektowanie: Przekształcenie wymagań w projekt architektury systemu. Obejmuje to:
+   - Projekt architektury: Określenie struktury systemu, komponentów i ich interakcji.
+   - Projekt szczegółowy: Opracowanie szczegółów implementacyjnych, struktur danych i algorytmów.
+4. Implementacja: Pisanie kodu zgodnie z projektem.
+5. Testowanie: Weryfikacja, czy oprogramowanie działa zgodnie z wymaganiami. Obejmuje testy jednostkowe, integracyjne, systemowe i akceptacyjne.
+6. Wdrożenie: Udostępnienie systemu użytkownikom w środowisku produkcyjnym (instalacja, konfiguracja, migracja danych).
+7. Utrzymanie: Najdłuższa faza. Obejmuje: naprawę błędów, adaptację do nowych środowisk, doskonalenie (dodawanie nowych funkcji) i zapobieganie awariom.
+---
+### Modele cykli projektowania
+Różne modele SDLC stanowią różne podejścia do organizacji i sekwencjonowania tych faz:
+1. Model kaskadowy (Waterfall model)
+   - Charakterystyka: Liniowy, sekwencyjny model. Każda faza musi być całkowicie ukończona, zanim rozpocznie się następna. Wymaga szczegółowego planowania na szamym początku.
+   - Zalety: Prosty w zarządzaniu, idealny dla małych, dobrze zdefiniowanych projektów o stabilnych wymaganiach.
+   - Wady: Mała elastyczność; błędy wykryte późno są bardzo kosztowne do naprawy.
+2. Modele iteracyjne i przyrostowe (Iterative & Incremental models)
+   - Charakterystyka: Oprogramowanie jest budowane i dostarczane w serii iteracji (cykli). Każda iteracja tworzy przyrost (klejny fragment funkcjonalności) i obejmuje wszystkie fazy (od wymagań po testowanie).
+   - Zalety: Wczesna wersja robocza jest dostępna, łatwiej jest zarządzać zmianami i minimalizować ryzyko.
+   - Wady: Wymaga ścisłego zarządzania celami iteracji.
+3. Model spiralny (Spiral model)
+   - Charakterystyka: Łączy iteracyjny charakter z systematyczną analizą ryzyka. Cykl powtarza się w spirali, przechodząc przez cztery kwadranty: określenie celów, analiza ryzyka, inżynieria (projektowanie/testowanie) i planowanie następnej iteracji.
+   - Zalety: Świetny do dużych, złożonych projektów, gdzie ryzyko jest wysokie.
+   - Wady: Kosztowny, wymaga znacznego doświadczenia w zarządzaniu ryzykiem.
+4. Metodyki agile:
+   - Charakterystyka: Podejście iteracyjne i przyrostowe, kładące nacisk na szybką adaptację do zmian, współpracę z klientem, dostarczanie działającego oprogramowania w krótkich cyklach (Sprinty/Iteracje) i ludzi ponad procesy.
+   - Zalety: Wysoka elastyczność, szybka reakcja na zmieniające się wymagania, stałe dostarczanie wartości.
+   - Wady: Wymagają zaangażowania klienta i zdyscyplinowanego zespołu (Przykłady: Scrum, Kanban).
+
+---
 
 ## 41. Metody oraz strategie testowania oprogramowania
 **Odpowiedź:**
