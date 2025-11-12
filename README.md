@@ -2329,19 +2329,318 @@ Dzięki nim programista może pisać kod ogólny, elastyczny i łatwy do ponowne
 
 ## 45. Rachunek zdań
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Rachunek zdań to dział logiki matematycznej, który zajmuje się badaniem zależności między zdaniami logicznymi oraz ustalaniem wartości logicznych zdań złożonych tworzonych za pomocą spójników logicznych.
+
+Każde zdanie logiczne może mieć tylko jedną z dwóch wartości logicznych:
+- 1 - zdanie prawdziwe (P)
+- 0 - zdanie fałszywe (F)
+
+Alfabet rachunku zdań składa się z trzech rodzajów znaków:
+- zmienne zdaniowe (zdania) oznaczane np. 'p', 'q', 'r', 's'
+- spójniki logiczne (negacja, koniunkcja, alternatywa, implikacja, równoważność)
+- znaki pomocnicze np. nawiasy
+
+Typy zdań złożonych:
+- Tautologia - zdanie zawsze prawdziwe (np. p ∨ ~p)
+- Sprzeczność - zdanie zawsze fałszywe (np. p ∧ ~p)
+- Zdanie spełnialne - zdanie prawdziwe dla niektórych wartości logicznych jego składników
+
+**Negacja (~p)**
+
+Negacja to zdanie postaci: „Nieprawda, że p", gdzie p jest zdaniem logicznym.
+Zdanie ~p jest prawdziwe tylko wtedy, gdy zdanie p jest fałszywe.
+
+| p | ~p |
+|---|-----|
+| 1 | 0 |
+| 0 | 1 |
+
+**Koniunkcja (p ∧ q)**
+
+Koniunkcja to zdanie postaci: „p i q", gdzie p i q są zdaniami logicznymi.
+Zdanie p ∧ q jest prawdziwe tylko wtedy, gdy oba zdania p i q są prawdziwe.
+
+| p | q | p ∧ q |
+|---|---|-------|
+| 1 | 1 | 1 |
+| 1 | 0 | 0 |
+| 0 | 1 | 0 |
+| 0 | 0 | 0 |
+
+**Alternatywa (p ∨ q)**
+
+Alternatywa to zdanie postaci: „p lub q", gdzie p i q są zdaniami logicznymi.
+Zdanie p ∨ q jest prawdziwe wtedy, gdy co najmniej jedno ze zdań p lub q jest prawdziwe.
+
+| p | q | p ∨ q |
+|---|---|-------|
+| 1 | 1 | 1 |
+| 1 | 0 | 1 |
+| 0 | 1 | 1 |
+| 0 | 0 | 0 |
+
+**Implikacja (p → q)**
+
+Implikacja to zdanie postaci: „Jeśli p, to q", gdzie p jest poprzednikiem, a q następnikiem.
+Implikacja jest prawdziwa, o ile ze zdania prawdziwego nie wynika zdanie fałszywe.
+
+| p | q | p → q |
+|---|---|-------|
+| 1 | 1 | 1 |
+| 1 | 0 | 0 |
+| 0 | 1 | 1 |
+| 0 | 0 | 1 |
+
+**Równoważność (p ↔ q)**
+
+Równoważność to zdanie postaci: „p wtedy i tylko wtedy, gdy q".
+Zdanie p ↔ q jest prawdziwe wtedy i tylko wtedy, gdy p i q mają tę samą wartość logiczną (obie prawdziwe lub obie fałszywe).
+
+| p | q | p ↔ q |
+|---|---|-------|
+| 1 | 1 | 1 |
+| 1 | 0 | 0 |
+| 0 | 1 | 0 |
+| 0 | 0 | 1 |
+
+**Podstawowe prawa rachunku zdań**
+
+**A. Prawo wyłączonego środka**
+
+p ∨ ~p ≡ 1
+
+Dla każdego zdania p zawsze prawdą jest jedno z dwóch: p lub jego zaprzeczenie.
+
+**B. Prawo sprzeczności**
+
+~(p ∧ ~p)
+
+Nie może być tak, że zdanie i jego zaprzeczenie są jednocześnie prawdziwe.
+
+**C. Prawo podwójnej negacji**
+
+~(~p) ≡ p
+
+Podwójna negacja nie zmienia wartości logicznej zdania - jeśli zaprzeczymy dwa razy, otrzymujemy pierwotne zdanie.
+
+**D. I prawo de Morgana**
+
+~(p ∧ q) ≡ (~p ∨ ~q)
+
+Zaprzeczenie koniunkcji dwóch zdań jest równoważne alternatywie zaprzeczeń tych zdań.
+
+**E. II prawo de Morgana**
+
+~(p ∨ q) ≡ (~p ∧ ~q)
+
+Zaprzeczenie alternatywy dwóch zdań jest równoważne koniunkcji zaprzeczeń tych zdań.
+
+**F. Prawo odrywania (modus ponens)**
+
+[(p → q) ∧ p] → q
+
+Jeśli prawdziwe są implikacja p→q oraz jej poprzednik p, to również jej następnik q jest zdaniem prawdziwym.
+
+**G. Prawo negacji implikacji**
+
+~(p → q) ≡ (p ∧ ~q)
+
+Zaprzeczenie implikacji „Jeśli p, to q" jest równoważne zdaniu „p i nie q".
+
+**H. Prawo kontrapozycji**
+
+(p → q) ≡ (~q → ~p)
+
+Implikacja jest równoważna zdaniu odwrotnemu z zanegowanymi częściami.
+
+**I. Prawo rozdzielności koniunkcji względem alternatywy**
+
+p ∧ (q ∨ r) ≡ (p ∧ q) ∨ (p ∧ r)
+
+Koniunkcja rozdziela się na oba człony alternatywy
+
+**J. Prawo rozdzielności alternatywy względem koniunkcji**
+
+p ∨ (q ∧ r) ≡ (p ∨ q) ∧ (p ∨ r)
+
+Alternatywa rozdziela się na oba człony koniunkcji.
 
 ## 46. Działania na macierzach
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Macierzą m × n nazywamy uporządkowaną tablicę liczb ułożonych w m wierszach oraz n kolumnach.
+
+Liczby znajdujące się na przecięciu wierszy i kolumn nazywamy elementami macierzy i zapisujemy jako a<sub>ij</sub>, gdzie:
+- i – numer wiersza (i = 1, 2, ..., m)
+- j – numer kolumny (j = 1, 2, ..., n)
+
+![Macierz](Static/Q45-48/Matris.png)
+
+**Dodawanie i odejmowanie**
+
+Dwie macierze można dodać lub odjąć tylko wtedy, gdy mają takie same wymiary. Dodajemy lub odejmujemy do siebie odpowiednie elementy pierwszej i drugiej macierzy.
+
+![Dodawanie i odejmowanie macierzy](Static/Q45-48/dodawanie-odejmowanie.png)
+
+**Mnożenie przez skalar**
+
+Mnożenie macierzy przez skalar polega na pomnożeniu każdego elementu macierzy przez tę liczbę.
+
+![Mnożenie przez skalar](Static/Q45-48/skalar.png)
+
+**Mnożenie macierzy**
+
+Mnożenie macierzy jest możliwe tylko wtedy, gdy liczba kolumn pierwszej macierzy równa się liczbie wierszy drugiej.
+
+Macierz wynikowa ma tyle wierszy co pierwsza i tyle kolumn co druga.
+
+Każdy element macierzy wynikowej obliczamy, łącząc cały wiersz z pierwszej macierzy z całą kolumną z drugiej macierzy.
+
+Mnożymy elementy znajdujące się na tych samych pozycjach w wierszu i kolumnie, a następnie dodajemy otrzymane iloczyny.
+
+Suma tych iloczynów tworzy jeden element macierzy wynikowej.
+
+![Mnożenie macierzy](Static/Q45-48/mnozenie.png)
+
+**Transpozycja macierzy**
+
+Zamiana wierszy na kolumny.
+
+![Transpozycja macierzy](Static/Q45-48/transpozycja.png)
+
+**Wyznacznik macierzy**
+
+Wyznacznik to liczba, którą oblicza się na podstawie elementów macierzy kwadratowej.
+
+- Wyznacznik stopnia 1
+
+Jeżeli macierz ma tylko jeden element to wyznacznik to po prostu ta liczba.
+
+![Wyznacznik 1x1](Static/Q45-48/1x1.png)
+
+- Wyznacznik stopnia 2
+
+Mnożymy elementy na przekątnej głównej i odejmujemy iloczyn przekątnej przeciwnej.
+
+![Wyznacznik 2x2](Static/Q45-48/2x2.png)
+
+- Wyznacznik stopnia 3
+
+Ogólny wzór:
+
+![Wyznacznik 3x3 - wzór](Static/Q45-48/3x31.png)
+
+Aby obliczyć wyznacznik macierzy 3×3, przepisujemy jeszcze raz pierwsze dwa wiersze pod macierzą, żeby móc łatwo zaznaczyć przekątne. Następnie mnożymy elementy na trzech przekątnych biegnących w dół i dodajemy te wyniki. Potem mnożymy elementy na trzech przekątnych biegnących w górę i te wyniki odejmujemy od wcześniejszej sumy. Różnica tych dwóch sum to wyznacznik.
+
+![Wyznacznik 3x3 - przykład](Static/Q45-48/3x32.png)
+
+**Macierz odwrotna**
+
+Macierz odwrotna to taka macierz, która „odwraca" działanie macierzy A, czyli po jej pomnożeniu dostajemy macierz jednostkową. Macierz odwrotna istnieje tylko wtedy, gdy wyznacznik macierzy jest różny od zera.
+
+A · A<sup>-1</sup> = A<sup>-1</sup> · A = I, gdzie I to macierz jednostkowa
+
+
+Macierz odwrotną można obliczyć, stosując metodę macierzy dołączonej lub metodę Gaussa–Jordana.
+W przypadku macierzy 2×2, odwrotność można wyznaczyć ze wzoru:
+
+![Macierz odwrotna](Static/Q45-48/modwrotna.png)
+
+pod warunkiem, że wyznacznik macierzy A jest różny od zera.
 
 ## 47. Układy równań liniowych – twierdzenie Kroneckera-Capelliego
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Układ równań liniowych to zbiór równań, w których niewiadome występują tylko w pierwszej potędze.
+
+![Układ równań - postać ogólna](Static/Q45-48/kk1.png)
+
+gdzie:
+- a<sub>11</sub>,...,a<sub>mn</sub> - są to współczynniki równania (dane)
+- b<sub>1</sub>,...,b<sub>m</sub> - wyrazy wolne (dane)
+- x<sub>1</sub>,...,x<sub>n</sub> - niewiadome równania (szukane)
+
+Aby zbadać, czy układ ma rozwiązanie, zapisujemy go w postaci macierzowej.
+
+![Układ równań - postać macierzowa](Static/Q45-48/kk2.png)
+
+**Rząd macierzy (oznaczenie: r(A))**
+
+Rząd macierzy to największa liczba wierszy (lub kolumn), które są liniowo niezależne, czyli nie da się ich otrzymać przez dodanie, odjęcie lub pomnożenie innych wierszy. W praktyce, gdy sprowadzimy macierz do postaci schodkowej (np. metodą Gaussa), rząd to po prostu liczba wierszy niezerowych, które pozostały po uproszczeniu.
+
+**Macierz uzupełniona układu równań liniowych**
+
+Macierz uzupełnioną otrzymujemy przez dołączenie do macierzy współczynników dodatkowej kolumny, w której znajdują się wyrazy wolne.
+
+![Macierz uzupełniona](Static/Q45-48/kk3.png)
+
+**Macierz współczynników**
+
+Macierz współczynników powstaje przez zapisanie wszystkich współczynników stojących przy niewiadomych w układzie równań.
+
+![Macierz A współczynników](Static/Q45-48/kk4.png)
+
+**Twierdzenie Kroneckera-Capelliego**
+
+Niech A, U będą odpowiednio macierzą i macierzą uzupełnioną układu równań liniowych z n niewiadomymi.
+
+Układ ten ma rozwiązanie wtedy i tylko wtedy, gdy r(A) = r(U).
+
+- Jeśli r(A) = r(U) = n, to układ ma dokładnie jedno rozwiązanie.
+- Jeśli r(A) = r(U) = k < n, to układ ma nieskończenie wiele rozwiązań zależnych od n−k parametrów.
+- Jeżeli natomiast r(A) ≠ r(U), to układ nie ma rozwiązania. Taki układ nazywamy sprzecznym.
+
+![Przykład - układ równań](Static/Q45-48/kk5.png)
+
+**Przykład:**
+
+Określ liczbę rozwiązań układu równań postaci:
+
+![Przykład - układ równań](Static/Q45-48/kk6.png)
+
+Niewiadome w tym układzie to x, y, z. Zatem liczba niewiadomych to n=3
+
+Rozpoczynamy od wyznaczenia macierzy współczynników oraz macierzy uzupełnionej.
+
+Macierz współczynników układu:
+
+![Przykład - macierz A](Static/Q45-48/kk7.png)
+
+Macierz uzupełniona układu.
+
+![Przykład - macierz uzupełniona U](Static/Q45-48/kk8.png)
+
+Obliczamy rzędy obu macierzy. Najpierw sprawdzamy wyznacznik macierzy A:
+
+![Przykład - wyznacznik](Static/Q45-48/kk9.png)
+
+Wyznacznik jest niezerowy, dlatego macierz A ma maksymalny rząd, czyli rząd równy 3.
+
+Ponieważ rząd macierzy współczynników jest największy z możliwych, to rząd macierzy uzupełnionej również wynosi 3. Zatem:
+
+![Przykład - wniosek](Static/Q45-48/kk10.png)
+
+Zgodnie z Twierdzeniem Kroneckera-Capellego rozważany układ równań ma dokładnie jedno rozwiązanie. Możemy ten układ rozwiązać np. stosując wzory Cramera. Otrzymamy wówczas, że:
+
+![Przykład - rozwiązanie](Static/Q45-48/kk11.png)
 
 ## 48. Pojęcie relacji i funkcji
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Relacja**
+
+To dowolny podzbiór R iloczynu kartezjańskiego dwóch zbiorów X × Y. Mówimy, że element x ∈ X jest w relacji z elementem y ∈ Y wtedy i tylko wtedy, gdy para (x,y) jest elementem zbioru R. Piszemy wtedy xRy. Jeżeli dodatkowo X = Y, to mówimy, że jest to relacja w zbiorze X (relacja na jednym zbiorze).
+
+**Funkcja**
+
+To szczególny rodzaj relacji między dwoma zbiorami X i Y. Mówimy, że mamy funkcję f: X → Y, jeżeli każdemu elementowi x ze zbioru X jest przyporządkowany dokładnie jeden element y ze zbioru Y. Element y nazywamy wartością funkcji w punkcie x lub obrazem punktu x i zapisujemy to jako y = f(x).
+
+Zbiór X nazywamy dziedziną funkcji, a zbiór Y nazywamy przeciwdziedziną. Natomiast podzbiór przeciwdziedziny, złożony ze wszystkich wartości, które funkcja faktycznie przyjmuje, oznaczamy jako f(X) i nazywamy zbiorem wartości funkcji.
+
+Funkcja jest więc relacją, ale taką, w której przyporządkowanie jest jednoznaczne - każdy argument ma dokładnie jedną wartość.
+
+![Funkcja - diagram](Static/Q45-48/funkcja.png)
 
 ## 49. Własności relacji: relacje porządkujące; relacje równoważności
 **Odpowiedź:**
