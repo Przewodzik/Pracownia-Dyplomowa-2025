@@ -2311,13 +2311,90 @@ Dzięki nim programista może pisać kod ogólny, elastyczny i łatwy do ponowne
 
 # Projektowanie systemów informatycznych
 
+## 41. Metody oraz strategie testowania oprogramowania
+**Odpowiedź:**
+
+Testowanie oprogramowania to proces planowania, projektowania, wykonywania i oceny testów w celu wykrycia problemów i potwierdzenia, że system spełnia wymagania użytkownika.
+
+### Metody testowania
+Podziały metod testowania:
+
+a) Ze względu na znajomość kodu testowanego oprogramowania
+- **Czarna skrzynka** – testowanie bez znajomości kodu wewnętrznego; fokus na wymaganiach, wejściach i wyjściach.
+- **Biała skrzynka** – testowanie z pełnym dostępem do kodu źródłowego; analiza ścieżek logicznych i pokrycia kodu.
+- **Szara skrzynka** – połączenie powyższych; częściowa znajomość struktury wewnętrznej.
+
+b) Ze względu na sposób wykonywania testów
+- **Manualne** – ręczne wykonywanie scenariuszy testowych przez testera.
+- **Automatyczne** – wykonywanie testów za pomocą skryptów i narzędzi.
+
+
+### Poziomy testowania
+
+1. **Jednostkowe (unit)** – testy izolowanych komponentów (funkcje, klasy).
+2. **Integracyjne** – weryfikacja współpracy między modułami (np. API i baza danych).
+3. **Systemowe** – testy całej aplikacji w środowisku zbliżonym do produkcyjnego.
+4. **Akceptacyjne(UAT)** – weryfikacja przez użytkownika końcowego.
+
+
+
+### Strategie testowania
+
+- **Testy regresji** – ponowne wykonanie istniejących testów po zmianach w kodzie.
+- **Testy eksploracyjne** – nieustrukturyzowane testowanie oparte na intuicji i doświadczeniu testera.
+- **Testy obciążeniowe (load)** – symulacja dużego ruchu użytkowników w warunkach produkcyjnych.
+- **Testy wytrzymałościowe (stress)** – przekraczanie limitów systemu w celu wykrycia punktów awarii.
+- **Testy bezpieczeństwa** – Identyfikacja luk i podatności w systemie, które mogą zostać wykorzystane do nieautoryzowanego dostępu, utraty danych lub ataku.
+- **Testy kompatybilności** – sprawdzanie działania na różnych przeglądarkach, systemach, urządzeniach.
+- **Testy smoke (sanity)** – szybka weryfikacja, czy system w ogóle się uruchamia.
+
+---
+# Projektowanie systemów informatycznych
+
 ## 42. Metodologie wytwarzania systemów informatycznych
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+
+| Metodologia     | Opis                                      | Zalety                                 | Wady                                                  | Zastosowanie                        |
+|-----------------|------------------------------------------|----------------------------------------|-------------------------------------------------------|------------------------------------|
+| **Kaskadowy**   | Sekwencyjny: analiza → projekt → implementacja → testy | Jasne etapy, pełna dokumentacja        | Mała elastyczność, brak powrotu do wcześniejszych faz | Małe projekty z dobrze określonymi wymaganiami |
+| **V**           | Kaskadowy + testy odpowiadające fazom    | Wczesne planowanie testów, ścisła weryfikacja | Ograniczona elastyczność                              | Systemy wbudowane, lotnictwo, medycyna |
+| **Przyrostowy** | System dostarczany etapami (moduły)     | Szybkie częściowe dostarczenie, kontakt z klientem | Trudny podział prac, ryzyko integracji, wyższe koszty | Projekty z etapową akceptacją funkcji |
+| **Iteracyjny**  | Fazy powtarzane, każda iteracja udoskonala produkt | Lepsza kontrola, wczesne testy          | Wyższa złożoność i przez to koszty                    | Projekty wymagające ciągłego dopracowywania |
+| **Spiralny**    | Iteracje + analiza ryzyka: planowanie → ryzyko → rozwój → testy | Skupienie na jakości i ryzyku          | Wysoki koszt, duża złożoność                          | Duże projekty krytyczne jakościowo |
+| **Agile**       | Filozofia iteracyjna/adaptacyjna; Scrum/Kanban | Szybka reakcja, częsty kontakt z klientem | Wymaga doświadczonego zespołu, minimalna dokumentacja | Projekty zmienne, wymagające elastyczności |
+
+**Kluczowe różnice:**  
+- **Przyrostowy** → dodawanie nowych funkcji/modułów  
+- **Iteracyjny** → udoskonalanie istniejących funkcji (refaktoring)  
 
 ## 43. Metody identyfikacji wymagań systemu informatycznego
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Identyfikacja wymagań jest kluczowym etapem analizy systemu informatycznego. Celem tego procesu jest określenie, jakie funkcje ma realizować system oraz jakie ograniczenia powinien spełniać. Wymagania dzielimy na: 
+- **Funkcjonalne** – określające, co system ma robić (np. reakcje na działania użytkownika, funkcje interfejsu).  
+- **Niefunkcjonalne** – definiujące warunki, jakie system musi spełniać (np. wydajność, niezawodność, cele biznesowe).  
+
+### Sposoby identyfikacji wymagań
+
+W początkowej fazie kluczowe jest zrozumienie otoczenia i przyszłego działania systemu. W tym celu stosuje się różne metody:
+
+- **Wywiady** – rozmowy z interesariuszami w formie ustrukturyzowanej lub swobodnej.  
+- **Burze mózgów** – generowanie pomysłów dotyczących funkcjonowania systemu.  
+- **Scenariusze i przypadki użycia** – opisy sekwencji działań użytkownika prowadzących do osiągnięcia celu.
+- **Prototypowanie** – tworzenie wstępnych makiet, modeli lub szkieletów systemu i ich testowanie z użytkownikami.  
+- **Spotkania grupowe i warsztaty** – wspólne dyskusje z udziałem interesariuszy nad wymaganiami i rozwiązaniami.  
+- **Obserwacja** – analiza sposobu pracy użytkowników (uczestnicząca lub nieuczestnicząca).  
+- **Kwestionariusze (ankiety)** – pozyskiwanie informacji od wielu osób w sposób ustrukturyzowany.  
+- **Eksperymenty** – testowanie niewielkich rozwiązań w celu oceny reakcji użytkowników.  
+- **Ciągła współpraca** – bieżący udział klienta w procesie projektowym w celu weryfikacji kierunku prac.  
+- **Symulacja punktów widzenia** – przyjęcie roli interesariusza w celu zrozumienia jego potrzeb.
+### Punkty widzenia
+
+**Punkt widzenia** to osoba lub element otoczenia mający wpływ na wymagania systemu. Dzielą się one na:
+- **Bezpośrednie** – docelowi użytkownicy systemu.
+- **Pośrednie** – kierownictwo, osoby odpowiedzialne za bezpieczeństwo.  
+- **Związane z dziedziną** – przepisy, standardy, regulacje.  
 
 ---
 
@@ -2325,7 +2402,49 @@ Dzięki nim programista może pisać kod ogólny, elastyczny i łatwy do ponowne
 
 ## 44. Działania na zbiorach
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Dopełnienie zbioru – **A' = U \ A**
+
+Suma zbiorów (unia) – **A ∪ B = {x : x ∈ A lub x ∈ B}**
+
+Część wspólna (iloczyn) – **A ∩ B = {x : x ∈ A i x ∈ B}**
+
+Różnica zbiorów – **A \ B = {x : x ∈ A i x ∉ B}**
+
+Różnica symetryczna – **A △ B = (A \ B) ∪ (B \ A)**
+
+
+![Operacje na zbiorach](Static/Q44/set_operations.png)
+
+**Iloczyn kartezjański**  
+ Zbiór wszystkich uporządkowanych par, gdzie pierwszy element pochodzi ze zbioru A, a drugi ze zbioru B.
+
+**A x B = {(a, b) : a ∈ A, b ∈ B}**
+
+
+Własności działań na zbiorach
+ 
+
+Przemienność:
+
+**A ∪ B = B ∪ A**  
+**A ∩ B = B ∩ A**
+
+Łączność:  
+
+**(A ∪ B) ∪ C = A ∪ (B ∪ C)**  
+**(A ∩ B) ∩ C = A ∩ (B ∩ C)**
+
+Rozdzielność:
+
+**A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)**  
+**A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)**
+
+Prawa de Morgana:
+
+**(A ∪ B)' = A' ∩ B'**  
+**(A ∩ B)' = A' ∪ B'**
+
 
 ## 45. Rachunek zdań
 **Odpowiedź:**
