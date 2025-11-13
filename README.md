@@ -2511,15 +2511,6 @@ Różne modele SDLC stanowią różne podejścia do organizacji i sekwencjonowan
    - Zalety: Wysoka elastyczność, szybka reakcja na zmieniające się wymagania, stałe dostarczanie wartości.
    - Wady: Wymagają zaangażowania klienta i zdyscyplinowanego zespołu (Przykłady: Scrum, Kanban).
 
----
-
-## 41. Metody oraz strategie testowania oprogramowania
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
-
----
-
-# Projektowanie systemów informatycznych
 
 ## 41. Metody oraz strategie testowania oprogramowania
 **Odpowiedź:**
