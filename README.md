@@ -3135,11 +3135,79 @@ Ten zestaw {NOT, AND, OR} jest funkcjonalnie pełny, bo każdą inną funkcję l
 
 ## 55. Elementy pamięciowe stosowane w układach sekwencyjnych
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Układy sekwencyjne to takie układy cyfrowe, których wyjścia zależą nie tylko od aktualnych wejść, ale także od poprzednich stanów, dlatego wymagają elementów pamięciowych.
+Do zapamiętywania stanów wykorzystuje się elementy pamięciowe, które mogą przechowywać 1 bit informacji.
+
+### Elementy pamięciowe – ogólna idea
+Element pamięciowy to układ cyfrowy, który może przyjmować i utrzymywać jeden z dwóch stanów logicznych: 0 lub 1 (czyli stan niski lub wysoki).
+Stan ten może się zmienić dopiero po spełnieniu określonego warunku (np. podaniu impulsu zegara lub zmianie sygnału sterującego).
+
+Najważniejsze elementy pamięciowe to **przerzutniki (flip-flops)** i **zatrzaski (latches)**.
+Najprostszym elementem pamięciowym jest **układ bistabilny**, który ma dwa stabilne stany - 0 i 1.
+
+### 1. Przerzutniki (flip-flops)
+Przerzutniki są elementami pamięciowymi sterowanymi zboczem zegara, czyli zmieniają stan tylko w chwili zmiany sygnału CLK.
+a) **Przerzutnik SR** – ma wejścia Set i Reset, służy do ustawiania i zerowania stanu.
+b) **Przerzutnik D** – zapamiętuje wartość z wejścia D w momencie zbocza zegara — dlatego używa się go w rejestrach i pamięciach.
+c) **Przerzutnik JK** – jest bardziej uniwersalny — eliminuje stan niedozwolony RS-a, a T służy głównie do zliczania, bo przełącza się przy każdym impulsie zegara.
+d) **Przerzutnik T** – uproszczona wersja JK; gdy T=1 zmienia stan; stosowany w licznikach
+Elementy te tworzą podstawę układów sekwencyjnych takich jak liczniki, rejestry, automaty stanów oraz pamięci.
+
+### 2. Zatrzaski (latches)
+Zatrzaski są elementami pamięciowymi sterowanymi poziomem sygnału (aktywne, gdy wejście sterujące ma określony poziom – najczęściej 1).
+a) **Zatrzask SR (Set-Reset)** – wejścia Set i Reset, utrzymuje stan gdy S=R=0
+b) **Zatrzask D (Data / Delay)** – gdy EN=1, przepisuje D na wyjście, inaczej pamięta stan
+
+- [Przerzutniki – ETI PG](https://eti.pg.edu.pl/documents/176770/35019317/20151214_przerzutniki.pdf)
+- [Przerzutnik SR – Uniwersytet Zielona Góra](https://staff.uz.zgora.pl/ipajak/materials/_general/autom/przerzutnik_SR.pdf)
+- [Struktury danych – EDUINF](https://eduinf.waw.pl/inf/alg/002_struct/0032.php)
+- [Układy sekwencyjne – WEL WAT](https://wel.wat.edu.pl/wp-content/uploads/2022/02/uc1_uklady_sekwencyjne.pdf)
 
 ## 56. Rodzaje układów sekwencyjnych, różnice w procedurach ich projektowania
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Układy sekwencyjne to układy cyfrowe, których **wyjścia zależą zarówno od aktualnych wejść, jak i od poprzedniego stanu**. Z tego powodu wymagają elementów pamięciowych (przerzutników lub zatrzasków).
+
+Rodzaje układów sekwencyjnych można podzielić na dwie główne grupy:
+
+### 1. Układy sekwencyjne asynchroniczne
+- Stan zmienia się natychmiast po zmianie wejść (brak zegara)
+- Zbudowane zwykle z zatrzasków (latches) sterowanych poziomem
+- Zmiany rozchodzą się według opóźnień bramek -> mogą powstawać hazardy i oscylacje
+- Trudniejsze w projektowaniu i analizie
+
+**Cechy:**
+- Brak sygnału zegarowego
+- Szybka reakcja
+- Podatność na zakłócenia
+- Bardziej złożona procedura projektowania
+
+**Projektowanie układów asynchronicznych obejmuje:**
+- Minimalizację funkcji przejść
+- Wykrywanie i eliminację hazardów
+- Zapewnienie stabilnych stanów
+- Analizę sekwencji zmian wejść, by unikać konfliktów
+
+### 2. Układy sekwencyjne synchroniczne
+- Zmieniają stan tylko w takt zegara (CLK)
+- W większości wykorzystują przerzutniki (flip-flops)
+- Są stabilne i przewidywalne -> dominujące w systemach cyfrowych
+
+**Cechy:**
+- Sygnał zegarowy kontroluje wszystkie zmiany
+- Większa odporność na zakłócenia
+- Łatwiejsze projektowanie
+- Stosowane w praktyce (liczniki, rejestry, automaty stanów, procesory)
+
+**Projektowanie układów synchronicznych obejmuje:**
+- Określenie liczby stanów układu (diagram stanów)
+- Minimalizację stanów
+- Kodowanie stanów (np. binarnie, Gray, one-hot)
+- Dobór typu przerzutnika (D, JK, T)
+- Wyznaczenie funkcji wejść przerzutników
+- Syntezę równań logicznych
+- Weryfikację timingową i implementację
+
+> Procedura projektowania układów synchronicznych jest systematyczna i łatwa do zautomatyzowania.
 
 ---
 
