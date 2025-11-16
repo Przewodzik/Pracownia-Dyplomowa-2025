@@ -2988,15 +2988,159 @@ Funkcja jest więc relacją, ale taką, w której przyporządkowanie jest jednoz
 
 ## 53. Budowa programu w Prologu: klauzule (fakty, reguły), definicje predykatów. Sposób realizacji programu
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
 
----
+**Prolog** to język programowania logicznego, jest **językiem deklaratywnym**, co oznacza, że programista opisuje **CO** ma zostać rozwiązane, zamiast **JAK** to zrobić. Program napisany w języku Prolog składa się z dwóch głównych elementów: **faktów**, które można traktować jako aksjomaty pewnej teorii oraz **reguł wnioskowania** dla tej teorii.  
+
+Program w Prologu składa się z zestawu klauzul, które mogą być:
+
+- **Faktami** – aksjomatami opisującymi pewną teorię lub bazę wiedzy.
+  Przykład faktu:
+  ```prolog
+  kot(tom).
+  ```
+- **Regułami** – opisującymi relacje między faktami oraz wnioski, które można wyprowadzić.
+  Przykład reguły:
+  ```prolog
+  zwierze_domowe(X) :- kot(X).
+  ```
+W tym przypadku reguła mówi: „X jest zwierzęciem domowym, jeśli X jest kotem lub psem”.
+
+Każdy program w Prologu opiera się na rachunku predykatów pierwszego rzędu oraz na zasadzie rezolucji, czyli mechanizmie automatycznego wnioskowania.
+
+Podczas działania programu użytkownik zadaje pytanie (zapytanie) do bazy wiedzy, a Prolog próbuje je udowodnić na podstawie dostępnych faktów i reguł.
+Przykładowo: 
+```prolog
+?- zwierze_domowe(tom).
+```
+Prolog odpowie „true”.
+
+Podsumowując, programowanie w Prologu polega na definiowaniu **faktów i reguł wnioskowania**, które tworzą pewną teorię, a następnie stawianiu pytań, które język ten próbuje rozwiązać logicznie.
+
+### Reguły w Prologu
+Baza danych w Prologu może zawierać nie tylko fakty, ale także reguły, które pozwalają wyprowadzać wnioski z danych. Reguła ma postać:
+  ```bash
+  jest(światło) :- włączony(przycisk).
+  ```
+Zapis **:-** oznacza „**jeśli**” lub „**wtedy, gdy**”. Reguła powyżej oznacza:
+  - Zdanie **jest(światło)** jest prawdziwe, jeśli prawdziwe jest zdanie **włączony(przycisk)**.
+
+Każda reguła musi kończyć się kropką.
+
+Reguły mogą używać **zmiennych**, które w Prologu zapisuje się wielką literą, natomiast stałe zaczynają się od małej litery. Przykład:
+  ```bash
+  ojciec(X, Y) :- rodzic(X, Y), jest_rodzaju_męskiego(X).
+  ```
+**Interpretacja:** „X jest ojcem Y, jeśli X jest rodzicem Y i X jest mężczyzną”.
+
+### Zapytania w Prologu
+Po zdefiniowaniu faktów i reguł, możemy zadawać pytania do bazy wiedzy. Zapytanie wygląda jak fakt, poprzedzony symbolem **?-**
+  ```prolog
+  ?- ojciec(tomasz, agata).
+  ```
+**Interpretacja:** „Czy Tomasz jest ojcem Agaty?”
+
+Prolog przeszukuje bazę wiedzy i odpowiada:
+  - **yes** – jeśli pytanie jest prawdziwe,
+  - **no** – jeśli nie istnieje odpowiedni fakt ani reguła.
+
+### Listy w Prologu
+Lista to uporządkowana sekwencja termów zapisywana w nawiasach kwadratowych, np.:
+```bash
+[jabłko, gruszka, pomarańcza]
+[1,2,3,4]
+[X, 2, dom(texas)]
+[[a,b,c], lista]
+```
+  - Elementami listy mogą być dowolne termy.
+  - Listy można dzielić na głowę i ogon używając symbolu |:
+```bash
+[a|[b,c,d]] = [a,b,c,d]
+[a|[]] = [a]
+```
+
+### Rekurencja w Prologu
+Prolog pozwala na użycie **rekurencji**, czyli wywoływania predykatu w jego własnej definicji.
+Przykład rekurencyjnego predykatu sumującego elementy listy:
+```prolog
+suma([], 0).
+suma([H|T], Suma) :- suma(T, S), Suma is H + S.
+```
+
+### Podsumowanie najważniejszych zasad Prologu
+**1. Fakty** – bezwarunkowo prawdziwe twierdzenia, zakończone kropką.
+- **Składnia:** nazwa_predykatu(argument1, argument2, ...).
+- **Argumenty mogą być:** stałymi (małe litery, np. marta, "Marta"), zmiennymi (duża litera, np. X).
+- Przykład:
+```prolog
+lubi(marta, mandarynki).      % Marta lubi mandarynki
+lubi(piotr, marta).           % Piotr lubi Martę
+```
+**2. Reguły** – warunkowe stwierdzenia, wnioski wyprowadzane z faktów.
+- **Składnia:** **wniosek :- warunek1, warunek2, ... .**
+    Można używać zmiennych (**X**, **Y**) i zmiennych anonimowych (**_**).
+- **Przykład:**
+```prolog
+ojciec(X, Y) :- rodzic(X, Y), jest_rodzaju_męskiego(X).
+siostra(S, X) :- kobieta(S), rodzice(Matka, Ojciec, S), rodzice(Matka, Ojciec, X).
+lubi(marta, X) :- mezczyzna(X), przystojny(X), jezdzi(X, porsche).
+  ```
+**3. Zapytania** – pytania do bazy wiedzy, poprzedzone **?-**.
+- Przykład:
+```prolog
+?- ojciec(tomasz, agata).  	  % Czy Tomasz jest ojcem Agaty?
+?- zwierze_domowe(tom).    	  % Czy tom jest zwierzęciem domowym?
+```
+**4. Listy** – uporządkowane sekwencje termów, zapis w nawiasach kwadratowych.
+- Przykład:
+```bash
+[1, 2, 3, 4]
+[jablko, gruszka, pomarancza]
+[H|T]      % głowa | ogon
+```
+**5. Rekurencja** – predykaty wywołujące same siebie, np. do przetwarzania list:
+Przykład:
+```prolog
+suma([], 0).
+suma([H|T], Suma) :- suma(T, S), Suma is H + S.
+```
+**6. Zasady ogólne:**
+- Każdy predykat kończy się kropką.
+- Nazwy predykatów i stałych piszemy małymi literami, zmienne dużymi literami.
+- Kolejność i liczba argumentów mają znaczenie.
+- Predykaty o tej samej nazwie tworzą procedury.
+
+### Przydatne materiały
+
+- [Wykład Prolog – PWR](https://ki.pwr.edu.pl/kobylanski/prolog/page0/index.html)  
+- [Tutorialspoint – Prolog Relations](https://www.tutorialspoint.com/prolog/prolog_relations.htm)  
+- [Prolog Programming Examples](https://athena.ecs.csus.edu/~mei/logicp/prolog/programming-examples.html)
 
 # Technika cyfrowa
 
 ## 54. Systemy (zestawy) funkcjonalnie pełne
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**System funkcjonalnie pełny** - taki zbiór funkcji boolowskich, dla którego dowolna funkcja boolowska może być przedstawiona za pomocą funkcji należących do tego zbioru i argumentów funkcji.
+Prościej mówiąc, zestaw funkcji logicznych (czyli operatorów logicznych AND, OR, NOT) nazywamy funkcjonalnie pełnym, jeśli przy pomocy tylko tych funkcji można zbudować dowolną funkcję logiczną.
+
+Funkcje sumy, iloczynu i negacji tworzą tzw. podstawowy system funkcjonalnie pełny. Nie jest to jednak system minimalny. Systemy funkcjonalnie pełne tworzą również:
+- iloczyn i negacja (suma może zostać wyeliminowana dzięki prawu De Morgana)
+- suma i negacja (analogicznie jak wyżej)
+- funkcja Sheffera (NAND) (jak wyżej oraz ponieważ `a' = (a*a)'`) 
+- funkcja Peirce'a (NOR) (`a' = (a+a)'`)
+
+```bash
+a` - oznacza sprzęzenie
+```
+
+**Klasyczny zestaw funkcji logicznych:**
+Podstawowe funkcje:
+- negacja (NOT)
+- suma logiczna (OR)
+- iloczyn logiczny (AND)
+
+Ten zestaw {NOT, AND, OR} jest funkcjonalnie pełny, bo każdą inną funkcję logiczną (np. XOR, NAND, NOR, implikację, równoważność itd.) można przedstawić za pomocą kombinacji tych trzech operacji.
+
+- [System funkcjonalnie pełny: Operacje NAND i NOR](https://elektrotechnika.ans.pila.pl/fcp/BGBUKOQtTKlQhbx08SlkTUQRQX2o8DAoHNiwFE1wZDyEPG1gnBVcoFW8SBDRKTxMKRy0SODwBBAEIMQheCFVAORFCH2dGTDxSJ28dPEpZE1EHSktqMQ/_users/code_eCEUAMhdDO1gzHg45HwpDEF8bMzg5GUMSBj8PUAhZCiE/elektronika_cyfrowa/system_f_p_nand_nor.pdf)
 
 ## 55. Elementy pamięciowe stosowane w układach sekwencyjnych
 **Odpowiedź:**
