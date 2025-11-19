@@ -2959,15 +2959,180 @@ Funkcja jest więc relacją, ale taką, w której przyporządkowanie jest jednoz
 
 ## 49. Własności relacji: relacje porządkujące; relacje równoważności
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+1. Podstawowe własności relacji:
+
+-   Zwrotność: Oznacza że każdy element jest w relacji z samym sobą.
+
+$$ ∀ x ∈ X: x R x $$
+
+-   Symetryczność: Jeśli x jest w relacji z y, to oznacza to również, że
+    y jest w relacji z x.
+
+$$ x R y ⟹ y R x $$
+
+Antysymetryczność występuje gdy powyższa własność jest prawdziwa jedynie
+dla x=y.
+
+-   Przechodniość: Jeśli element x jest w relacji z elementem y, a y w
+    relacji z z, to x również jest w relacji z z.
+
+$$ (x R y ∧ y R z)⟹x R z $$
+
+-   Spójność: na zbiorze X wszystkie elementy zbioru wchodzą w relację z
+    dowolnym innym elementem.
+
+2.**Relacja równoważności:** relacja ta mówi nam, że dwa obiekty są
+\"takie same\" pod względem pewnej cechy, mimo że mogą być różnymi
+obiektami. Aby relacja była relacją równoważności musi spełnić trzy
+warunki:
+
+-   Jest zwrotna.
+
+-   Jest symetryczna.
+
+-   Jest przechodnia.
+
+Najważniejszą konsekwencją istnienia relacji równoważności jest podział
+zbioru na **klasy abstrakcji** (klasy równoważności). Każdy element
+zbioru należy do dokładnie jednej klasy.
+
+3.**Relacja porządkująca:** Relacja ta oznacza że elementy zbioru są
+uporządkowane, czyli jego elementy możemy ułożyć w szereg od
+najmniejszego do największego. Dla określenia takiego porządku istotna
+jest relacja „x poprzedza y", którą można zapisać jako x ≤ y. Aby
+relacja była relacją porządkującą musi spełniać warunki:
+
+-   Jest zwrotna
+
+-   Jest antysymetryczna
+
+-   Jest przechodnia
+
+-   Jest spójna
+
+Jeśli relacja spełnia trzy pierwsze warunki, mówimy o częściowym
+porządku.
 
 ## 50. Własności funkcji: miejsca zerowe, ciągłość, pochodna
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+**Podstawowe własności funkcji:**
+
+-   Dziedzina: zbiór wszystkich argumentów funkcji
+
+-   Zbiór wartości: wszystkie wartości przyjmowane dla argumentów z
+    dziedziny
+
+-   Miejsca zerowe: argument dla którego funkcja ma wartość 0
+
+-   Monotoniczność: jeśli funkcja jest rosnąca, malejąca, nierosnoąca,
+    niemalejąca lub stała.
+
+-   Różnowartościowość: dla każdego argumentu funkcja przyjmuje inną
+    wartość
+
+-   Parzystość: funkcja jest parzysta jeśli jej wykres jest symetryczny
+    względem osi y
+
+-   Nieparzystość: wykres jest symetryczny względem punktu (0, 0).
+    -f(-x)
+
+-   Maksimum i minimum: wartości największe i najmniejsze
+
+    ![](./Static/Q49-52/maxresdefault.png)
+
+**Typy funkcji**:
+-  Surjekcja: funkcja przyjmująca jako swoje wartości wszystkie elementy
+przeciwdziedziny
+-  Injekcja: funkcja różnowartościowa
+
+-  Bijekcja: funkcja, która spełnia jednocześnie dwie poprzednie własności
+
+**Ciągłość funkcji:** funkcja jest ciągła wtedy gdy nie ma w niej „dziur".
+
+Definicja Heinego:
+
+Funkcja jest ciągła w punkcie x~0~ należącego do M wtedy i tylko wtedy
+gdy dla każdego ciągu (x~n~) liczb z M, który jest zbieżny do x~0~, ciąg
+wartości (f(x~n~)) jest zbieżny do f(x~0~). Mówimy, że funkcja jest
+ciągła jeżeli jest ciągła na całej swojej dziedzinie.
+
+Nieciągłości: wyróżniamy dwa typy:
+
+-   Usuwalna -- jeżeli istnieje granica funkcji w punkcie nieciągłości
+
+-   Odosobniona -- jeżeli w pewnym sąsiedztwie punktu nieciągłości
+    funkcja jest ciągła (np. signum)
+
+Dodatkowe rodzaje nieciągłości:
+
+-   Skok
+
+-   Nieciągłość zwyczajna (1 rodzaju)
+
+-   2 rodzaju
+
+Pochodna: miara szybkości funkcji, czyli tempa zmian jej wartości
+względem zmian jej argumentów.
+
+Niech y=f(x) będzie funkcją zmiennej rzeczywistej x określoną w
+otoczeniu punktu x~0~. Pochodną funkcji nazywamy granicę ilorazu
+różnicowego:
+
+$$\lim_{\Delta x \rightarrow 0}\frac{f\left( x_{0} + \Delta x \right) - f\left( x_{0} \right)}{\Delta x}$$
 
 ## 51. Zmienna losowa i jej charakterystyki liczbowe
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Zmienna losowa - funkcja przypisująca zdarzeniom elementarnym liczby.
+
+Do określenia zmiennej losowej potrzebna jest przestrzeń
+probabilistyczna. Załóżmy więc, że dana jest dowolna przestrzeń
+probabilistyczna (E, Z, P), a więc zmienna losową nazywamy dowolną
+funkcję X, określoną na przestrzeni zdarzeń elementarnych E, o
+własnościach ze zbioru liczb rzeczywistych i mierzalną względem ciała
+zdarzeń Z.
+
+Zmienna losowa X dana jest zbiorem:  <br>
+
+$$X:E\mathbb{\rightarrow R}$$
+
+Zmienne losowe oznaczamy dużymi literami np.: S, T, X, Y, Z, ich
+własności zaś odpowiednimi małymi literami: s, t, x, y, z, często ze
+wskaźnikami.
+
+Jeżeli zbiór wartości, jakie przyjmuje funkcja X, jest zbiorem
+policzalnym, wtedy zmienną losową nazywamy zmienną losową dyskretną lub
+skokową.
+
+Natomiast jeśli funkcja X przyjmuje wartości z pewnego przedziału
+liczbowego, nazywamy ją zmienną losową ciągłą.
+
+Rodzaje zmiennych losowych:
+
+-   Zmienne losowe skokowe (dyskretne)
+
+-   Zmienne losowe ciągłe
+
+Dystrubuanta zmiennej losowej X jest funkcją określoną na całym zbiorze
+liczb rzeczywistych i dana jest wzorem: 
+
+$$ F(x) = P(X < x) = \sum_{x_{i} < x}^{}p_{i} $$
+
+Charakterystyki zmiennej losowej
+
+-   Wartość przeciętna\
+    ![](./Static/Q49-52/image1.png)
+
+-   Wariancja zmiennej losowej
+
+> ![](./Static/Q49-52/image2.png)
+
+-   Odchylenie standardowe zmiennej losowej\
+    ![](./Static/Q49-52/image3.png)
+
+Rozkład normalny\
+![](./Static/Q49-52/image4.png)
+
+---
 
 ---
 
@@ -2975,7 +3140,49 @@ Funkcja jest więc relacją, ale taką, w której przyporządkowanie jest jednoz
 
 ## 52. Definicje unifikatora (podstawienia uzgadniającego), najogólniejszego unifikatora, algorytm unifikacji i twierdzenie o unifikacji
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Unifikacja jest podstawowym mechanizmem obliczeniowym w programowaniu deklaratywnym. Jest to proces dopasowywania do siebie dwóch wyrażeń (termów) w celu sprawdzenia, czy mogą one stać się identyczne, oraz wyznaczenia wartości zmiennych, które to umożliwią.
+
+1\. Definicja unifikatora (podstawienia uzgadniającego)
+
+W programowaniu logicznym operujemy na termach, które mogą być stałymi, zmiennymi lub strukturami złożonymi. Unifikatorem dwóch termów nazywamy taki zbiór podstawień wartości za zmienne, po którego zastosowaniu oba termy stają się identyczne. Innymi słowy, jest to zestaw instrukcji mówiący, co trzeba wpisać w miejsce zmiennych w obu wyrażeniach, aby stały się one nierozróżnialne.
+
+Przykład: 
+Jeśli mamy term rodzic(Anna, X) oraz term rodzic(Y, Tomek), to unifikatorem jest podstawienie: X = Tomek oraz Y = Anna. Po podstawieniu oba termy brzmią rodzic(Anna, Tomek).
+
+2\. Najogólniejszy unifikator
+
+Dla dwóch termów może istnieć wiele różnych unifikatorów. Najogólniejszy unifikator to takie podstawienie, które doprowadza do uzgodnienia termów, ale nie wprowadza żadnych zbędnych ograniczeń ani nadmiarowych konkretów. Jest to rozwiązanie najbardziej uniwersalne, które pozostawia zmienne niezwiązane, jeśli nie jest to konieczne do unifikacji. Każdy inny unifikator dla tych termów jest szczególnym przypadkiem najogólniejszego unifikatora.
+
+Przykład:
+  Dla termów f(X) i f(Y) można przyjąć unifikator {X = 5, Y = 5}, ale jest on zbyt szczegółowy (narzuca liczbę 5). Najogólniejszym unifikatorem jest po prostu {X = Y}, co oznacza, że zmienne muszą być sobie równe, bez wskazywania konkretnej wartości.
+
+3\. Algorytm unifikacji
+
+Jest to procedura, która automatycznie znajduje najogólniejszy unifikator dla dwóch termów lub informuje, że ich uzgodnienie jest niemożliwe. Algorytm działa rekurencyjnie, porównując termy element po elemencie:
+
+-  Stałe: Jeśli porównywane elementy są stałymi, muszą być identyczne. Jeśli są różne, unifikacja kończy się porażką.
+
+-  Zmienne: Jeśli jeden z elementów jest zmienną, algorytm podstawia za nią drugi element.
+
+-  Ważny wyjątek: Przed podstawieniem należy sprawdzić, czy zmienna nie występuje wewnątrz termu, który ma być za nią podstawiony (np. X i f(X)). Jeśli występuje, unifikacja jest niemożliwa (prowadziłaby do pętli nieskończonej).
+
+-  Struktury złożone: Jeśli oba elementy są funkcjami lub predykatami, muszą mieć tę samą nazwę (funktor) i taką samą liczbę argumentów. Algorytm wywołuje się wtedy rekurencyjnie dla każdej pary odpowiadających sobie argumentów.
+
+Proces kończy się sukcesem, gdy cała struktura zostanie przetworzona bez
+błędów, a wynikiem jest zebrany zestaw podstawień.
+
+4\.  Twierdzenie o unifikacji (Robinsona)
+
+Jest to fundamentalne twierdzenie matematyczne, które gwarantuje poprawność działania powyższego mechanizmu. Mówi ono, że dla dowolnych dwóch termów:
+
+-  Algorytm unifikacji zawsze kończy działanie w skończonym czasie.
+
+-  Jeżeli termy można uzgodnić, algorytm zawsze znajdzie unifikator i
+będzie to najogólniejszy unifikator.
+
+-  Jeżeli algorytm zwróci wynik negatywny, oznacza to, że termów nie da się
+uzgodnić w żaden sposób.
+
 
 ## 53. Budowa programu w Prologu: klauzule (fakty, reguły), definicje predykatów. Sposób realizacji programu
 **Odpowiedź:**
