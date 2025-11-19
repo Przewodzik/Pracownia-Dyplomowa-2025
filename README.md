@@ -3214,24 +3214,350 @@ Rodzaje układów sekwencyjnych można podzielić na dwie główne grupy:
 # Systemy wbudowane
 
 ## 57. Mikrokontrolery i systemy wbudowane
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+### 1. Czym jest mikrokontroler?
+Mikrokontroler to układ scalony łączący w jednej obudowie:
+- CPU (jednostkę obliczeniową),
+- pamięć programu (Flash),
+- pamięć operacyjną (RAM),
+- peryferia wejścia/wyjścia.
+
+Dzięki temu jest samowystarczalny i może sterować urządzeniem bez dodatkowych układów zewnętrznych.
+
+> Schemat blokowy mikrokontrolera  
+> ![schemat-blokowy-mikrokontrolera](Static/Q57/1.png)
+>
+>- CPU steruje wszystkimi modułami i pobiera dane z pamięci lub I/O.
+>- Pamięć i rejestry przechowują dane i instrukcje, które CPU wykonuje.
+>- Moduły komunikacyjne i I/O wymieniają dane z otoczeniem.
+>- Timery, przetworniki i inne peryferia rozszerzają funkcjonalność mikrokontrolera.
+>
+
+### 2. Kluczowe cechy mikrokontrolerów
+Najważniejsze właściwości, które mikrokontrolery odróżniają od mikroprocesorów:
+
+#### 2.1 Elementy wbudowane mikrokontrolera
+- pamięć Flash,
+- pamięć RAM,
+- timery,
+- przetworniki ADC/DAC,
+- interfejsy komunikacyjne (UART, SPI, I2C, CAN, USB),
+- watchdog,
+- GPIO.
+
+#### 2.2 Zalety mikrokontrolerów
+- niska cena,
+- niewielkie rozmiary,
+- niski pobór energii,
+- możliwość pracy bez dodatkowych układów zewnętrznych.
+
+#### 2.3 Typowe zastosowania mikrokontrolerów
+- sterowniki silników,
+- urządzenia IoT,
+- układy pomiarowe,
+- automatyka przemysłowa,
+- elektronika użytkowa (AGD, zabawki, sterowniki LED).
+
+> Przykładowe mikrokontrolery Atmel AVR
+> ![przykladowe-mikrokontrolery](Static/Q57/2.jpg)
+
+
+### 3. Systemy wbudowane – definicja i rola
+System wbudowany (embedded system) to urządzenie, którego działanie:
+- jest ściśle określone,
+- nie służy jako komputer ogólnego zastosowania,
+- działa najczęściej w czasie rzeczywistym.
+
+#### Przykładowe urządzenia:
+- sterowniki przemysłowe,
+- systemy samochodowe (ABS, ESP),
+- smart home,
+- urządzenia medyczne,
+- robotyka,
+- telefony i elektronika consumer.
+
+#### Typowy układ systemu wbudowanego
+- mikrokontroler,
+- czujniki,
+- elementy wykonawcze (silniki, przekaźniki, siłowniki),
+- komunikacja (np. Bluetooth, Wi-Fi, RS485),
+- zasilanie.
+
+```mermaid
+graph LR
+B[Czujniki] -- dane --> A[Mikrokontroler]
+A -- sterowanie --> D[Elementy wykonawcze]
+A <-- TX/RX --> C[Moduły komunikacyjne]
+```
+
+### 4. Programowanie mikrokontrolerów
+
+#### Najczęściej stosowane języki:
+- **C** – standard w systemach embedded,
+- **C++** – coraz częściej stosowany,
+- **Assembler** – gdy wymagane są optymalizacje,
+- **MicroPython** – w niektórych platformach (ESP32, Micro:bit).
+
+#### Jak to wygląda?
+-  Na komputerze pisany jest kod.
+-  Następuje kompilacja do formatu zrozumiałego dla mikrokontrolera.
+-  Skompilowany program jest wgrywany przez programator/USB.
+-  Mikrokontroler wykonuje program samodzielnie.
+
+> Przykładowy kod
+>```c
+>// Definiujemy pin, do którego podłączona jest dioda
+>#define LED_PIN 13
+>
+>// Funkcja główna
+>int main(void) {
+>    // Ustawienie pinu jako wyjście
+>    pinMode(LED_PIN, OUTPUT);
+>
+>    while(1) {                   // Pętla nieskończona
+>        digitalWrite(LED_PIN, HIGH); // Włącz LED
+>        delay(500);                  // Poczekaj 500 ms
+>        digitalWrite(LED_PIN, LOW);  // Wyłącz LED
+>        delay(500);                  // Poczekaj 500 ms
+>    }
+>
+>    return 0;
+>}
+>```
 
 ## 58. Tryby adresowania rozkazów mikrokontrolera
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### 1. Każdy mikrokontroler wykonuje instrukcje (rozka­zy), które operują na danych.  
+**Tryb adresowania** określa:
+- skąd instrukcja pobiera dane,
+- gdzie zapisuje wynik.
+
+Dzięki różnym trybom adresowania można efektywnie sterować pamięcią, rejestrami i peryferiami.
+
+### 2. Główne tryby adresowania
+
+#### 2.1 Adresowanie bezpośrednie (Immediate)
+- Dane są zapisane **bezpośrednio w instrukcji**.
+- Nie wymaga odczytu pamięci ani rejestrów.
+- Używane do wstawiania stałych wartości.
+
+> **Przykład:**
+> ```c
+> MOV R1, #10  // do rejestru R1 wstaw 10
+> ```
+
+#### 2.2 Adresowanie rejestrowe (Register)
+- Instrukcja operuje na danych znajdujących się w **rejestrach CPU**.
+- Jest to bardzo szybkie, bo rejestry znajdują się bezpośrednio w procesorze.
+
+> **Przykład:**
+> ```c
+> ADD R1, R2   // dodaj zawartość R2 do R1
+> ```
+
+#### 2.3 Adresowanie pośrednie (Indirect)
+- Instrukcja używa **rejestru jako wskaźnika** do pamięci.
+- Pozwala pracować na danych w RAM lub w tablicach.
+
+> **Przykład:**
+> ```c
+> MOV A, @R0   // pobierz dane spod adresu w R0 i wstaw do akumulatora A
+> ```
+
+#### 2.4 Adresowanie bezpośrednie do pamięci (Direct)
+- Adres pamięci jest podany **bezpośrednio w instrukcji**.
+- Używane do odczytu lub zapisu konkretnej komórki pamięci.
+
+> **Przykład:**
+> ```c
+> MOV A, 30h  // wstaw zawartość komórki pamięci 0x30 do akumulatora
+> ```
+
+#### 2.5 Adresowanie względne (Relative)
+- Instrukcja podaje **przesunięcie względem bieżącej pozycji programu**.
+- Najczęściej stosowane w skokach warunkowych.
+
+> **Przykład:**
+> ```c
+> JZ LABEL   // (JZ) - Jump if Zero, jeśli zero, skocz o offset do LABEL
+>
+> LABEL:
+> // kod wykonywany po skoku
+> ```
+
+### 3. Wszystko w jednym miejscu
+
+| Tryb adresowania 	|        Skąd pobiera dane        	|  Gdzie zapisuje wynik  	|    Typowe zastosowanie    	|
+|:----------------:	|:-------------------------------:	|:----------------------:	|:-------------------------:	|
+| Immediate        	| W samej instrukcji              	| Rejestr lub akumulator 	| Stałe wartości            	|
+| Register         	| Rejestr CPU                     	| Rejestr CPU            	| Operacje arytmetyczne     	|
+| Indirect         	| Pamięć wskazywana przez rejestr 	| Rejestr/akumulator     	| Tablice, RAM              	|
+| Direct           	| Bezpośredni adres pamięci       	| Rejestr/akumulator     	| Konkretna komórka pamięci 	|
+| Relative         	| Offset względem PC              	| Adres skoku            	| Skoki warunkowe, pętle    	|
+
 
 ## 59. Rodzaje transmisji szeregowej
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### 1. Czym jest transmisja szeregowa?
+Transmisja szeregowa to sposób przesyłania danych **bit po bicie przez jeden przewód lub linię komunikacyjną**.  
+Jest powszechnie stosowana w mikrokontrolerach i systemach wbudowanych, bo wymaga **mniej przewodów** niż transmisja równoległa, co upraszcza układy i zmniejsza koszty.
+
+### 2. Podstawowe rodzaje transmisji szeregowej
+
+### 2.1 Asynchroniczna (UART, RS232)
+- Dane wysyłane są **bez zegara**, odbiorca musi wiedzieć, kiedy zaczyna się bajt.
+- Każdy bajt otoczony jest:
+  - **bit startu** – sygnalizuje początek danych
+  - **bity danych** – 5–9 bitów
+  - **bit parzystości (opcjonalny)** – sprawdzenie błędów
+  - **bit stopu** – kończy bajt
+- **Zalety:** prosta, wymaga tylko 2 przewodów (TX i RX), tania.
+- **Wady:** wolniejsza i mniej odporna na zakłócenia niż SPI/I2C.
+
+### 2.2 Synchronous (SPI, I2C)
+Dane wysyłane są **zsynchronizowane z sygnałem zegarowym**.
+
+#### 2.2.1 SPI (Serial Peripheral Interface)
+- 4 przewody: 
+  - MOSI (Master Out Slave In)
+  - MISO (Master In Slave Out) 
+  - SCK (zegar)
+  - CS (wybór urządzenia).
+- Szybka transmisja między mikrokontrolerem a peryferiami.
+- **Zalety:** bardzo szybka, prosta dla krótkich połączeń.
+- **Wady:** wymaga więcej przewodów niż I2C, trudniejsza w przypadku wielu urządzeń.
+
+#### 2.2.2 I2C (Inter-Integrated Circuit)
+- 2 przewody: SDA (dane), SCL (zegar)
+- Pozwala podłączyć wiele urządzeń do jednej magistrali przy użyciu adresów.
+- **Zalety:** oszczędza przewody, pozwala podłączyć wiele urządzeń.
+- **Wady:** wolniejsza niż SPI, wymaga odpowiedniego programowania obsługi adresów.
+
+
+### 2.3 Inne standardy szeregowe
+- **CAN (Controller Area Network)** – używany w motoryzacji i automatyce, odporny na zakłócenia.
+- **1-Wire** – przesył danych i zasilania po jednej linii.
+- **USB (Universal Serial Bus)** – szybka transmisja między komputerem a mikrokontrolerem.
+
+### 3. Porównanie podstawowych rodzajów transmisji szeregowej
+
+| Typ transmisji 	| Liczba przewodów                     	| Synchronizacja             	| Zastosowanie                                                     	|
+|----------------	|--------------------------------------	|----------------------------	|------------------------------------------------------------------	|
+| UART / RS232   	| 2                                    	| Asynchroniczna             	| PC ↔ mikrokontroler                                              	|
+| SPI            	| 4                                    	| Synchroniczna              	| Mikrokontroler ↔ peryferia                                       	|
+| I2C            	| 2                                    	| Synchroniczna              	| Wiele urządzeń na jednej magistrali                              	|
+| CAN            	| 2                                    	| Synchroniczna              	| Motoryzacja, automatyka                                          	|
+| 1-Wire         	| 1                                    	| Asynchroniczna             	| Czujniki, proste urządzenia                                      	|
+| USB            	| 4 (lub 2 w trybie USB 2.0 Low Speed) 	| Synchroniczna z protokołem 	| Komputer ↔ mikrokontroler, pamięć masowa, urządzenia peryferyjne 	|
 
 ---
 
 # Sztuczna inteligencja i metody inżynierii wiedzy
 
 ## 60. Model obliczeniowy perceptronu
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+### 1. Czym jest perceptron?
+Perceptron to najprostszy model **sztucznego neuronu** w sieciach neuronowych.  
+Jest to **matematyczny model inspirowany neuronem biologicznym**, który przetwarza sygnały wejściowe i generuje sygnał wyjściowy na podstawie wagi i funkcji aktywacji.
+
+Perceptron jest wykorzystywany do:
+- klasyfikacji danych (np. True/False),
+- rozpoznawania prostych wzorców,
+- nauki maszynowej w trybie nadzorowanym.
+
+### 2. Struktura perceptronu
+Perceptron składa się z kilku elementów:
+
+1. **Wejścia**: $x_1, x_2, \dots, x_n$ – wartości danych wejściowych.
+2. **Wagi**: $w_1, w_2, \dots, w_n$ – określają, jak ważne jest każde wejście.
+3. **Suma ważona**: obliczana jako  
+   $$
+   z = \sum_{i=1}^{n} w_i x_i + b
+   $$  
+   gdzie $b$ to **bias** (przesunięcie).
+4. **Funkcja aktywacji**: decyduje o wyjściu perceptronu. Najczęściej:
+   - **skok jednostkowy (Heaviside)**: wyjście 0 lub 1
+   - **sigmoidalna**: wyjście w przedziale (0,1)
+   - **ReLU**: wyjście ≥0
+5. **Wyjście**: $y$ – wartość, którą perceptron przekazuje dalej lub klasyfikuje
+
+
+> **Diagram perceptronu:**
+>```mermaid
+>graph LR
+>X1[Wejście x1] -- w1 --> SUMA[Suma ważona + Bias] --> AKT[Funkcja aktywacji] --> Y[Wyjście y]
+>X2[Wejście x2] -- w2 --> SUMA
+>Xn[Wejście xn] -- wn --> SUMA
+>```
+
+### 33. Przykład działania perceptronu
+
+Załóżmy taki perceptron z dwoma wejściami $x_1$ i $x_2$ oraz funkcją aktywacji skokową.
+
+- Wagi: $w_1 = 0.6$, $w_2 = 0.4$  
+- Bias: $b = -0.5$  
+- Funkcja aktywacji: skokowa
+
+Dla danych wejściowych $x_1 = 1$, $x_2 = 1$:
+
+$$
+z = (0.6 \cdot 1) + (0.4 \cdot 1) - 0.5 = 0.5
+$$
+
+Ponieważ $z > 0$, perceptron **wychodzi 1** (np. klasyfikacja „TAK”).
+
+Dla danych wejściowych $x_1 = 0$, $x_2 = 1$:
+
+$$
+z = (0.6 \cdot 0) + (0.4 \cdot 1) - 0.5 = -0.1
+$$
+
+Ponieważ $z < 0$, perceptron **wychodzi 0** (np. klasyfikacja „NIE”).
+
+### 4. Uczenie perceptronu
+
+- Perceptron **uczy się na podstawie danych treningowych**.  
+- Celem jest dobranie wag $w_i$ i biasu $b$, aby perceptron poprawnie klasyfikował wszystkie przykłady.  
+- Algorytm uczenia perceptronu:
+
+  1. Wybierz przykład treningowy.  
+  2. Oblicz wyjście perceptronu.  
+  3. Porównaj z wartością oczekiwaną.  
+  4. Jeśli wynik jest błędny, **skoryguj wagi i bias**:
+
+     $$
+     w_i \leftarrow w_i + \Delta w_i, \quad \Delta w_i = \eta \,(y_{\text{oczekiwane}} - y_{\text{obliczone}}) \, x_i
+     $$
+
+     gdzie $\eta$ – współczynnik uczenia (mała liczba, np. 0.1).
+
+- Proces powtarza się aż do uzyskania poprawnych wyników dla wszystkich przykładów (lub po określonej liczbie iteracji).
+
+> **Diagram uczenia perceptronu:**
+>```mermaid
+>flowchart TD
+>START[Start] --> INICJALIZUJ[Inicjalizuj wagi i bias]
+>INICJALIZUJ --> ITERACJA[Ustaw licznik iteracji = 0]
+>ITERACJA --> WYBIERZ[Wybierz pierwszy/kolejny przykład]
+>WYBIERZ --> OBLICZ[Oblicz wyjście perceptronu]
+>OBLICZ --> POROWNAJ{Porównaj z wartością oczekiwaną}
+>POROWNAJ -->|Poprawny| NASTEPNY[Następny przykład]
+>POROWNAJ -->|Błędny| AKTUALIZUJ[Aktualizuj wagi i bias] --> NASTEPNY
+>NASTEPNY --> SPRAWDZ{Czy są jeszcze przykłady w zbiorze?}
+>SPRAWDZ -->|Tak| WYBIERZ
+>SPRAWDZ -->|Nie| KONTROLA{Sprawdź poprawność wszystkich przykładów}
+>KONTROLA -->|Wszystkie poprawne| KONIEC[Koniec uczenia]
+>KONTROLA -->|Są błędy| INKREMENTUJ[Licznik iteracji +1] --> SPRAWDZ_ITERACJE{Czy osiągnięto max iteracji?}
+>SPRAWDZ_ITERACJE -->|Tak| KONIEC
+>SPRAWDZ_ITERACJE -->|Nie| WYBIERZ
+>```
+
+### 5. TL;DR
+- Perceptron to **najprostszy sztuczny neuron**.  
+- Operuje na **wejściach, wagach, sumie i funkcji aktywacji**.  
+- Używany głównie do **binarnych klasyfikacji**.  
+- Nie potrafi rozwiązywać problemów nieliniowo separowalnych (np. XOR), ale jest podstawą dla **wielowarstwowych sieci neuronowych**.
+
+
 
 ## 61. Metody uczenia sieci neuronowych
 **Odpowiedź:**
