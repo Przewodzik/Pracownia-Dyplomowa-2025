@@ -3922,9 +3922,9 @@ graph TD
     B["Dziecko 1<br>90% TAK / 10% NIE<br>Entropia = 0.47 (Niska - Porządek)"]
     C["Dziecko 2<br>10% TAK / 90% NIE<br>Entropia = 0.47 (Niska - Porządek)"]
 
-    style A fill:#ffcccc
-    style B fill:#ccffcc
-    style C fill:#ccffcc
+    style A fill:#ffb3ba,stroke:#333,stroke-width:2px,color:black
+    style B fill:#baffc9,stroke:#333,stroke-width:2px,color:black
+    style C fill:#baffc9,stroke:#333,stroke-width:2px,color:black
 ```
 
 Algorytm wybiera ten atrybut, który daje największy **Zysk Informacyjny (Information Gain)**, czyli najbardziej redukuje entropię (zamienia chaos w węźle rodzica na porządek w węzłach dzieciach).
