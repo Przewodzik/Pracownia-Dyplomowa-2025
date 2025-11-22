@@ -3916,11 +3916,11 @@ Entropia jest używana do decydowania, **które pytanie zadać** (który atrybut
 
 ```mermaid
 graph TD
-    A[Węzeł Rodzic<br>50% TAK / 50% NIE<br>Entropia = 1.0 (Wysoka - Chaos)] -->|Podział wg atrybutu X| B
+    A["Węzeł Rodzic<br>50% TAK / 50% NIE<br>Entropia = 1.0 (Wysoka - Chaos)"] -->|Podział wg atrybutu X| B
     A -->|Podział wg atrybutu X| C
 
-    B[Dziecko 1<br>90% TAK / 10% NIE<br>Entropia = 0.47 (Niska - Porządek)]
-    C[Dziecko 2<br>10% TAK / 90% NIE<br>Entropia = 0.47 (Niska - Porządek)]
+    B["Dziecko 1<br>90% TAK / 10% NIE<br>Entropia = 0.47 (Niska - Porządek)"]
+    C["Dziecko 2<br>10% TAK / 90% NIE<br>Entropia = 0.47 (Niska - Porządek)"]
 
     style A fill:#ffcccc
     style B fill:#ccffcc
@@ -3984,6 +3984,7 @@ Algorytmy te (np. CN2, AQ) generują reguły bezpośrednio z danych, bez budowan
 | **Cel** | Przewidywanie jednej, konkretnej zmiennej (Decyzji/Klasy). | Znajdowanie powiązań między *dowolnymi* zmiennymi. |
 | **Przykład** | Jeśli *Wiek > 60* i *Pali = Tak* to *Ryzyko = Wysokie*. | Jeśli kupił *Piwo*, to kupi też *Chipsy* (Analiza koszykowa). |
 | **Algorytmy** | C4.5, AQ, CN2 | Apriori, FP-Growth |
+
 ## 65. Uczenie się zespołowe
 **Odpowiedź:**
 > **Tu wpisujesz swoją odpowiedź**
