@@ -3770,30 +3770,67 @@ Ponieważ $z < 0$, perceptron **wychodzi 0** (np. klasyfikacja „NIE”).
 
 **Odpowiedź:**
 
-Uczenie sieci neuronowych to proces dostosowywania jej parametrów, głównie wag połączeń między neuronami, w taki sposób, aby sieć jak najlepiej realizowała postawione przed nią zadanie. Proces ten opiera się na analizie danych uczących. Istnieją trzy główne paradygmaty uczenia maszynowego, które znajdują zastosowanie w treningu sieci neuronowych: uczenie nadzorowane, nienadzorowane oraz uczenie ze wzmocnieniem.
+Uczenie sieci neuronowych to proces dostosowywania jej parametrów, głównie wag połączeń między neuronami, w taki sposób, aby sieć jak najlepiej realizowała postawione przed nią zadanie. Proces ten opiera się na analizie danych uczących. Istnieją trzy główne paradygmaty uczenia maszynowego, które znajdują zastosowanie w treningu sieci neuronowych.
+
+### Schemat podziału metod uczenia
+
+```mermaid
+graph TD
+    A[Metody Uczenia Sieci] --> B[Uczenie Nadzorowane<br>Supervised]
+    A --> C[Uczenie Nienadzorowane<br>Unsupervised]
+    A --> D[Uczenie ze Wzmocnieniem<br>Reinforcement]
+
+    B --> B1(Dane z etykietami)
+    B --> B2(Cel: Minimalizacja błędu)
+    B1 -.-> B3[Np. Klasyfikacja obrazów]
+
+    C --> C1(Dane bez etykiet)
+    C --> C2(Cel: Odkrycie struktury)
+    C1 -.-> C3[Np. Segmentacja klientów]
+
+    D --> D1(Interakcja ze środowiskiem)
+    D --> D2(Cel: Maksymalizacja nagrody)
+    D1 -.-> D3[Np. Sterowanie robotem]
+```
 
 **1. Uczenie nadzorowane (Supervised Learning):**
 
-Jest to najczęściej stosowana metoda, w której sieć uczy się na podstawie zbioru danych zawierającego przykłady wejściowe wraz z odpowiadającymi im, prawidłowymi odpowiedziami (etykietami). Celem jest minimalizacja błędu, czyli różnicy między odpowiedzią generowaną przez sieć a oczekiwaną odpowiedzią. Kluczowym algorytmem w tej metodzie jest **algorytm wstecznej propagacji błędu (backpropagation)**. Działa on dwuetapowo:
-*   **Propagacja w przód:** Dane wejściowe są przepuszczane przez sieć, a na wyjściu generowana jest odpowiedź.
-*   **Propagacja wsteczna:** Obliczony błąd jest propagowany od warstwy wyjściowej do wejściowej, a wagi połączeń są modyfikowane w kierunku minimalizacji tego błędu, najczęściej z użyciem metody spadku gradientowego.
+Jest to najczęściej stosowana metoda, w której sieć uczy się na podstawie zbioru danych zawierającego przykłady wejściowe wraz z odpowiadającymi im, prawidłowymi odpowiedziami (etykietami).
 
-Uczenie nadzorowane stosuje się głównie w zadaniach **klasyfikacji** (przypisywanie obiektów do predefiniowanych kategorii) oraz **regresji** (przewidywanie wartości ciągłych).
+*   **Mechanizm:** Kluczowym algorytmem jest **wsteczna propagacja błędu (backpropagation)**.
+    1.  **Propagacja w przód:** `Wejście -> Warstwy Ukryte -> Wyjście (Predykcja)`
+    2.  **Obliczenie błędu:** `Błąd = Oczekiwana Wartość - Predykcja`
+    3.  **Propagacja wsteczna:** Aktualizacja wag w celu zmniejszenia błędu (metoda spadku gradientowego).
+
+> **Przykład:** System antyspamowy.
+> *   **Dane:** Tysiące e-maili oznaczonych ręcznie jako "Spam" lub "Nie spam".
+> *   **Uczenie:** Sieć uczy się cech (słowa kluczowe, nadawca), które korelują z etykietą "Spam".
 
 **2. Uczenie nienadzorowane (Unsupervised Learning):**
 
-W tym podejściu sieć otrzymuje dane wejściowe bez etykiet i jej zadaniem jest samodzielne odkrycie w nich ukrytych struktur, wzorców lub zależności. Nie ma tu zewnętrznego sygnału błędu, który kierowałby procesem uczenia. Główne zastosowania to:
-*   **Klastrowanie (grupowanie):** Dzielenie danych na grupy podobnych do siebie obiektów.
-*   **Asocjacja:** Odkrywanie reguł współwystępowania cech w danych.
-*   **Redukcja wymiarowości:** Znajdowanie bardziej zwięzłej reprezentacji danych.
+Sieć otrzymuje dane surowe (bez etykiet). Zadaniem jest samodzielne odkrycie ukrytych struktur, wzorców lub zależności. Brak tu sygnału błędu z zewnątrz.
 
-Przykładem sieci uczonej w sposób nienadzorowany są **samoorganizujące się mapy Kohonena (SOM)**, które potrafią tworzyć topologiczne mapy wielowymiarowych danych.
+*   **Zastosowania:**
+    *   **Klastrowanie:** Grupowanie podobnych obiektów (np. klastrowanie klientów banku wg historii transakcji).
+    *   **Redukcja wymiarowości:** Kompresja danych przy zachowaniu najważniejszych informacji (np. Autoenkodery).
+    *   **Asocjacja:** "Klienci, którzy kupili chleb, kupili też masło".
+
+> **Przykład:** Sieci Kohonena (SOM) porządkujące kolory. Na wejściu podajemy losowe wartości RGB. Po uczeniu sieć tworzy mapę 2D, na której podobne kolory sąsiadują ze sobą.
 
 **3. Uczenie ze wzmocnieniem (Reinforcement Learning):**
 
-Jest to metoda inspirowana behawioralną psychologią. Agent (model) uczy się poprzez interakcję ze środowiskiem. Za wykonane akcje otrzymuje sygnały zwrotne w postaci "nagród" lub "kar". Celem agenta jest maksymalizacja sumy otrzymanych nagród w czasie. Uczenie polega na opracowaniu optymalnej **polityki**, czyli strategii podejmowania decyzji, która prowadzi do najlepszych wyników. Ta metoda jest często stosowana w robotyce, grach (np. Go, StarCraft II) oraz systemach sterowania. W połączeniu z głębokimi sieciami neuronowymi tworzy dziedzinę znaną jako **Deep Reinforcement Learning (DRL)**.
+Metoda inspirowana psychologią behawioralną. Agent uczy się metodą prób i błędów.
 
-Inne znane reguły i metody uczenia to m.in. **reguła Hebba**, która zakłada wzmacnianie połączeń między neuronami, które są jednocześnie aktywne.
+*   **Cykl działania:**
+    1.  Agent obserwuje **Stan** środowiska.
+    2.  Podejmuje **Akcję**.
+    3.  Otrzymuje **Nagrodę** (pozytywną) lub **Karę** (negatywną).
+    4.  Aktualizuje swoją **Politykę** działania, aby w przyszłości uzyskać więcej nagród.
+
+> **Przykład:** Nauka gry w szachy.
+> *   Wygrałeś partię? +100 punktów (wzmocnienie decyzji, które do tego doprowadziły).
+> *   Przegrałeś? -100 punktów.
+> *   Wykonałeś nielegalny ruch? -10 punktów (natychmiastowa kara).
 
 ---
 
@@ -3801,26 +3838,53 @@ Inne znane reguły i metody uczenia to m.in. **reguła Hebba**, która zakłada 
 
 **Odpowiedź:**
 
-Algorytm genetyczny to heurystyczna metoda optymalizacji i przeszukiwania, która jest inspirowana procesem ewolucji biologicznej. Jego działanie opiera się na zasadach dziedziczenia i doboru naturalnego, gdzie najlepiej przystosowane osobniki mają największe szanse na przetrwanie i rozmnażanie. Algorytmy genetyczne przetwarzają populację potencjalnych rozwiązań problemu, a każde rozwiązanie jest kodowane w formie **chromosomu** (najczęściej binarnego ciągu).
+Algorytm genetyczny (AG) to heurystyczna metoda optymalizacji inspirowana ewolucją biologiczna. Przetwarza on populację rozwiązań (osobników), dążąc do znalezienia najlepszego wyniku poprzez mechanizmy dziedziczenia, mutacji i selekcji.
 
-Działanie algorytmu genetycznego przebiega w sposób iteracyjny, a każda iteracja nazywana jest **pokoleniem**. Schemat działania algorytmu można opisać w następujących krokach:
+### Cykl działania Algorytmu Genetycznego
 
-1.  **Inicjalizacja:** Tworzona jest losowa populacja początkowa, składająca się z pewnej liczby osobników (chromosomów). Każdy osobnik reprezentuje jedno potencjalne rozwiązanie problemu.
+```mermaid
+flowchart TD
+    Start([Start]) --> Inicjalizacja[1. Inicjalizacja Populacji]
+    Inicjalizacja --> Ocena[2. Ocena Przystosowania<br>Fitness Function]
+    Ocena --> Warunek{Warunek Stopu?}
+    Warunek -- TAK --> Stop([Koniec - Wynik])
+    Warunek -- NIE --> Selekcja[3. Selekcja Rodziców]
+    Selekcja --> Krzyzowanie[4. Krzyżowanie<br>Crossover]
+    Krzyzowanie --> Mutacja[5. Mutacja]
+    Mutacja --> NowaPop[6. Nowa Populacja]
+    NowaPop --> Ocena
+```
 
-2.  **Ocena (Ewaluacja):** Każdy osobnik w populacji jest oceniany za pomocą **funkcji przystosowania** (ang. *fitness function*). Funkcja ta określa, jak dobre jest rozwiązanie reprezentowane przez dany chromosom. Wyższa wartość funkcji przystosowania oznacza lepsze rozwiązanie.
+**Szczegółowy opis kroków:**
 
-3.  **Selekcja:** Na podstawie ocen z funkcji przystosowania wybierani są osobnicy, którzy posłużą do stworzenia nowej populacji. Osobniki o wyższym przystosowaniu mają większe prawdopodobieństwo bycia wybranymi. Popularne metody selekcji to:
-    *   **Metoda koła ruletki:** Prawdopodobieństwo wyboru osobnika jest proporcjonalne do jego wartości funkcji przystosowania.
-    *   **Selekcja turniejowa:** Z populacji losuje się niewielkie podgrupy, a z każdej z nich wybierany jest najlepszy osobnik.
-    *   **Selekcja rankingowa:** Osobniki są szeregowane od najlepszego do najgorszego, a prawdopodobieństwo selekcji zależy od ich pozycji w rankingu.
+1.  **Inicjalizacja:** Losowe wygenerowanie populacji początkowej. Każdy osobnik (chromosom) to zakodowane rozwiązanie problemu (np. ciąg bitów).
+2.  **Ocena (Fitness):** Każdy osobnik otrzymuje ocenę liczbową. Im wyższa, tym lepsze rozwiązanie.
+3.  **Selekcja:** Wybór osobników do reprodukcji (np. metodą koła ruletki – lepsze osobniki mają większy wycinek koła).
 
-4.  **Operatory genetyczne:** Wybrane osobniki są poddawane operacjom genetycznym w celu stworzenia potomstwa, które utworzy nowe pokolenie.
-    *   **Krzyżowanie (Crossover):** Jest to kluczowy operator, który polega na wymianie fragmentów materiału genetycznego (części chromosomów) między dwoma osobnikami rodzicielskimi, co prowadzi do powstania nowych osobników potomnych. Istnieją różne warianty, np. krzyżowanie jednopunktowe.
-    *   **Mutacja (Mutation):** Polega na losowej, niewielkiej modyfikacji genów w chromosomie (np. zamiana bitu z 0 na 1). Mutacja odgrywa rolę drugorzędną i jej celem jest wprowadzenie nowej informacji genetycznej do populacji, co zapobiega przedwczesnej zbieżności algorytmu do lokalnego optimum.
+**4. Operatory genetyczne (Przykłady):**
 
-5.  **Utworzenie nowej populacji:** Osobniki potomne, powstałe w wyniku krzyżowania i mutacji, zastępują osobniki z poprzedniego pokolenia (w całości lub częściowo), tworząc nową populację.
+To kluczowy moment tworzenia nowego pokolenia.
 
-6.  **Warunek zatrzymania:** Cały cykl (kroki 2-5) jest powtarzany, aż do spełnienia określonego warunku stopu, np. osiągnięcia zadanej liczby pokoleń, uzyskania rozwiązania o satysfakcjonującej wartości funkcji przystosowania lub braku postępów w kolejnych iteracjach.
+*   **Krzyżowanie (Crossover) jednopunktowe:**
+    Wymiana fragmentów kodu między rodzicami.
+    ```text
+    Rodzic A:  1 1 1 1 | 1 1    (miejsce cięcia po 4 bicie)
+    Rodzic B:  0 0 0 0 | 0 0
+
+    Potomek 1: 1 1 1 1 0 0      (poczatek A, koniec B)
+    Potomek 2: 0 0 0 0 1 1      (poczatek B, koniec A)
+    ```
+
+*   **Mutacja:**
+    Losowa zmiana genu, zapobiegająca utknięciu w lokalnym minimum.
+    ```text
+    Przed:     1 1 1 1 1 0
+                       ^
+    Po:        1 1 1 1 1 1      (bit 0 zamieniony na 1)
+    ```
+
+5.  **Utworzenie nowej populacji:** Potomkowie zastępują rodziców.
+6.  **Warunek zatrzymania:** Algorytm działa do osiągnięcia np. 1000 pokoleń lub znalezienia idealnego rozwiązania.
 
 ---
 
@@ -3828,25 +3892,46 @@ Działanie algorytmu genetycznego przebiega w sposób iteracyjny, a każda itera
 
 **Odpowiedź:**
 
-**Entropia informacji**, wprowadzona przez Claude'a Shannona w 1948 roku, jest miarą niepewności lub losowości związanej z wynikiem pewnego zdarzenia losowego. W teorii informacji, entropia określa średnią ilość informacji, jaką niesie ze sobą pojedyncza wiadomość pochodząca z danego źródła. Im większa entropia, tym większa niepewność co do wyniku i tym więcej informacji jest potrzebne do jego jednoznacznego określenia.
+**Entropia informacji** (Entropia Shannona) to miara niepewności lub nieuporządkowania zbioru danych. Określa średnią ilość informacji potrzebną do opisania stanu układu. Im bardziej losowe zdarzenie, tym wyższa jego entropia.
 
-Formalnie, dla zmiennej losowej X, która może przyjmować wartości {x₁, x₂, ..., xₙ} z prawdopodobieństwami P(xᵢ), entropię H(X) oblicza się ze wzoru Shannona:
+**Wzór matematyczny:**
+Dla zmiennej losowej $X$ przyjmującej wartości $x_1, ..., x_n$ z prawdopodobieństwem $P(x_i)$:
 
-`H(X) = -Σᵢ P(xᵢ) log₂(P(xᵢ))`
+$$H(X) = - \sum_{i=1}^{n} P(x_i) \log_2 P(x_i)$$
 
-Jednostką entropii jest **bit**. Entropia osiąga wartość maksymalną, gdy wszystkie zdarzenia są jednakowo prawdopodobne, a wartość minimalną (równą 0), gdy wynik jednego ze zdarzeń jest pewny.
+**Przykład obliczeniowy (Rzut monetą):**
 
-**Wybrane zastosowania entropii informacji:**
+*   **Moneta sprawiedliwa (50% orzeł, 50% reszka):**
+    Pełna niepewność.
+    $H(X) = - (0.5 \cdot \log_2 0.5 + 0.5 \cdot \log_2 0.5) = -(-0.5 - 0.5) = \mathbf{1 \ bit}$
+*   **Moneta sfałszowana (100% orzeł, 0% reszka):**
+    Brak niepewności (wynik jest znany z góry).
+    $H(X) = - (1 \cdot \log_2 1 + 0 \cdot \dots) = \mathbf{0 \ bitów}$
 
-1.  **Uczenie maszynowe i drzewa decyzyjne:** Entropia jest kluczowym pojęciem w algorytmach budujących drzewa decyzyjne, takich jak ID3, C4.5. Wykorzystuje się ją do wyboru atrybutu, który najlepiej podzieli zbiór danych.
-    *   **Mierzenie "czystości" węzła:** W kontekście klasyfikacji, entropia mierzy stopień "wymieszania" klas w danym węźle drzewa. Węzeł "czysty" (zawierający przykłady tylko jednej klasy) ma entropię równą 0, natomiast węzeł z równomiernym rozkładem klas ma entropię maksymalną.
-    *   **Przyrost informacji (Information Gain):** Algorytm budowy drzewa dąży do maksymalizacji przyrostu informacji, który jest różnicą między entropią węzła-rodzica a średnią ważoną entropią jego węzłów-dzieci. Wybierany jest ten atrybut do podziału, który daje największy przyrost informacji, czyli prowadzi do najbardziej jednorodnych podzbiorów.
+**Zastosowanie: Budowa Drzew Decyzyjnych (Algorytm ID3/C4.5)**
 
-2.  **Kompresja danych:** Entropia źródła informacji określa teoretyczną dolną granicę średniej długości słowa kodowego dla bezstratnej kompresji danych. Oznacza to, że nie da się skompresować danych tak, aby średnia liczba bitów na symbol była mniejsza niż entropia tego źródła.
+Entropia jest używana do decydowania, **które pytanie zadać** (który atrybut wybrać do podziału), aby jak najlepiej posegregować dane. Dążymy do minimalizacji entropii w liściach drzewa.
 
-3.  **Kryptografia:** Entropia jest używana do mierzenia losowości i nieprzewidywalności danych, co jest kluczowe w generowaniu bezpiecznych kluczy kryptograficznych i haseł.
+### Wizualizacja koncepcji w drzewach decyzyjnych
 
-4.  **Funkcja kosztu w sieciach neuronowych:** W zadaniach klasyfikacyjnych często używa się funkcji straty zwanej **entropią krzyżową** (cross-entropy), która mierzy różnicę między przewidywanym przez model rozkładem prawdopodobieństwa a rzeczywistym rozkładem. Minimalizacja entropii krzyżowej jest celem procesu uczenia sieci.
+```mermaid
+graph TD
+    A[Węzeł Rodzic<br>50% TAK / 50% NIE<br>Entropia = 1.0 (Wysoka - Chaos)] -->|Podział wg atrybutu X| B
+    A -->|Podział wg atrybutu X| C
+
+    B[Dziecko 1<br>90% TAK / 10% NIE<br>Entropia = 0.47 (Niska - Porządek)]
+    C[Dziecko 2<br>10% TAK / 90% NIE<br>Entropia = 0.47 (Niska - Porządek)]
+
+    style A fill:#ffcccc
+    style B fill:#ccffcc
+    style C fill:#ccffcc
+```
+
+Algorytm wybiera ten atrybut, który daje największy **Zysk Informacyjny (Information Gain)**, czyli najbardziej redukuje entropię (zamienia chaos w węźle rodzica na porządek w węzłach dzieciach).
+
+**Inne zastosowania:**
+1.  **Kompresja danych:** Entropia wyznacza teoretyczny limit kompresji bezstratnej (nie można zapisać danych na mniejszej liczbie bitów niż wynosi ich entropia).
+2.  **Kryptografia:** Ocena siły haseł (hasło o wysokiej entropii jest trudniejsze do zgadnięcia).
 
 ---
 
@@ -3854,29 +3939,51 @@ Jednostką entropii jest **bit**. Entropia osiąga wartość maksymalną, gdy ws
 
 **Odpowiedź:**
 
-**Reguły decyzyjne** to forma reprezentacji wiedzy w postaci zdań warunkowych "JEŻELI (przesłanki) TO (konkluzja)". Generowanie reguł decyzyjnych (indukcja reguł) to proces automatycznego odkrywania takich reguł z danych, najczęściej w celu klasyfikacji nowych, nieznanych przypadków. Celem jest stworzenie zestawu reguł, który jest zarówno dokładny, jak i zrozumiały dla człowieka.
+Generacja reguł decyzyjnych to proces wydobywania z danych wiedzy w postaci czytelnych dla człowieka instrukcji warunkowych:
+> **JEŻELI** (warunek 1) **I** (warunek 2) **TO** (Decyzja)
 
-Istnieją dwie główne strategie generowania reguł decyzyjnych:
+Istnieją dwie główne strategie generowania takich reguł.
 
-**1. Metody pośrednie - ekstrakcja reguł z innych modeli:**
+### 1. Metody pośrednie (Z drzew decyzyjnych)
 
-Najpopularniejszym podejściem jest generowanie reguł na podstawie zbudowanego wcześniej **drzewa decyzyjnego**. Każda ścieżka od korzenia do liścia w drzewie decyzyjnym może być bezpośrednio przekształcona w jedną regułę decyzyjną. Przesłanki reguły składają się z warunków napotkanych w węzłach na danej ścieżce, a konkluzją jest klasa przypisana do liścia. Zaletą tego podejścia jest prostota, jednak często wygenerowany zbiór reguł można uprościć (przyciąć) bez utraty mocy klasyfikacyjnej.
+Najpierw budujemy drzewo decyzyjne, a następnie każdą ścieżkę od korzenia do liścia zamieniamy na jedną regułę.
 
-**2. Metody bezpośrednie - algorytmy indukcji reguł:**
+**Przykład transformacji Drzewo -> Reguły:**
 
-Te algorytmy generują reguły bezpośrednio ze zbioru danych uczących. Najczęściej stosowaną strategią jest **sekwencyjne pokrywanie (sequential covering)**. Algorytm działający według tej strategii iteracyjnie wykonuje następujące kroki:
-a.  **Znajdź najlepszą regułę:** Wyszukaj regułę, która poprawnie klasyfikuje pewien podzbiór przykładów uczących. "Najlepsza" reguła jest wybierana na podstawie określonego kryterium jakości, np. maksymalnej dokładności lub przyrostu informacji.
-b.  **Usuń pokryte przykłady:** Usuń ze zbioru uczącego te przykłady, które są poprawnie pokrywane przez znalezioną regułę.
-c.  **Powtarzaj:** Powtarzaj kroki (a) i (b) na pozostałych przykładach, aż do momentu, gdy wszystkie (lub prawie wszystkie) przykłady zostaną pokryte.
+```mermaid
+graph TD
+    A{Czy pada deszcz?} -- TAK --> B{Czy wieje wiatr?}
+    A -- NIE --> C[Idź na spacer]
+    B -- TAK --> D[Zostań w domu]
+    B -- NIE --> E[Idź na spacer]
+```
 
-Przykłady algorytmów opartych na sekwencyjnym pokrywaniu to **AQ** i **CN2**. Wyszukiwanie pojedynczej reguły w kroku (a) może odbywać się na dwa sposoby:
-*   **Od ogółu do szczegółu (top-down):** Zaczyna się od bardzo ogólnej reguły (np. z pustą przesłanką) i stopniowo dodaje się kolejne warunki, aby ją uszczegółowić.
-*   **Od szczegółu do ogółu (bottom-up):** Zaczyna się od bardzo specyficznej reguły (pokrywającej jeden przykład) i uogólnia się ją poprzez usuwanie warunków.
+**Wygenerowane reguły:**
+1.  `JEŻELI (Pada deszcz = NIE) TO (Idź na spacer)`
+2.  `JEŻELI (Pada deszcz = TAK) I (Wieje wiatr = TAK) TO (Zostań w domu)`
+3.  `JEŻELI (Pada deszcz = TAK) I (Wieje wiatr = NIE) TO (Idź na spacer)`
 
-**Reguły decyzyjne a reguły asocjacyjne:**
+### 2. Metody bezpośrednie (Algorytmy pokrycia sekwencyjnego)
 
-Warto odróżnić reguły decyzyjne od **reguł asocjacyjnych**. Główna różnica polega na tym, że reguły decyzyjne mają z góry określony atrybut docelowy (decyzję), podczas gdy reguły asocjacyjne odkrywają dowolne, częste współwystępowania atrybutów w danych. Algorytmy takie jak **Apriori** służą do znajdowania reguł asocjacyjnych, które choć podobne w formie, mają inne zastosowanie (np. analiza koszykowa).
+Algorytmy te (np. CN2, AQ) generują reguły bezpośrednio z danych, bez budowania drzewa. Stosują strategię **"Oddziel i Zwyciężaj" (Separate-and-Conquer)**.
 
+**Mechanizm działania:**
+
+1.  **Znajdź jedną regułę**, która poprawnie klasyfikuje część przykładów z danej klasy (np. "pozytywnej").
+2.  **Usuń** ze zbioru uczącego przykłady, które ta reguła pokryła (zostały już "wyjaśnione").
+3.  **Powtórz** proces dla pozostałych danych, aż zbiór będzie pusty.
+
+> **Analogi:** Wyobraź sobie podłogę (zbiór danych) z rozsypanymi okruchami (przykłady).
+> *   Drzewo decyzyjne to próba pocięcia całej podłogi liniami prostymi na czyste kawałki.
+> *   Metoda bezpośrednia to przykrywanie okruchów serwetkami (regułami). Kładziesz serwetkę tam, gdzie jest najwięcej okruchów, sprzątasz je i bierzesz kolejną serwetkę do pozostałych.
+
+**Porównanie reguł decyzyjnych i asocjacyjnych:**
+
+| Cecha | Reguły Decyzyjne | Reguły Asocjacyjne |
+| :--- | :--- | :--- |
+| **Cel** | Przewidywanie jednej, konkretnej zmiennej (Decyzji/Klasy). | Znajdowanie powiązań między *dowolnymi* zmiennymi. |
+| **Przykład** | Jeśli *Wiek > 60* i *Pali = Tak* to *Ryzyko = Wysokie*. | Jeśli kupił *Piwo*, to kupi też *Chipsy* (Analiza koszykowa). |
+| **Algorytmy** | C4.5, AQ, CN2 | Apriori, FP-Growth |
 ## 65. Uczenie się zespołowe
 **Odpowiedź:**
 > **Tu wpisujesz swoją odpowiedź**
