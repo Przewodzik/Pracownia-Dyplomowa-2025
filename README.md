@@ -3677,9 +3677,7 @@ Perceptron składa się z kilku elementów:
 1. **Wejścia**: $x_1, x_2, \dots, x_n$ – wartości danych wejściowych.
 2. **Wagi**: $w_1, w_2, \dots, w_n$ – określają, jak ważne jest każde wejście.
 3. **Suma ważona**: obliczana jako  
-   $$
-   z = \sum_{i=1}^{n} w_i x_i + b
-   $$  
+   $z = \sum_{i=1}^{n} w_i x_i + b$  
    gdzie $b$ to **bias** (przesunięcie).
 4. **Funkcja aktywacji**: decyduje o wyjściu perceptronu. Najczęściej:
    - **skok jednostkowy (Heaviside)**: wyjście 0 lub 1
