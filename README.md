@@ -4019,14 +4019,114 @@ Algorytmy te (np. CN2, AQ) generują reguły bezpośrednio z danych, bez budowan
 
 # Problemy społeczne i zawodowe informatyki
 
-## 72. Trzy podstawowe obszary uzależnień komputerowych
+## 72. Trzy podstawowe obszary uzależnień komputerowych  
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
 
-## 73. Zasadnicza różnica między ochroną własności intelektualnej i ochroną patentową
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+Uzależnienia komputerowe zaliczają się do uzależnień behawioralnych. Obejmują one różne formy nadmiernego korzystania z technologii, które wpływają negatywnie na funkcjonowanie człowieka. Najczęściej wyróżnia się trzy podstawowe obszary uzależnień komputerowych:
 
-## 74. Szpiegostwo komputerowe
+### 1. Uzależnienie od internetu
+Dotyczy kompulsywnego korzystania z sieci, które prowadzi do utraty kontroli nad czasem spędzanym online.  
+**Objawy:**
+- wielogodzinne przeglądanie stron, social mediów,
+- niepokój przy braku dostępu do sieci,
+- traktowanie internetu jako formy ucieczki,
+- zaniedbywanie obowiązków.
+
+### 2. Uzależnienie od gier komputerowych
+Polega na nadmiernym i niekontrolowanym graniu, często kosztem życia rodzinnego, nauki lub pracy.  
+**Cechy:**
+- ciągłe myślenie o grach,
+- wydłużanie czasu gry,
+- agresja przy próbach ograniczenia,
+- granie mimo negatywnych konsekwencji.
+
+### 3. Uzależnienie od komputera / nowych technologii
+Obejmuje kompulsywne korzystanie z komputera lub urządzeń elektronicznych bez konkretnego celu.  
+**Przykłady:**
+- obsesyjne sprawdzanie komunikatorów,
+- nadmierne oglądanie treści (YouTube, streaming),
+- ciągłe „bycie przy ekranie”.
+
+
+---
+
+## 73. Zasadnicza różnica między ochroną własności intelektualnej i ochroną patentową  
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Ochrona własności intelektualnej oraz ochrona patentowa dotyczą zabezpieczenia efektów pracy twórczej, jednak są to dwa różne pojęcia o innym zakresie i zastosowaniu.
+
+### Ochrona własności intelektualnej
+Jest pojęciem **szerokim** i obejmuje:
+- prawa autorskie,
+- znaki towarowe,
+- wzory przemysłowe,
+- bazy danych,
+- **patenty** (jako jeden z elementów).
+
+Powstaje często **automatycznie**, np. prawa autorskie do programu komputerowego powstają w momencie jego stworzenia. Chroni **formę utworu**, a nie sam pomysł.
+
+### Ochrona patentowa
+Dotyczy tylko **wynalazków technicznych**, które są:
+- nowe,
+- innowacyjne,
+- mają zastosowanie przemysłowe.
+
+Patent daje twórcy **wyłączność** na korzystanie i rozwijanie wynalazku przez określony czas (najczęściej 20 lat).  
+Wymaga **rejestracji** i spełnienia rygorystycznych kryteriów — jest to procedura formalna i często kosztowna.
+
+### Zasadnicza różnica
+- **Własność intelektualna** = szeroka ochrona twórczości (różne kategorie).  
+- **Patent** = wąska, specjalistyczna forma ochrony dotycząca wyłącznie wynalazków.
+
+
+---
+
+## 74. Szpiegostwo komputerowe  
+**Odpowiedź:**
+
+Szpiegostwo komputerowe to celowe, nielegalne pozyskiwanie danych lub zasobów informatycznych bez wiedzy i zgody właściciela. Może być stosowane zarówno przez cyberprzestępców, firmy, jak i przez państwa w ramach cyberwywiadu.
+
+### Na czym polega szpiegostwo komputerowe?
+Atakujący dąży do zdobycia wartościowych informacji, takich jak:
+- dane osobowe,
+- tajemnice firmowe i handlowe,
+- projekty technologiczne,
+- hasła i loginy,
+- poufne dokumenty rządowe.
+
+Celem nie jest niszczenie danych, ale **ukryte ich pozyskanie**.
+
+### Metody szpiegostwa komputerowego
+Najczęściej wykorzystywane techniki:
+
+- **Malware (oprogramowanie szpiegujące)**  
+  keyloggery, spyware, trojany.
+
+- **Ataki socjotechniczne**  
+  phishing, podszywanie się pod instytucje, wyłudzanie danych.
+
+- **Sniffing i podsłuchiwanie sieci**  
+  przechwytywanie danych przesyłanych nieszyfrowanymi połączeniami.
+
+- **Backdoory**  
+  ukryte furtki umożliwiające zdalny dostęp.
+
+- **Zaawansowane ataki państwowe (APT)**  
+  długotrwałe operacje cyberwywiadowcze prowadzone przez wyspecjalizowane grupy.
+
+### Skutki szpiegostwa komputerowego
+- kradzież danych osobowych i finansowych,
+- wyciek poufnych informacji,
+- utrata reputacji firmy,
+- kradzież technologii,
+- zagrażanie bezpieczeństwu państwa,
+- możliwość szantażu.
+
+### Ochrona przed szpiegostwem
+- aktualizowanie systemów,
+- stosowanie silnych haseł i dwuskładnikowego uwierzytelniania,
+- szyfrowanie transmisji,
+- programy anty-malware,
+- ostrożność przy otwieraniu załączników,
+- edukacja dotycząca socjotechniki.
+
