@@ -4005,17 +4005,302 @@ Algorytmy te (np. CN2, AQ) generują reguły bezpośrednio z danych, bez budowan
 
 ## 69. Przekształcenia afiniczne 3W
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Przekształcenia afiniczne w przestrzeni trójwymiarowej (3W) to operacje geometryczne, które zachowują równoległość linii i proporcje odległości wzdłuż tych linii. Są fundamentalne w grafice komputerowej 3D do manipulacji obiektami.
+
+### Podstawowe rodzaje przekształceń afinicznych:
+
+#### 1. **Translacja (przesunięcie)**
+Przesuwa obiekt o określony wektor w przestrzeni 3D.
+
+**Macierz translacji 4×4:**
+```
+[ 1  0  0  tx ]
+[ 0  1  0  ty ]
+[ 0  0  1  tz ]
+[ 0  0  0  1  ]
+```
+
+Gdzie `tx`, `ty`, `tz` to przesunięcia wzdłuż osi X, Y, Z.
+
+**Przykład:**
+```python
+# Przesunięcie punktu (2, 3, 4) o wektor (5, -2, 3)
+P = (2, 3, 4)
+T = (5, -2, 3)
+P' = (2+5, 3-2, 4+3) = (7, 1, 7)
+```
+
+#### 2. **Skalowanie (zmiana rozmiaru)**
+Zmienia rozmiar obiektu względem początku układu współrzędnych lub określonego punktu.
+
+**Macierz skalowania:**
+```
+[ sx  0   0   0 ]
+[ 0   sy  0   0 ]
+[ 0   0   sz  0 ]
+[ 0   0   0   1 ]
+```
+
+Gdzie `sx`, `sy`, `sz` to współczynniki skalowania wzdłuż osi X, Y, Z.
+
+**Przykłady:**
+- Skalowanie jednolite: `sx = sy = sz = 2` (powiększenie 2×)
+- Skalowanie niejednolite: `sx = 2, sy = 1, sz = 0.5` (rozciągnięcie wzdłuż X, spłaszczenie wzdłuż Z)
+
+#### 3. **Obrót (rotacja)**
+Obraca obiekt wokół osi X, Y lub Z o określony kąt.
+
+**Obrót wokół osi Z (o kąt θ):**
+```
+[ cos(θ)  -sin(θ)  0  0 ]
+[ sin(θ)   cos(θ)  0  0 ]
+[ 0        0       1  0 ]
+[ 0        0       0  1 ]
+```
+
+**Obrót wokół osi X (o kąt θ):**
+```
+[ 1  0        0       0 ]
+[ 0  cos(θ)  -sin(θ)  0 ]
+[ 0  sin(θ)   cos(θ)  0 ]
+[ 0  0        0       1 ]
+```
+
+**Obrót wokół osi Y (o kąt θ):**
+```
+[ cos(θ)   0  sin(θ)  0 ]
+[ 0        1  0       0 ]
+[ -sin(θ)  0  cos(θ)  0 ]
+[ 0        0  0       1 ]
+```
+### Współrzędne jednorodne
+
+W grafice 3D używamy **współrzędnych jednorodnych** (x, y, z, w), gdzie zwykle w=1. Pozwala to reprezentować wszystkie przekształcenia afiniczne jako mnożenie macierzy 4×4:
+
+```
+P' = M × P
+
+Gdzie:
+P = [x, y, z, 1]ᵀ  - punkt wejściowy
+M - macierz przekształcenia 4×4
+P' = [x', y', z', 1]ᵀ - punkt wynikowy
+```
+
+### Kompozycja przekształceń
+
+Przekształcenia można łączyć przez mnożenie macierzy:
+
+```python
+# Obrót, następnie translacja, następnie skalowanie
+M = S × T × R
+P' = M × P
+```
+
+**Uwaga:** Kolejność mnożenia ma znaczenie! `M₁ × M₂ ≠ M₂ × M₁`
+
+### Właściwości przekształceń afinicznych:
+
+- **Zachowują równoległość** - linie równoległe pozostają równoległe
+- **Zachowują proporcje** - stosunek odległości punktów na linii pozostaje stały
+- **Punkt środkowy** - środek odcinka pozostaje środkiem po przekształceniu
+- **Kombinacja liniowa** - przekształcenie kombinacji liniowej punktów równa się kombinacji liniowej przekształconych punktów
+
+### Zastosowania w grafice 3D:
+
+1. **Animacja obiektów** - płynne przesuwanie, obracanie, skalowanie
+2. **Hierarchie obiektów** - przekształcenia względne (np. ruch ramienia robota)
+3. **Transformacje kamery** - pozycjonowanie punktu widzenia
+4. **Deformacje modeli** - tworzenie złożonych kształtów
+5. **Systemy cząstek** - generowanie efektów specjalnych
+Przekształcenia afiniczne są podstawą wszelkich operacji na obiektach 3D w grafice komputerowej, silnikach gier i aplikacjach CAD.
 
 ## 70. Rzutowanie w grafice 3W
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Rzutowanie (projection) to proces przekształcania obiektów trójwymiarowych na płaszczyznę dwuwymiarową (ekran). Jest to kluczowy element pipeline'u renderowania grafiki 3D.
+
+### Główne typy rzutowania:
+
+## 1. **Rzutowanie równoległe (Parallel Projection)**
+
+Promienie rzutujące są równoległe do siebie.
+
+### A) **Rzutowanie ortogonalne (Orthographic)**
+
+Promienie rzutujące są prostopadłe do płaszczyzny rzutowania.
+
+**Macierz rzutowania ortogonalnego:**
+```
+[ 2/(r-l)    0          0         -(r+l)/(r-l) ]
+[ 0          2/(t-b)    0         -(t+b)/(t-b) ]
+[ 0          0         -2/(f-n)   -(f+n)/(f-n) ]
+[ 0          0          0          1           ]
+```
+### B) **Rzutowanie skośne (Oblique)**
+
+Promienie rzutujące tworzą kąt inny niż 90° z płaszczyzną rzutowania.
+
+**Odmiany:**
+- **Cavalier** - zachowuje długości linii równoległych do płaszczyzny rzutowania
+- **Cabinet** - linie prostopadłe do płaszczyzny rzutowania są skrócone o połowę
+
+**Zastosowanie:** Rysunki techniczne, wizualizacje architektoniczne
+
+## 2. **Rzutowanie perspektywiczne (Perspective Projection)**
+
+Promienie rzutujące zbiegają się w jednym punkcie (oku obserwatora).
+
+**Wzór podstawowy:**
+```
+x_ekran = (x_3d * d) / z_3d
+y_ekran = (y_3d * d) / z_3d
+```
+Gdzie `d` to odległość od kamery do płaszczyzny projekcji.
+
+### Typy perspektywy:
+
+**1-punktowa perspektywa:**
+- Jeden punkt zbiegu na horyzoncie
+- Stosowana dla widoków z przodu
+
+**2-punktowa perspektywa:**
+- Dwa punkty zbiegu
+- Najbardziej naturalna dla widoków architektonicznych
+
+**3-punktowa perspektywa:**
+- Trzy punkty zbiegu
+- Stosowana dla ekstremalnych kątów (widok z dołu/góry)
+
+**Zastosowania:**
+- Gry 3D (FPS, TPS)
+- Filmy CGI
+- Symulatory
+- Rzeczywistość wirtualna (VR)
+
+### Porównanie rzutowań:
+
+| Cecha | Ortogonalne | Perspektywiczne |
+|-------|-------------|-----------------|
+| Realistyczność | Mała | Duża |
+| Zachowanie proporcji | Tak | Nie |
+| Równoległość linii | Zachowana | Linie zbiegają się |
+| Mierzalność | Możliwa | Niemożliwa |
+| Złożoność obliczeń | Niska | Średnia |
+| Zastosowanie | CAD, techniczne | Gry, wizualizacje |
+Rzutowanie jest fundamentalnym elementem każdego silnika graficznego 3D, determinującym sposób wyświetlania sceny 3D na ekranie 2D.
 
 ## 71. Krzywe Béziera
 **Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
 
----
+Krzywe Béziera to parametryczne krzywe wykorzystywane w grafice komputerowej, projektowaniu CAD i typografii do modelowania gładkich kształtów. Zostały opracowane niezależnie przez Pierre'a Béziera (Renault) i Paula de Casteljau (Citroën) w latach 60. XX wieku.
+
+### Podstawy matematyczne
+
+Krzywa Béziera stopnia `n` jest definiowana przez `n+1` punktów kontrolnych P₀, P₁, ..., Pₙ i opisana wzorem:
+
+**Wzór ogólny:**
+```
+B(t) = Σ(i=0 do n) [Bᵢⁿ(t) × Pᵢ]
+
+Gdzie:
+- t ∈ [0, 1] - parametr krzywej
+- Bᵢⁿ(t) - wielomiany Bernsteina
+- Pᵢ - punkty kontrolne
+```
+### Rodzaje krzywych Béziera:
+
+## 1. **Krzywa Béziera liniowa (stopień 1)**
+
+Dwa punkty kontrolne: P₀, P₁
+
+**Wzór:**
+```
+B(t) = (1-t)P₀ + tP₁
+```
+
+To po prostu odcinek łączący P₀ z P₁.
+
+## 2. **Krzywa Béziera kwadratowa (stopień 2)**
+
+Trzy punkty kontrolne: P₀, P₁, P₂
+
+**Wzór:**
+```
+B(t) = (1-t)²P₀ + 2(1-t)tP₁ + t²P₂
+```
+## 3. **Krzywa Béziera sześcienna (stopień 3)**
+
+Cztery punkty kontrolne: P₀, P₁, P₂, P₃
+
+**Wzór:**
+```
+B(t) = (1-t)³P₀ + 3(1-t)²tP₁ + 3(1-t)t²P₂ + t³P₃
+```
+> ![Krzywa Béziera 3-stopnia](Static/Q71/Bezier.png)
+
+**Macierzowa reprezentacja:**
+```
+B(t) = [t³ t² t 1] × M × [P₀ P₁ P₂ P₃]ᵀ
+
+Gdzie M (macierz Béziera) =
+[-1   3  -3   1]
+[ 3  -6   3   0]
+[-3   3   0   0]
+[ 1   0   0   0]
+```
+### Właściwości krzywych Béziera:
+
+1. **Interpolacja końców** - krzywa przechodzi przez P₀ i Pₙ
+   - B(0) = P₀
+   - B(1) = Pₙ
+
+2. **Styczność** - krzywa jest styczna do wielokąta kontrolnego na końcach:
+   - B'(0) jest równoległe do P₁ - P₀
+   - B'(1) jest równoległe do Pₙ - Pₙ₋₁
+
+3. **Otoczka wypukła** - krzywa leży w otoczce wypukłej punktów kontrolnych
+
+4. **Niezmienniczość afiniczna** - przekształcenia afiniczne krzywej = przekształcenia punktów kontrolnych
+
+5. **Symetria** - B(t) i B(1-t) dają tę samą krzywą w odwrotnym kierunku
+
+6. **Podział krzywej** - algorytm de Casteljau pozwala podzielić krzywą w dowolnym punkcie
+
+### Pochodne krzywych Béziera:
+
+**Pierwsza pochodna (dla krzywej sześciennej):**
+```
+B'(t) = 3(1-t)²(P₁-P₀) + 6(1-t)t(P₂-P₁) + 3t²(P₃-P₂)
+```
+
+Styczna w punkcie t pozwala na:
+- Obliczanie kąta nachylenia
+- Łączenie krzywych w sposób gładki (C¹, C² continuity)
+- Animacje (orientacja obiektu wzdłuż ścieżki)
+### Zastosowania:
+
+1. **Grafika wektorowa:**
+   - Adobe Illustrator, Inkscape
+   - Format SVG: `<path d="M 0,0 C 1,2 2,2 2,0"/>`
+
+2. **Typografia:**
+   - Fonty TrueType (kwadratowe)
+   - Fonty PostScript/OpenType (sześcienne)
+
+3. **Animacje:**
+   - CSS transitions: `cubic-bezier(0.42, 0, 0.58, 1)`
+   - Ścieżki ruchu w grach i filmach
+
+4. **Modelowanie 3D:**
+   - Powierzchnie Béziera (tensor product)
+   - Krzywe na powierzchniach
+
+5. **CAD/CAM:**
+   - Projektowanie kształtów samochodów, samolotów
+   - Ścieżki narzędzi CNC
+
+Krzywe Béziera to eleganckie i wszechstronne narzędzie matematyczne, które stało się fundamentem współczesnej grafiki komputerowej i projektowania.
 
 # Problemy społeczne i zawodowe informatyki
 
