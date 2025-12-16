@@ -3984,27 +3984,135 @@ Algorytmy te (np. CN2, AQ) generują reguły bezpośrednio z danych, bez budowan
 | **Algorytmy** | C4.5, AQ, CN2 | Apriori, FP-Growth |
 
 ## 65. Uczenie się zespołowe
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Uczenie zespołowe (ensemble learning)** to podejście w uczeniu maszynowym, w którym:
+- trenujemy wiele modeli (tzw. modele bazowe, np. wiele drzew decyzyjnych),
+- a następnie łączymy ich wyniki, aby uzyskać jedną, lepszą decyzję.
+
+### Cel uczenia zespołowego:
+- zwiększenie dokładności,
+- zmniejszenie ryzyka błędu pojedynczego modelu,
+- ograniczenie przeuczenia (overfittingu).
+
+### Sposoby łączenia modeli:
+- **Klasyfikacja** (np. TAK/NIE, kot/pies)  
+  → głosowanie większościowe  
+  (jeśli 7 modeli wskazuje „kot”, a 3 „pies”, wynik to „kot”)
+- **Regresja** (wartości liczbowe)  
+  → średnia z wyników wszystkich modeli
+
+### Zalety:
+- stabilniejszy wynik,
+- mniejszy wpływ błędu pojedynczego modelu,
+- często lepsza dokładność niż w przypadku jednego, nawet bardzo złożonego modelu.
+
+### Wady:
+- większy koszt obliczeniowy,
+- trudniejsza interpretacja wyników.
+
+### Główne typy uczenia zespołowego:
+- **Bagging**
+  - modele uczone niezależnie,
+  - każdy na losowym podzbiorze danych,
+  - wyniki są uśredniane lub poddawane głosowaniu.
+- **Boosting**
+  - modele uczone sekwencyjnie,
+  - każdy kolejny poprawia błędy poprzednich,
+  - skuteczny dla trudnych przypadków.
 
 ---
 
-# Wprowadzenie do grafiki maszynowej
+## Wprowadzenie do grafiki maszynowej
 
 ## 66. Modele barw
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+**Model barw** to matematyczny sposób opisu koloru za pomocą kilku liczb, np.  
+`(R=120, G=200, B=50)`.
+
+### Najważniejsze modele barw:
+
+### RGB (Red, Green, Blue)
+- stosowany w: monitorach, telewizorach, telefonach,
+- kolor jako mieszanka trzech składowych światła,
+- zakres wartości: 0–255,
+- model addytywny:
+  - (0,0,0) → czarny
+  - (255,255,255) → biały
+
+### CMYK (Cyan, Magenta, Yellow, Key)
+- stosowany w drukarkach,
+- model subtraktywny (odejmowanie światła),
+- im więcej tuszu, tym ciemniejszy kolor.
+
+### HSV / HSL
+- używany w programach graficznych,
+- bardziej intuicyjny dla człowieka:
+  - **H** – odcień,
+  - **S** – nasycenie,
+  - **V/L** – jasność,
+- ułatwia modyfikację kolorów (rozjaśnianie, zmiana nasycenia).
+
+---
 
 ## 67. Algorytmy rastrowe
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
+
+Algorytmy rastrowe określają, które piksele należy uaktywnić, aby jak najlepiej odwzorować obiekty geometryczne w obrazie rastrowym.
+
+### Przykłady algorytmów:
+- **rysowanie odcinków** – algorytm Bresenhama,
+- **rysowanie okręgów i elips** – np. okrąg Bresenhama,
+- **wypełnianie obszarów** – flood fill,
+- **rasteryzacja wielokątów** – algorytmy scanline (np. trójkąty w grafice 3D).
+
+### Cechy algorytmów rastrowych:
+- działają w przestrzeni dyskretnej (siatka pikseli),
+- są wydajne (proste operacje, często bez liczb zmiennoprzecinkowych),
+- dążą do jak najlepszego przybliżenia obiektów geometrycznych,
+- mogą wykorzystywać antyaliasing.
+
+---
 
 ## 68. Formaty plików graficznych
-**Odpowiedź:**
-> **Tu wpisujesz swoją odpowiedź**
 
-## 69. Przekształcenia afiniczne 3W
-**Odpowiedź:**
+### Najważniejsze formaty:
+
+### BMP
+- brak lub słaba kompresja,
+- duże pliki, bezstratna jakość,
+- rzadko używany w internecie.
+
+### JPEG / JPG
+- kompresja stratna,
+- bardzo dobry do zdjęć,
+- brak przezroczystości,
+- najpopularniejszy format w sieci.
+
+### PNG
+- kompresja bezstratna,
+- obsługa przezroczystości (kanał alfa),
+- idealny do ikon, logotypów i screenów.
+
+### GIF
+- maksymalnie 256 kolorów,
+- obsługuje animacje,
+- nie nadaje się do zdjęć wysokiej jakości.
+
+### SVG
+- format wektorowy,
+- skalowanie bez utraty jakości,
+- idealny do ikon i logotypów.
+
+### WebP
+- nowoczesny format Google,
+- mały rozmiar pliku,
+- dobra jakość i przezroczystość.
+
+### Podsumowanie
+- JPEG – zdjęcia,
+- PNG – grafika z przezroczystością,
+- GIF – animacje,
+- SVG – grafika wektorowa.
+
 
 Przekształcenia afiniczne w przestrzeni trójwymiarowej (3W) to operacje geometryczne, które zachowują równoległość linii i proporcje odległości wzdłuż tych linii. Są fundamentalne w grafice komputerowej 3D do manipulacji obiektami.
 
